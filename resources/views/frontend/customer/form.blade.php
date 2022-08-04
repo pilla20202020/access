@@ -58,7 +58,7 @@
                             <div class="form-group col-6">
                                 <div class="form-group">
                                     <select name="test_name" class="form-control" id="test_name">
-                                        <option value="" disabled selected>Intrested Country</option>
+                                        <option value="" disabled selected>Select Language</option>
                                         <option value="ielts">Ielts</option>
                                         <option value="sat">SAT</option>
                                         <option value="gre">GRE</option>
