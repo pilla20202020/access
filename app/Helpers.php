@@ -165,7 +165,7 @@ function member()
     return $member;
 }
 
-function httpPost($url, $data)
+function smsPost($url, $data)
 {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_POST, true);

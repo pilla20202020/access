@@ -76,7 +76,7 @@ class CustomerController extends Controller
                 'to' => $request->phone,
                 'text' => $campaign->sms_message
             );
-            // $response = json_decode(httpPost($url, $data));
+            // $response = json_decode(smsPost($url, $data));
             // dd($response);
             // if ($response->response_code == 201) {
             //     return true;
