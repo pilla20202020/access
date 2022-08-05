@@ -5,6 +5,14 @@
             <div class="col-lg-7 col-md-8">
                 <div class="login-form bg-light mt-4 p-4">
                     <img src="{{ asset('assets/images/access.png') }}" alt="" class="img-fluid">
+                    @if(Illuminate\Support\Facades\Session::has('success'))
+                        <div class="alert alert-success">
+                            {{Illuminate\Support\Facades\Session::get('success')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <h5 class="login_welcome">Please register to continue. </h5>
                     <form method="POST" name="enq" action="{{ route('customerform.store') }}">
                         @csrf
@@ -28,27 +36,22 @@
 
                         <div class="row">
 
-                            <div class="form-group col-3">
-                                <input required="required" placeholder="Enter Highest " class="form-control"
+                            <div class="form-group col-4">
+                                <input required="required" placeholder="Qualification " class="form-control"
                                     name="highest_qualification" type="text">
 
                             </div>
 
-                            <div class="form-group col-3">
-                                <input required="required" placeholder="Enter Highest Grade" class="form-control"
+                            <div class="form-group col-4">
+                                <input required="required" placeholder="Grade" class="form-control"
                                     name="highest_grade" type="text">
 
                             </div>
 
-                            <div class="form-group col-3">
-                                <input required="required" placeholder="Enter Highest Stream" class="form-control"
+                            <div class="form-group col-4">
+                                <input required="required" placeholder="Stream" class="form-control"
                                     name="highest_stream" type="text">
 
-                            </div>
-
-                            <div class="form-group col-3">
-                                <input required="required" placeholder="Enter Highest College" class="form-control"
-                                    name="highest_college" type="text">
                             </div>
                         </div>
 
@@ -58,7 +61,7 @@
                             <div class="form-group col-6">
                                 <div class="form-group">
                                     <select name="test_name" class="form-control" id="test_name">
-                                        <option value="" disabled selected>Select Language</option>
+                                        <option value="" disabled selected>Test Preparation</option>
                                         <option value="ielts">Ielts</option>
                                         <option value="sat">SAT</option>
                                         <option value="gre">GRE</option>
@@ -100,21 +103,17 @@
         <div class="col-lg-5 col-md-4 d-flex align-items-center pl-5">
             <div class="login-right">
                 <h2 class="login-right-title ">
-                    Accelerating your growth <br>
-                    towards New Zealand.
+                    {{$campaign->name}}
                 </h2>
 
                 <div class="login-right-list pt-4 ">
-                    <p class="login-list"><i class="fas fa-circle"></i><span class="list-para"> The
-                            universities in New Zealand offer a world-class educational system.</span></p>
-                    <p class="login-list"><i class="fas fa-circle"></i><span class="list-para">
-                            Over 30,000 international students choose New Zealand as their study abroad destination
-                            every year.span></p>
-                    <p class="login-list"><i class="fas fa-circle"></i><span class="list-para"> The
-                            fair allows students to gain all the essential knowledge about the entire application
-                            process.</span></p>
+                    @if(isset($campaign) && $campaign->banner)
+                        <img class="img-fluid" src="{{ asset($campaign->thumbnail_path)}}"/>
+                    @endif
+                    {!! $campaign->description !!}
 
                 </div>
+
 
             </div>
         </div>

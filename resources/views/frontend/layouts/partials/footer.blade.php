@@ -22,12 +22,12 @@
 </section> --}}
 <!-- END SECTION CALL TO ACTION -->
 <!-- START FOOTER -->
-<footer class="bg_blue_dark footer_dark">
+{{-- <footer class="bg_blue_dark footer_dark">
     <div class="top_footer">
         <div class="container">
 
         </div>
     </div>
 
-</footer>
+</footer> --}}
 <!-- END FOOTER -->

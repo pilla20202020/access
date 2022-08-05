@@ -108,7 +108,16 @@
                             <div class="form-group">
                                 <strong>Coupen Codes</strong>
                                 <textarea name="coupon_codes" id=""
-                                          class="ckeditor">{{old('coupon_codes',isset($campaign->coupon_codes)?$campaign->coupon_codes : '')}}</textarea>
+                                          class="">{{old('coupon_codes',isset($campaign->coupon_codes)?$campaign->coupon_codes : '')}}</textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <strong>OG Tags</strong>
+                                <textarea name="ogtags" id=""
+                                          class="">{{old('ogtags',isset($campaign->ogtags)?$campaign->ogtags : '')}}</textarea>
 
                             </div>
                         </div>

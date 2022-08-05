@@ -19,13 +19,14 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $customer, $registration;
+    protected $customer, $registration, $campaign;
 
-    function __construct(Customer $customer, User $user, Registration $registration)
+    function __construct(Customer $customer, User $user, Registration $registration, Campaign $campaign)
     {
         $this->customer = $customer;
         $this->user = $user;
         $this->registration = $registration;
+        $this->campaign = $campaign;
 
     }
     public function customerForm()
@@ -64,8 +65,25 @@ class CustomerController extends Controller
     {
        // dd($request->all());
         if($registration = $this->registration->create($request->all())) {
-            Toastr()->success('Registration Send Successfully','Success');
-            return redirect()->route('homepage');
+            $campaign = $this->campaign->where('id',$request->campaign_id)->first();
+            $message = $campaign->success_message;
+            $todeliver_msg = Str::replace("name",$request->name, $message);
+
+            $url = 'https://aakashsms.com/admin/public/sms/v1/send';
+            $data = array(
+                'auth_token' => '28a22c64768a49ee5f539fa2924a8c278bb9ff16d7798496adbb87278d1c7e70',
+                'from' => '31001',
+                'to' => $request->phone,
+                'text' => $campaign->sms_message
+            );
+            // $response = json_decode(httpPost($url, $data));
+            // dd($response);
+            // if ($response->response_code == 201) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
+            return redirect()->route('homepage')->withSuccess(trans($todeliver_msg));
         }
     }
 
@@ -76,20 +94,6 @@ class CustomerController extends Controller
         return redirect()->route('registration.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
 }

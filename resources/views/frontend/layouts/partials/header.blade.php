@@ -1,5 +1,5 @@
 <!-- START HEADER -->
-<header class="header_wrap dark_skin">
+{{-- <header class="header_wrap dark_skin">
     <div class="top-header light_skin bg-dark">
         <div class="container">
             <div class="row align-items-center">
@@ -13,5 +13,5 @@
     <div class="container">
 
     </div>
-</header>
+</header> --}}
 <!-- END HEADER -->
