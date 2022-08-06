@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col">
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control" required
                                        value="{{ old('name', isset($campaign->name) ? $campaign->name : '') }}"/>
@@ -17,38 +17,32 @@
                                 <span id="textarea1-error" class="text-danger">{{ $errors->first('name') }}</span>
                             </div>
                         </div>
+                                 
                     </div>
-
                     <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <input type="text" name="alias" class="form-control" required
-                                       value="{{ old('alias', isset($campaign->alias) ? $campaign->alias : '') }}"/>
 
-                                <label for="Name">Alias</label>
-                                <span id="textarea1-error" class="text-danger">{{ $errors->first('alias') }}</span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="details" class="form-control" required
-                                       value="{{ old('details', isset($campaign->details) ? $campaign->details : '') }}"/>
+                                <textarea  name="details" class="form-control">{{ old('details', isset($campaign->details) ? $campaign->details : '') }}
+                                </textarea>
 
                                 <label for="Name">Details</label>
                                 <span id="textarea1-error" class="text-danger">{{ $errors->first('details') }}</span>
                             </div>
                         </div>
-
-                        <div class="col-sm-4">
+                   
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="success_message" class="form-control" required
-                                       value="{{ old('success_message', isset($campaign->success_message) ? $campaign->success_message : '') }}"/>
+                                <textarea  name="success_message" class="form-control">{{ old('success_message', isset($campaign->success_message) ? $campaign->success_message : '') }}
+                                </textarea>
+                              
 
                                 <label for="Name">Success Message</label>
                                 <span id="textarea1-error" class="text-danger">{{ $errors->first('success_message') }}</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
 
                         <div class="col-sm-4">
                             <div class="form-group">
