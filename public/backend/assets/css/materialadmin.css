@@ -6805,6 +6805,12 @@ sub.badge {
   font-size: 12px;
   text-shadow: none;
 }
+.viewdetail h4 {
+    margin-left: 20px;
+    margin-bottom: 30px;
+    font-size: 17px;
+    font-weight: 400
+}
 .breadcrumb > li {
   opacity: 0.8;
   display: inline-block;

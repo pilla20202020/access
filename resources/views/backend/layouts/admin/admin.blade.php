@@ -23,8 +23,8 @@
 
 
 		<link rel="stylesheet" href="{{ asset('backend/assets/css/materialadmin-bootstrap.css') }}">
-  		  <link rel="stylesheet" href="{{ asset('backend/assets/css/materialadmin.css') }}">
-
+  		<link rel="stylesheet" href="{{ asset('backend/assets/css/materialadmin.css') }}">
+        <link href="{{ asset('backend/assets/css/dropify.min.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('backend/assets/css/font-awesome.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('backend/assets/css/material-design-iconic-font.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('backend/assets/css/libs/toastr/toastr.min.css') }}">
@@ -104,6 +104,7 @@
 		<script src="{{ asset('backend/assets/js/core/demo/Demo.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/core/demo/DemoDashboard.js') }}"></script>
 
+        <script src="{{ asset('backend/assets/js/dropify.min.js') }}"></script>
 		<script src="{{asset('backend/assets/js/bootstrap-datetimepicker.min.js')}}"></script>
 		<script src="{{asset('backend/assets/js/altair_admin_common.js')}}"></script>
 		<!-- END JAVASCRIPT -->
@@ -114,11 +115,6 @@
 
 	    <script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
 		<script>
-			$(function () {
-				$('.ckeditor').each(function (e) {
-				});
-			});
-
             $(document).ready(function(){
                 // Basic
                 $('.dropify').dropify();
@@ -159,6 +155,13 @@
                     }
                 })
             });
+
+			$(function () {
+				$('.ckeditor').each(function (e) {
+				});
+			});
+
+
 		</script>
 
 @stack('scripts')
