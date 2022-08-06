@@ -67,22 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-
-
-                       
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <textarea  name="keywords" class="form-control" rows="4">{{ old('keywords', isset($campaign->keywords) ? $campaign->keywords : '') }}
-                                </textarea>
-                                
-
-                                <label for="Name">Keywords - Use , (comma) for multiple</label>
-                                <span id="textarea1-error" class="text-danger">{{ $errors->first('keywords') }}</span>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -105,6 +90,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <strong>Description</strong>
+                                <textarea name="description" id=""
+                                          class="ckeditor">{{old('description',isset($campaign->description)?$campaign->description : '')}}</textarea>
+
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -115,6 +110,8 @@
 
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
 
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -125,16 +122,25 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <strong>Description</strong>
-                                <textarea name="description" id=""
-                                          class="ckeditor">{{old('description',isset($campaign->description)?$campaign->description : '')}}</textarea>
+                        
 
+
+                    </div>
+                    <div class="row">
+
+
+                       
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea  name="keywords" class="form-control" rows="4">{{ old('keywords', isset($campaign->keywords) ? $campaign->keywords : '') }}
+                                </textarea>
+                                
+
+                                <label for="Name">Keywords - Use , (comma) for multiple</label>
+                                <span id="textarea1-error" class="text-danger">{{ $errors->first('keywords') }}</span>
                             </div>
                         </div>
-
-
                     </div>
 
                     
