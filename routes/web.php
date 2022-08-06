@@ -75,8 +75,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::get('', 'Frontend\FrontendController@homepage')->name('homepage');
 
 
-Route::get('customerform', 'Backend\CustomerController@customerForm')->name('customerform');
-Route::post('customerform/store', 'Backend\CustomerController@store')->name('customerform.store');
+Route::get('customerform', 'Frontend\FrontendController@homepage')->name('customerform');
+Route::post('customerform/store', 'Frontend\FrontendController@store')->name('customerform.store');
 
 
 

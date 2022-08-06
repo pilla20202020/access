@@ -344,25 +344,9 @@
                     <tr>
                         <td class="wrapper">
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>{{ $data['full_name'] }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td>{{ $data['email_address'] }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Phone Number</td>
-                                    <td>{{ $data['phone_number'] }}</td>
-                                </tr>
-                            
-                                <tr>
-                                    <td>Message</td>
-                                    <td>{!!  $data['message'] !!}</td>
-                                </tr>
-                                </tbody>
+                                <h2>Dear {{ $data['name'] }}, Your Enquiry has been submitted successfully. We will contact you as soon as possible. </h2><br>
+                                <h2>Thank You</h2>
+                                <h2>Access Consultancy </h2><br>
                             </table>
                         </td>
                     </tr>
