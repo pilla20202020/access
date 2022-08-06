@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control" required
                                        value="{{ old('name', isset($campaign->name) ? $campaign->name : '') }}"/>
@@ -17,8 +17,20 @@
                                 <span id="textarea1-error" class="text-danger">{{ $errors->first('name') }}</span>
                             </div>
                         </div>
-                                 
+                        <div class="col-md-4" id="imageupload">
+                            
+                                <label class="text-default-light">Banner Image</label>
+                                @if(isset($campaign) && $campaign->banner)
+                                    <input type="file" name="banner" class="dropify"
+                                        data-default-file="{{ asset($campaign->thumbnail_path)}}"/>
+                                @else
+                                    <input type="file" name="banner" class="dropify"/>
+                                @endif
+                            </div>
+
+
                     </div>
+                     
                     <div class="row">
 
                         <div class="col-md-12">
@@ -35,43 +47,38 @@
                    
                         <div class="col-md-6">
                             <div class="form-group">
-                                <textarea  name="success_message" class="form-control">{{ old('success_message', isset($campaign->success_message) ? $campaign->success_message : '') }}
+                                <textarea  name="success_message" class="form-control" rows="4">{{ old('success_message', isset($campaign->success_message) ? $campaign->success_message : '') }}
                                 </textarea>
                               
 
                                 <label for="Name">Success Message</label>
-                                <span id="textarea1-error" class="text-danger">{{ $errors->first('success_message') }}</span>
+                                <span id="textarea1-error" class="text-danger" >{{ $errors->first('success_message') }}</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-sm-4">
+                    
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="sms_message" class="form-control" required
-                                       value="{{ old('sms_message', isset($campaign->sms_message) ? $campaign->sms_message : '') }}"/>
+                                <textarea  name="sms_message" class="form-control" rows="4">{{ old('sms_message', isset($campaign->sms_message) ? $campaign->sms_message : '') }}
+                                </textarea>
+                                
 
                                 <label for="Name">SMS Message</label>
                                 <span id="textarea1-error" class="text-danger">{{ $errors->first('sms_message') }}</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
 
-                        <div class="col-sm-4">
+
+                       
+
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" name="url" class="form-control" required
-                                       value="{{ old('url', isset($campaign->url) ? $campaign->url : '') }}"/>
+                                <textarea  name="keywords" class="form-control" rows="4">{{ old('keywords', isset($campaign->keywords) ? $campaign->keywords : '') }}
+                                </textarea>
+                                
 
-                                <label for="Name">URL</label>
-                                <span id="textarea1-error" class="text-danger">{{ $errors->first('url') }}</span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <input type="text" name="keywords" class="form-control" required
-                                       value="{{ old('keywords', isset($campaign->keywords) ? $campaign->keywords : '') }}"/>
-
-                                <label for="Name">Keywords</label>
+                                <label for="Name">Keywords - Use , (comma) for multiple</label>
                                 <span id="textarea1-error" class="text-danger">{{ $errors->first('keywords') }}</span>
                             </div>
                         </div>
@@ -100,11 +107,11 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <strong>Coupen Codes</strong>
-                                <textarea name="coupon_codes" id=""
-                                          class="">{{old('coupon_codes',isset($campaign->coupon_codes)?$campaign->coupon_codes : '')}}</textarea>
+                                <textarea name="coupon_codes" id="coupon_codes"
+                                          class="form-control" rows="4">{{old('coupon_codes',isset($campaign->coupon_codes)?$campaign->coupon_codes : '')}}</textarea>
 
                             </div>
                         </div>
@@ -112,8 +119,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <strong>OG Tags</strong>
-                                <textarea name="ogtags" id=""
-                                          class="">{{old('ogtags',isset($campaign->ogtags)?$campaign->ogtags : '')}}</textarea>
+                                <textarea name="ogtags" id="ogtags"
+                                          class="form-control" rows="4">{{old('ogtags',isset($campaign->ogtags)?$campaign->ogtags : '')}}</textarea>
 
                             </div>
                         </div>
@@ -130,19 +137,7 @@
 
                     </div>
 
-                    <div class="row" id="imageupload">
-                            <div class="col-sm-12">
-                                <label class="text-default-light">Banner Image</label>
-                                @if(isset($campaign) && $campaign->banner)
-                                    <input type="file" name="banner" class="dropify"
-                                        data-default-file="{{ asset($campaign->thumbnail_path)}}"/>
-                                @else
-                                    <input type="file" name="banner" class="dropify"/>
-                                @endif
-                            </div>
-
-
-                    </div>
+                    
                 </div>
             </div>
         </div>
