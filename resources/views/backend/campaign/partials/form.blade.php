@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <strong>Coupen Codes</strong>
                                 <textarea name="coupon_codes" id="coupon_codes"
@@ -110,10 +110,9 @@
 
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                   
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <strong>OG Tags</strong>
                                 <textarea name="ogtags" id="ogtags"
