@@ -67,22 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-
-
-                       
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <textarea  name="keywords" class="form-control" rows="4">{{ old('keywords', isset($campaign->keywords) ? $campaign->keywords : '') }}
-                                </textarea>
-                                
-
-                                <label for="Name">Keywords - Use , (comma) for multiple</label>
-                                <span id="textarea1-error" class="text-danger">{{ $errors->first('keywords') }}</span>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -105,26 +90,7 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <strong>Coupen Codes</strong>
-                                <textarea name="coupon_codes" id="coupon_codes"
-                                          class="form-control" rows="4">{{old('coupon_codes',isset($campaign->coupon_codes)?$campaign->coupon_codes : '')}}</textarea>
-
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <strong>OG Tags</strong>
-                                <textarea name="ogtags" id="ogtags"
-                                          class="form-control" rows="4">{{old('ogtags',isset($campaign->ogtags)?$campaign->ogtags : '')}}</textarea>
-
-                            </div>
-                        </div>
-
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <strong>Description</strong>
@@ -133,8 +99,47 @@
 
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong>Coupen Codes</strong>
+                                <textarea name="coupon_codes" id="coupon_codes"
+                                          class="form-control" rows="4">{{old('coupon_codes',isset($campaign->coupon_codes)?$campaign->coupon_codes : '')}}</textarea>
+
+                            </div>
+                        </div>
+                   
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <strong>OG Tags</strong>
+                                <textarea name="ogtags" id="ogtags"
+                                          class="form-control" rows="4">{{old('ogtags',isset($campaign->ogtags)?$campaign->ogtags : '')}}</textarea>
+
+                            </div>
+                        </div>
+
+                        
 
 
+                    </div>
+                    <div class="row">
+
+
+                       
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea  name="keywords" class="form-control" rows="4">{{ old('keywords', isset($campaign->keywords) ? $campaign->keywords : '') }}
+                                </textarea>
+                                
+
+                                <label for="Name">Keywords - Use , (comma) for multiple</label>
+                                <span id="textarea1-error" class="text-danger">{{ $errors->first('keywords') }}</span>
+                            </div>
+                        </div>
                     </div>
 
                     
