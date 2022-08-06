@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <textarea  name="details" class="form-control">{{ old('details', isset($campaign->details) ? $campaign->details : '') }}
                                 </textarea>
@@ -30,6 +30,8 @@
                                 <span id="textarea1-error" class="text-danger">{{ $errors->first('details') }}</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                    
                         <div class="col-md-6">
                             <div class="form-group">

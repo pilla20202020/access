@@ -21,6 +21,7 @@
 		<link type="text/css" rel="stylesheet" href="{{ asset('backend/assets/css/theme-default/libs/morris/morris.core.css?1420463396') }}" />
 
 
+
 		<link rel="stylesheet" href="{{ asset('backend/assets/css/materialadmin-bootstrap.css') }}">
   		  <link rel="stylesheet" href="{{ asset('backend/assets/css/materialadmin.css') }}">
 
@@ -44,6 +45,12 @@
 		<script type="text/javascript" src="../../assets/js/libs/utils/respond.min.js?1403934956"></script>
 		<![endif]-->
 		@stack('styles')
+		<style>
+			.floating-label .form-control ~ label {
+    top: 0px;
+    font-size: 16px;
+}
+			</style>
 
 </head>
 <body class="menubar-hoverable header-fixed ">
