@@ -54,6 +54,9 @@ class CampaignController extends Controller
                 if ($request->hasFile('banner')) {
                     $this->uploadFile($request, $campaign);
                 }
+                if ($request->hasFile('ogImage')) {
+                    $this->uploadFile($request, $campaign);
+                }
             }
         } catch (Exception $e) {
             return null;
@@ -128,6 +131,14 @@ class CampaignController extends Controller
         if (!empty($campaign->banner))
             $this->__deleteImages($campaign);
         $data['banner'] = $fileName;
+        $this->updateImage($campaign->id, $data);
+
+        $file = $request->file('ogImage');
+        $path = 'uploads/campaign';
+        $fileName = $this->uploadFromAjax($file, $path);
+        if (!empty($campaign->banner))
+            $this->__deleteImages($campaign);
+        $data['ogImage'] = $fileName;
         $this->updateImage($campaign->id, $data);
 
     }

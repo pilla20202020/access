@@ -30,11 +30,11 @@
                             <div class="col-md-4" id="imageupload2">
                             
                                 <label class="text-default-light">OG Image</label>
-                                @if(isset($campaign) && $campaign->og_image)
-                                    <input type="file" name="og_image" class="dropify"
-                                        data-default-file="{{ asset($campaign->og_image_thumbnail_path)}}"/>
+                                @if(isset($campaign) && $campaign->ogImage)
+                                    <input type="file" name="ogImage" class="dropify"
+                                        data-default-file="{{ asset($campaign->ogImage_thumbnail_path)}}"/>
                                 @else
-                                    <input type="file" name="og_image" class="dropify"/>
+                                    <input type="file" name="ogImage" class="dropify"/>
                                 @endif
                             </div>
 
