@@ -22,12 +22,14 @@
                                 <input required="required" placeholder="Enter Name" id="first-name" class="form-control"
                                     name="name" type="text">
                             </div>
-                            <div class="form-group col-12">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-8">
                                 <input required="required" placeholder="Enter Email" id="email" class="form-control"
                                     name="email" type="email">
                             </div>
 
-                            <div class="form-group col-12">
+                            <div class="form-group col-4">
                                 <input required="required" placeholder="Enter Phone" id="phone" class="form-control"
                                     name="phone" type="number">
                             </div>
@@ -62,10 +64,10 @@
                                 <div class="form-group">
                                     <select name="test_name" class="form-control" id="test_name">
                                         <option value="" disabled selected>Test Preparation</option>
-                                        <option value="ielts">Ielts</option>
+                                        <option value="ielts">IELTS</option>
                                         <option value="sat">SAT</option>
                                         <option value="gre">GRE</option>
-                                        <option value="canada">Canada</option>
+                                        <option value="none">None</option>
                                     </select>
                                 </div>
                             </div>
@@ -80,11 +82,13 @@
                             <div class="form-group col-12">
                                 <div class="col-12">
                                     <select class="form-select form-control" name="preffered_location" aria-label="Default select example">
-                                        <option selected disabled>Preferred Location</option>
-                                        <option value="baneshowr">Baneshor</option>
-                                                <option value="chitwan">Chitwan</option>
-                                                <option value="pokhara">Pokhara</option>
-                                                <option value="butwal">Butwal</option>
+                                        <option selected disabled>Registering For</option>
+                                        <option value="baneshwor">NZ Admission Day New Baneshor (24 August)</option>
+                                                <option value="biratnagar">NZ Admission Day Biratnagar (25 August)</option>
+                                                <option value="pokhara">NZ Admission Day Pokhara (26 August)</option>
+                                                <option value="chitwan">NZ Admission Day Chitwan (28 August)</option>
+                                                <option value="butwal">NZ Admission Day Butwal (29 August)</option>
+                                                <option value="putalisadak">NZ Admission Day Putalisadak (30 August)</option>
 
                                       </select>
                                 </div>
