@@ -6,14 +6,14 @@
                 <img src="{{ asset('assets/images/access.png') }}" alt="" class="img-fluid">
             </div>
             <div class="col-md-9">
-                <h2 class="login-right-title ">
+                <h2 class="login-right-title pt-10">
                     {{$campaign->name}}
                 </h2>
             </div>
         </div>
         <div class="row gx-5">
             <div class="col-lg-7 col-md-8">
-                <div class="login-form bg-light mt-4 p-4">
+                <div class="login-form bg-light mt-4 pb-4">
                     
                     @if(isset($campaign) && $campaign->banner)
                     <img class="img-fluid" src="{{ asset($campaign->banner_path)}}"/>
@@ -26,7 +26,7 @@
                             </button>
                         </div>
                     @endif
-                    <h5 class="login_welcome">Register now for Appointments</h5>
+                    <h5 class="login_welcome text-center pt-10 pb-10">Register now for Appointments</h5>
                     <form method="POST" name="enq" action="{{ route('customerform.store') }}">
                         @csrf
                         <input type="hidden" name="campaign_id" id="" value="{{$campaign->id}}">

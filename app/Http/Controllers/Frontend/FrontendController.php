@@ -49,6 +49,7 @@ class FrontendController extends Controller
                 'to' => $request->phone,
                 'text' => $campaign->sms_message
             );
+            smsPost($url, $data);
             // $response = json_decode(smsPost($url, $data));
             // dd($response);
             // if ($response->response_code == 201) {
@@ -56,7 +57,7 @@ class FrontendController extends Controller
             // } else {
             //     return false;
             // }
-            Mail::to('accessconsultancy@gmail.com')->send(new StudentEnquiryMail($request->all()));
+            Mail::to('prajwalbro@hotmail.com')->send(new StudentEnquiryMail($request->all()));
             Mail::to($request->email)->send(new StudentNotifyMail($request->all()));
 
             return redirect()->route('homepage')->withSuccess(trans($todeliver_msg));
