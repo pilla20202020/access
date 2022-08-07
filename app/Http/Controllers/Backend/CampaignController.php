@@ -105,6 +105,12 @@ class CampaignController extends Controller
             }
         }
 
+        if ($campaign->update($request->data())) {
+            if ($request->hasFile('ogImage')) {
+                $this->uploadFile($request, $campaign);
+            }
+        }
+
         return redirect()->route('campaign.index');
     }
 

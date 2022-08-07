@@ -35,7 +35,7 @@ class Campaign extends Model
     ];
 
     protected $appends = [
-        'thumbnail_path', 'banner_path', 'ogImage_path', 'ogImage_thumbnail_path'
+        'banner_thumbnail_path', 'banner_path', 'ogImage_path', 'ogImage_thumbnail_path'
     ];
 
     function getBannerPathAttribute()

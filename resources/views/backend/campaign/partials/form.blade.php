@@ -22,7 +22,7 @@
                                 <label class="text-default-light">Banner Image</label>
                                 @if(isset($campaign) && $campaign->banner)
                                     <input type="file" name="banner" class="dropify"
-                                        data-default-file="{{ asset($campaign->thumbnail_path)}}"/>
+                                        data-default-file="{{ asset($campaign->banner_thumbnail_path)}}"/>
                                 @else
                                     <input type="file" name="banner" class="dropify"/>
                                 @endif
