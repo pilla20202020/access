@@ -24,10 +24,7 @@ class CampaignRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name'=>'required',
-            'starts'=>'required',
-            'starts'=>'required',
-        ];
+            'name'=>'required'        ];
 
         return $rules;
     }
