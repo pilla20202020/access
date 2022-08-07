@@ -29,6 +29,6 @@ class StudentNotifyMail extends Mailable
     public function build()
     {
         $data = $this->data;
-        return $this->from("accessconsultancy@gmail.com", "Access COnsultancy")->view('mail.notifystudent',compact('data'));
+        return $this->from("webmaster@accessedu.net", "Access Education Network - Event Registrations")->view('mail.notifystudent',compact('data'));
     }
 }
