@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control" required
                                        value="{{ old('name', isset($campaign->name) ? $campaign->name : '') }}"/>
@@ -25,6 +25,16 @@
                                         data-default-file="{{ asset($campaign->thumbnail_path)}}"/>
                                 @else
                                     <input type="file" name="banner" class="dropify"/>
+                                @endif
+                            </div>
+                            <div class="col-md-4" id="imageupload2">
+                            
+                                <label class="text-default-light">OG Image</label>
+                                @if(isset($campaign) && $campaign->og_image)
+                                    <input type="file" name="og_image" class="dropify"
+                                        data-default-file="{{ asset($campaign->og_image_thumbnail_path)}}"/>
+                                @else
+                                    <input type="file" name="og_image" class="dropify"/>
                                 @endif
                             </div>
 
