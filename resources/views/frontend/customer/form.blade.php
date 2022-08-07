@@ -1,35 +1,42 @@
-@extends ('frontend.layouts.app')
+@extends('frontend.layouts.app')
+
+@section('title', 'Enquiry Form')
+
 @section('content')
     <div class="container login-section py-5">
         <div class="row">
             <div class="col-md-3">
-                <img src="{{ asset('assets/images/access.png') }}" alt="" class="img-fluid">
+                <img src="{{ asset('images/access.png') }}" alt="" class="img-fluid">
             </div>
             <div class="col-md-9">
-                <h2 class="login-right-title pt-10">
-                    {{$campaign->name}}
+                <h2 class="login-right-title pt-5">
+                    @if(isset($campaign))
+                        {{$campaign->name}}
+                    @endif
                 </h2>
             </div>
         </div>
         <div class="row gx-5">
             <div class="col-lg-7 col-md-8">
                 <div class="login-form bg-light mt-4 pb-4">
-                    
+
                     @if(isset($campaign) && $campaign->banner)
-                    <img class="img-fluid" src="{{ asset($campaign->banner_path)}}"/>
-                @endif
+                        <img class="img-fluid" src="{{ asset($campaign->banner_path)}}"/>
+                    @endif
                     @if(Illuminate\Support\Facades\Session::has('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success mt-3 mb-3">
                             {{Illuminate\Support\Facades\Session::get('success')}}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                     @endif
-                    <h5 class="login_welcome text-center pt-10 pb-10">Register now for Appointments</h5>
-                    <form method="POST" name="enq" action="{{ route('customerform.store') }}">
+                    <h5 class="login_welcome text-center pt-4 pb-1">Register now for Appointments</h5>
+                    <form method="POST" name="enq" action="{{ route('customerform.store') }}" class="p-3">
                         @csrf
-                        <input type="hidden" name="campaign_id" id="" value="{{$campaign->id}}">
+                        @if(isset($campaign))
+                            <input type="hidden" name="campaign_id" id="" value="{{$campaign->id}}">
+                        @endif
                         <div class="row">
                             <div class="form-group col-12">
                                 <input required="required" placeholder="Enter Name" id="first-name" class="form-control"
@@ -94,7 +101,7 @@
 
                         <div class="row">
                             <div class="form-group col-md-12">
-                                
+
                                     <select class="form-select form-control" name="preffered_location" aria-label="Default select example">
                                         <option selected disabled>Registering For</option>
                                         <option value="baneshwor">NZ Admission Day New Baneshor (24 August)</option>
@@ -105,12 +112,12 @@
                                                 <option value="putalisadak">NZ Admission Day Putalisadak (30 August)</option>
 
                                       </select>
-                                
+
                             </div>
                         </div>
                         <div class="row">
-                        <div class="col-lg-12">
-                            <button type="submit" title="Submit Your Message!" class="btn btn-default" name="submit"
+                        <div class="col-lg-12 justify-content-center align-center">
+                            <button type="submit" title="Submit Your Message!" class="btn btn-submit" name="submit"
                                 value="Submit">Submit</button>
                         </div>
                 </div>
@@ -120,11 +127,13 @@
         </div>
         <div class="col-lg-5 col-md-4 d-flex align-items-center pl-5">
             <div class="login-right">
-               
+
 
                 <div class="login-right-list pt-4 ">
-                   
-                    {!! $campaign->description !!}
+                    @if(isset($campaign))
+
+                        {!! $campaign->description !!}
+                    @endif
 
                 </div>
 

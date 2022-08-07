@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -33,7 +34,9 @@
             border-collapse: separate;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
-            width: 100%; }
+            width: 100%;
+        }
+
         table td {
             font-family: sans-serif;
             font-size: 14px;
@@ -93,6 +96,7 @@
             text-align: center;
             width: 100%;
         }
+
         .footer td,
         .footer p,
         .footer span,
@@ -133,6 +137,7 @@
             margin: 0;
             margin-bottom: 15px;
         }
+
         p li,
         ul li,
         ol li {
@@ -150,17 +155,23 @@
         ------------------------------------- */
         .btn {
             box-sizing: border-box;
-            width: 100%; }
-        .btn > tbody > tr > td {
-            padding-bottom: 15px; }
+            width: 100%;
+        }
+
+        .btn>tbody>tr>td {
+            padding-bottom: 15px;
+        }
+
         .btn table {
             width: auto;
         }
+
         .btn table td {
             background-color: #ffffff;
             border-radius: 5px;
             text-align: center;
         }
+
         .btn a {
             background-color: #ffffff;
             border: solid 1px #3498db;
@@ -253,6 +264,7 @@
                 font-size: 28px !important;
                 margin-bottom: 10px !important;
             }
+
             table[class=body] p,
             table[class=body] ul,
             table[class=body] ol,
@@ -261,28 +273,35 @@
             table[class=body] a {
                 font-size: 16px !important;
             }
+
             table[class=body] .wrapper,
             table[class=body] .article {
                 padding: 10px !important;
             }
+
             table[class=body] .content {
                 padding: 0 !important;
             }
+
             table[class=body] .container {
                 padding: 0 !important;
                 width: 100% !important;
             }
+
             table[class=body] .main {
                 border-left-width: 0 !important;
                 border-radius: 0 !important;
                 border-right-width: 0 !important;
             }
+
             table[class=body] .btn table {
                 width: 100% !important;
             }
+
             table[class=body] .btn a {
                 width: 100% !important;
             }
+
             table[class=body] .img-responsive {
                 height: auto !important;
                 max-width: 100% !important;
@@ -297,6 +316,7 @@
             .ExternalClass {
                 width: 100%;
             }
+
             .ExternalClass,
             .ExternalClass p,
             .ExternalClass span,
@@ -305,6 +325,7 @@
             .ExternalClass div {
                 line-height: 100%;
             }
+
             .apple-link a {
                 color: inherit !important;
                 font-family: inherit !important;
@@ -313,6 +334,7 @@
                 line-height: inherit !important;
                 text-decoration: none !important;
             }
+
             #MessageViewBody a {
                 color: inherit;
                 text-decoration: none;
@@ -321,84 +343,118 @@
                 font-weight: inherit;
                 line-height: inherit;
             }
+
+            .btn {
+                display: inline-block;
+                margin-bottom: 0;
+                font-weight: normal;
+                text-align: center;
+                vertical-align: middle;
+                touch-action: manipulation;
+                cursor: pointer;
+                background-image: none;
+                border: 1px solid transparent;
+                white-space: nowrap;
+                padding: 4.5px 14px;
+                font-size: 13px;
+                line-height: 1.846153846;
+                border-radius: 2px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            .btn-primary {
+                color: #0aa89e;
+                color: #ffffff;
+                background-color: #0aa89e;
+                border-color: #0aa89e;
+            }
+
             .btn-primary table td:hover {
                 background-color: #34495e !important;
             }
+
             .btn-primary a:hover {
                 background-color: #34495e !important;
                 border-color: #34495e !important;
             }
         }
-
     </style>
 </head>
+
 <body>
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
-    <tr>
-        <td>&nbsp;</td>
-        <td class="container">
-            <div class="content">
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table role="presentation" class="main">
-                    <!-- START MAIN CONTENT AREA -->
-                    <tr>
-                        <td class="wrapper">
-                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                <h2>Dear Sir, {{ $data['name'] }} has send enquiry.</h2>
-                                <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>{{ $data['name'] }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td>{{ $data['email'] }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Phone Number</td>
-                                    <td>{{ $data['phone'] }}</td>
-                                </tr>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td>&nbsp;</td>
+            <td class="container">
+                <div class="content">
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table role="presentation" class="main">
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                            <td class="wrapper">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <h2>{!! $campaign['email_success'] !!}</h2>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>{{ $data['name'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{{ $data['email'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone Number</td>
+                                            <td>{{ $data['phone'] }}</td>
+                                        </tr>
 
-                                <tr>
-                                    <td>Highest Qualification</td>
-                                    <td>{{ $data['highest_qualification'] }}</td>
-                                </tr>
+                                        <tr>
+                                            <td>Highest Qualification</td>
+                                            <td>{{ $data['highest_qualification'] }}</td>
+                                        </tr>
 
-                                <tr>
-                                    <td>Highest Grade</td>
-                                    <td>{{  $data['highest_grade'] }}</td>
-                                </tr>
+                                        <tr>
+                                            <td>Highest Grade</td>
+                                            <td>{{ $data['highest_grade'] }}</td>
+                                        </tr>
 
-                                <tr>
-                                    <td>Highest Stream</td>
-                                    <td>{{  $data['highest_stream'] }}</td>
-                                </tr>
+                                        <tr>
+                                            <td>Highest Stream</td>
+                                            <td>{{ $data['highest_stream'] }}</td>
+                                        </tr>
 
-                                <tr>
-                                    <td>Test Name</td>
-                                    <td>{{  ucfirst($data['test_name']) }}</td>
-                                </tr>
+                                        <tr>
+                                            <td>Test Name</td>
+                                            <td>{{ ucfirst($data['test_name']) }}</td>
+                                        </tr>
 
-                                <tr>
-                                    <td>Test Score</td>
-                                    <td>{{  ucfirst($data['test_score']) }}</td>
-                                </tr>
+                                        <tr>
+                                            <td>Test Score</td>
+                                            <td>{{ ucfirst($data['test_score']) }}</td>
+                                        </tr>
 
-                                <tr>
-                                    <td>Preferred Location</td>
-                                    <td>{{  ucfirst($data['preffered_location']) }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <!-- END MAIN CONTENT AREA -->
-                </table>
-                <!-- END CENTERED WHITE CONTAINER -->
-            </div>
-        </td>
-    </tr>
-</table>
+                                        <tr>
+                                            <td>Preferred Location</td>
+                                            <td>{{ ucfirst($data['preffered_location']) }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <a href="{{ route('registration.show', $registration['id']) }}"
+                                    ><button class="btn btn-primary">View More</button></a>
+                            </td>
+                        </tr>
+                        <!-- END MAIN CONTENT AREA -->
+                    </table>
+                    <!-- END CENTERED WHITE CONTAINER -->
+                </div>
+            </td>
+        </tr>
+    </table>
 
 </body>
+
 </html>

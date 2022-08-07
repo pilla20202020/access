@@ -1,95 +1,9 @@
-@extends('backend.layouts.admin.admin')
+@extends('layouts.app')
 
 @section('title', 'Login')
 
-@section('guest')
-    <!-- BEGIN LOGIN SECTION -->
-    <section class="section-account">
-        <div class="row col-md-12 logo" align="center">
-            <img src="{{ asset('assets/images/access.png') }}" alt="logo" height="100">
-        </div>
-        <div class="row col-md-12" align="center">
-            <div class="card col-sm-4 col-sm-offset-4 ">
-                <div class="card-body">
-                    <br/>
-                    <span class="text-lg text-bold text-primary" style="color: #6E2B86;">{{ ('Access Admin Panel') }}</span>
-                    <br/><br/>
-
-                    <form class="form form-validate" role="form" style="text-align:left;" method="POST"
-                          action="{{ url('/login') }}" autocomplete="off" novalidate>
-                        {!! csrf_field() !!}
-                        <div class="form-group">
-                            <label for="email"
-                                   class="text col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            {{--<div class="col-md-6">--}}
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" style="height: 57px"
-                                   name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                            {{--</div>--}}
-                        </div>
-                        {{--<div class="form-group">--}}
-                        {{--<input type="text" class="form-control" style="height: 57px" id="email" name="email"--}}
-                        {{--value="{{ old('email') }}" required>--}}
-                        {{--<label for="login">Email</label>--}}
-                        {{--</div>--}}
-                        <div class="form-group">
-                            <input type="password" class="form-control" style="height: 57px" id="password"
-                                   name="password" required>
-                            <label for="password">Password</label>
-                            <p class="help-block">
-                                <a href="{{ url('/password/reset') }}" target="_blank">Forgot?</a>
-                            </p>
-                        </div>
-                        <br/>
-
-                        <div class="form-group row">
-                            {{--<div class="form-group row">--}}
-
-                            {{--</div>--}}
-
-
-                            {{--<div class="col-xs-6 text-left">--}}
-                            {{--<div class="checkbox checkbox-inline checkbox-styled">--}}
-                            {{--<label>--}}
-                            {{--<span>Remember me</span>--}}
-                            {{--</label>--}}
-                            {{--</div>--}}
-                            {{--</div><!--end .col -->--}}
-                            <div class="col-xs-6 text-right">
-                                <button class="btn btn-primary btn-raised" type="submit" style="background-color: #28A575;
-    border-color: #28A575;">Login</button>
-                            </div><!--end .col -->
-                        </div><!--end .row -->
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- END LOGIN SECTION -->
-
-    <footer class="text-center">
-        <p>
-            Copyright &#183; {{ str_replace('_',' ',config('app.name'))}} &#183; {{date('Y')}}
-        </p>
-    </footer>
-@endsection
-
-@push('styles')
-    <style type="text/css">
-        .logo {
-            margin-top: 60px;
-            margin-bottom: 15px;
-        }
-    </style>
-@endpush
-<!-- @section('content')
-<div class="container">
+@section('content')
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -157,5 +71,97 @@
             </div>
         </div>
     </div>
+</div> --}}
+<div class="row">
+    <div class="col-lg-3 pr-0">
+        <div class="card mb-0 shadow-none">
+            <div class="card-body">
+
+                <h3 class="text-center m-0">
+                    <a href="index.html" class="logo logo-admin">
+                        <img src="{{asset('images/logo.png')}}" height="80px" alt="logo" class="my-3">
+                        <p>New Project</p>
+                    </a>
+                </h3>
+
+                <div class="px-2 mt-2">
+                    <h4 class="text-muted font-size-18 mb-2 text-center">Welcome Back !</h4>
+                    <p class="text-muted text-center">Sign in to continue to HRIS</p>
+
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="username">Email</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
+                                </div>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userpassword">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
+                                </div>
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row mt-4">
+                            <div class="col-sm-12">
+                                @if (Route::has('password.request'))
+                                    <a class="text-muted font-13" href="{{ route('user.forgetPassword') }}">
+                                        <i class="mdi mdi-lock"></i>{{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-0 row">
+                            <div class="col-12 mt-2">
+                                {{-- <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In <i class="fas fa-sign-in-alt ml-1"></i></button> --}}
+                                <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">
+                                    {{ __('Login') }}
+                                    <i class="fas fa-sign-in-alt ml-1"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <p class="mb-0">&copy; {{ date('Y') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 p-0 vh-100  d-flex justify-content-center">
+        <div class="accountbg d-flex align-items-center">
+            <div class="account-title text-center text-white">
+                <h4 class="mt-3 text-white">Customer Management System</h4>
+                <div class="border w-25 mx-auto border-warning"></div>
+            </div>
+        </div>
+    </div>
 </div>
-@endsection -->
+
+@endsection
+
+

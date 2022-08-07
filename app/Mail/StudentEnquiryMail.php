@@ -16,9 +16,11 @@ class StudentEnquiryMail extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $campaign, $registration)
     {
         $this->data = $data;
+        $this->campaign = $campaign;
+        $this->registration = $registration;
     }
 
     /**
@@ -29,6 +31,8 @@ class StudentEnquiryMail extends Mailable
     public function build()
     {
         $data = $this->data;
-        return $this->from($this->data['email'], $this->data['name'])->view('mail.registrationenquiry',compact('data'));
+        $campaign = $this->campaign;
+        $registration = $this->registration;
+        return $this->from($this->data['email'], $this->data['name'])->view('mail.registrationenquiry',compact('data','campaign','registration'));
     }
 }

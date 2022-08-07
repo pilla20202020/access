@@ -24,13 +24,12 @@ class CampaignRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name'=>'required'        ];
-
+            'name'=>'required'
+        ];
         return $rules;
     }
 
     public function data(){
-
         $inputs=[
             'name' => $this->get('name'),
             'alias'   => $this->get('alias'),
@@ -38,12 +37,13 @@ class CampaignRequest extends FormRequest
             'starts'   => $this->get('starts'),
             'ends'   => $this->get('ends'),
             'success_message'   => $this->get('success_message'),
+            'email_success'   => $this->get('email_success'),
             'sms_message'   => $this->get('sms_message'),
             'coupon_codes'   => $this->get('coupon_codes'),
             'url'   => $this->get('url'),
             'keywords'   => $this->get('keywords'),
             'description'   => $this->get('description'),
-            'status' => ($this->get('status') ? $this->get('status') : '') == 'on' ? 'active' : 'in-active',
+            'status' => ($this->get('status') ? $this->get('status') : '') == 'on' ? 'active' : 'in_active',
             'created_by'   => Auth()->user()->id,
 
         ];

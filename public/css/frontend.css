@@ -1,0 +1,90 @@
+.login-form {
+
+    border-top: 10px solid #f47d34;
+    border-bottom: 10px solid #f47d34;
+
+}
+.login-section {
+    /* background-color: #b80056; */
+    padding-bottom: 273px;
+}
+.login_welcome{
+    color:#1b9aa6;
+}
+.btn-login{
+    background-color: #b80056;
+    color: #fff;
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+
+}
+.btn-login:hover {
+    background-color: rgba(184, 0, 86,0.8);
+}
+.login-btn{
+    width: 100px;
+    height: 6vh;
+    border-radius: 5px;
+    background-color: #b80056;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.login-btn button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-radius: 0;
+    color: #ffffff;
+}
+.login-right-para{
+    color: #0c51a1;
+}
+.login-right-title{
+    font-size: 27px;
+    font-weight: bold;
+
+}
+.login-list-icon{
+    font-size: 10px;
+    color: #1b9aa6;
+
+    flex-basis: 5%;
+}
+.login-list{
+    display: flex;
+    align-items: center;
+}
+.list-para{
+    flex-basis: 95%;
+}
+.forget-btn{
+    width: 100%;
+    height: 6vh;
+    border-radius: 5px;
+    background-color: #b80056;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.forget-btn button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-radius: 0;
+    color: #ffffff;
+}
+.login-right{
+    padding-left: 30px;
+}
+.form-control{
+    color: rgb(134, 132, 132);
+    height: 7vh;
+    border-radius: 5px;
+}
