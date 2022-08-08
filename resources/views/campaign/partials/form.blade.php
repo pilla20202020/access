@@ -170,6 +170,21 @@
                         </div>
                     </div>
 
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <label for="to">Offerd Course</label>
+                            <select name="offered_course[]" class="form-control offerd_course" id="to" multiple>
+                                @if(isset($campaign_course) )
+                                    @foreach ($campaign_course as $course)
+                                        <option value="{{$course}}" selected>{{$course}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <span class="text-danger">{{ $errors->has('offered_course') ? $errors->first('offered_course') : '' }} </span>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
@@ -220,6 +235,10 @@
         $(function () {
             $('.ckeditor').each(function (e) {
             });
+        });
+
+        $('.offerd_course').select2({
+            tags: true
         });
     </script>
 @endsection

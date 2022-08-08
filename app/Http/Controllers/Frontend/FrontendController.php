@@ -11,32 +11,41 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use App\Modules\Models\Customer\Customer;
+use App\Modules\Models\Qualification\Qualification;
 use App\Modules\Models\Registration\Registration;
+use App\Modules\Models\TestPreparation\TestPreparation;
 use App\Modules\Models\User;
 use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
-    protected $registration, $campaign;
+    protected $registration, $campaign, $qualification, $preparation;
 
-    function __construct(User $user, Registration $registration, Campaign $campaign)
+    function __construct(User $user, Registration $registration, Campaign $campaign,  Qualification $qualification, TestPreparation $preparation)
     {
         $this->user = $user;
         $this->registration = $registration;
         $this->campaign = $campaign;
+        $this->qualification = $qualification;
+        $this->preparation = $preparation;
 
     }
 
     public function homepage()
     {
         $campaign = $this->campaign->latest()->take(1)->first();
-        return view('frontend.customer.form',compact('campaign'));
+        $campaign_course = explode(',', $campaign->offered_course);
+        $qualifications = $this->qualification->all();
+        $preparations = $this->preparation->all();
+        return view('frontend.customer.form',compact('campaign','qualifications','preparations','campaign_course'));
     }
 
     public function store(Request $request)
     {
-
-        if($registration = $this->registration->create($request->all())) {
+        $data = $request->all();
+        $result = collect($data['intrested_course']);
+        $data['intrested_course'] = $result->implode(',');
+        if($registration = $this->registration->create($data)) {
             $campaign = $this->campaign->where('id',$request->campaign_id)->first();
             $web_message = $campaign->success_message;
             $sms_message = $campaign->sms_message;
@@ -50,7 +59,7 @@ class FrontendController extends Controller
                 'to' => $request->phone,
                 'text' => $smsdeliver_msg
             );
-            smsPost($url, $data);
+            $response = smsPost($url, $data);
             // $response = json_decode(smsPost($url, $data));
             // dd($response);
             // if ($response->response_code == 201) {

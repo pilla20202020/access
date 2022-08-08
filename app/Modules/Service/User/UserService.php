@@ -168,7 +168,6 @@ class UserService extends Service
             $user = $this->user->find($userId);
             $data['is_deleted']='yes';
             return $user = $user->update($data);
-            dd($user);
 
         } catch (Exception $e) {
             return false;

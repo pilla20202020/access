@@ -94,6 +94,42 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::post('districts', 'Common\CommonController@getDistrictsByProvinceId')->name('district.provinceId');
     });
 
+    /*
+    |--------------------------------------------------------------------------
+    | qualification CRUD
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::group(['as' => 'qualification.', 'prefix' => 'qualification',], function () {
+        Route::get('', 'Common\QualificationController@index')->name('index');
+        Route::get('qualification-data', 'Common\QualificationController@getAllData')->name('data');
+        Route::get('create', 'Common\QualificationController@create')->name('create');
+        Route::post('', 'Common\QualificationController@store')->name('store');
+        Route::get('{qualification}/edit', 'Common\QualificationController@edit')->name('edit');
+        Route::put('{qualification}', 'Common\QualificationController@update')->name('update');
+        Route::get('get-qualifications','Common\QualificationController@getQualifications')->name('get_qualifications');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Preparation CRUD
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::group(['as' => 'preparation.', 'prefix' => 'preparation',], function () {
+        Route::get('', 'Common\TestPreparationController@index')->name('index');
+        Route::get('preparation-data', 'Common\TestPreparationController@getAllData')->name('data');
+        Route::get('create', 'Common\TestPreparationController@create')->name('create');
+        Route::post('', 'Common\TestPreparationController@store')->name('store');
+        Route::get('{preparation}/edit', 'Common\TestPreparationController@edit')->name('edit');
+        Route::put('{preparation}', 'Common\TestPreparationController@update')->name('update');
+        Route::get('get-preparation','Common\TestPreparationController@getQualifications')->name('get_qualifications');
+        Route::get('preparation/{id}/destroy', 'Common\TestPreparationController@destroy')->name('destroy')->middleware('permission:permission-delete');
+
+    });
+
 
     /*
     |--------------------------------------------------------------------------
@@ -106,6 +142,7 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::get('', 'Registration\RegistrationController@index')->name('index');
         Route::get('{blog}/show', 'Registration\RegistrationController@show')->name('show');
         Route::get('{id}', 'Registration\RegistrationController@destroy')->name('destroy');
+        Route::post('addfollowup', 'Registration\RegistrationController@addFollowUp')->name('addfollowup');
     });
 
     /*

@@ -25,6 +25,7 @@ class Campaign extends Model
         'sms_message',
         'email_success',
         'coupon_codes',
+        'offered_course',
         'url',
         'keywords',
         'description',

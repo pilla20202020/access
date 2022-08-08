@@ -18,6 +18,7 @@ class ChangesFieldTypeOfTblCampaigns extends Migration
             $table->text('ogtags')->change();
             $table->text('details')->change();
             $table->string('email_success')->nullable();
+            $table->string('offered_course')->nullable();
 
         });
     }
@@ -30,5 +31,8 @@ class ChangesFieldTypeOfTblCampaigns extends Migration
     public function down()
     {
         //
+        Schema::table('tbl_campaigns', function (Blueprint $table) {
+            $table->dropColumn(['email_success','offered_course']);
+        });
     }
 }

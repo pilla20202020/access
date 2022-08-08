@@ -24,7 +24,7 @@
                         <img class="img-fluid" src="{{ asset($campaign->banner_path)}}"/>
                     @endif
                     @if(Illuminate\Support\Facades\Session::has('success'))
-                        <div class="alert alert-success mt-3 mb-3">
+                        <div class="alert alert-success mt-3 mb-3" id="alert_message">
                             {{Illuminate\Support\Facades\Session::get('success')}}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -59,9 +59,12 @@
                         <div class="row">
 
                             <div class="form-group col-4">
-                                <input required="required" placeholder="Qualification " class="form-control"
-                                    name="highest_qualification" type="text">
-
+                                <select name="highest_qualification" class="form-control">
+                                    <option value="" disabled selected>Select Qualification</option>
+                                    @foreach ($qualifications as $qualification)
+                                        <option value="{{$qualification->name}}">{{$qualification->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group col-4">
@@ -81,22 +84,19 @@
 
                         <div class="row">
                             <div class="form-group col-6">
-                                <div class="form-group">
-                                    <select name="test_name" class="form-control" id="test_name">
-                                        <option value="" disabled selected>Test Preparation</option>
-                                        <option value="ielts">IELTS</option>
-                                        <option value="sat">SAT</option>
-                                        <option value="gre">GRE</option>
-                                        <option value="none">None</option>
-                                    </select>
-                                </div>
+                                <select name="test_name" class="form-control">
+                                    <option value="" disabled selected>Select Test Preparation</option>
+                                    @foreach ($preparations as $preparation)
+                                        <option value="{{$preparation->name}}">{{$preparation->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
 
                             <div class="form-group col-6">
                                 <input required="required" placeholder="Enter Test Score " class="form-control"
                                     name="test_score" type="text">
-                        </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -115,6 +115,17 @@
 
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <select name="intrested_course[]" data-placeholder="Please Select Intrested Course" class="form-control offerd_course" multiple>
+                                    @foreach ($campaign_course as $course)
+                                        <option value="{{$course}}">{{$course}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="row">
                         <div class="col-lg-12 justify-content-center align-center">
                             <button type="submit" title="Submit Your Message!" class="btn btn-submit" name="submit"
@@ -144,6 +155,13 @@
     </div>
 @endsection
 
-@push('scripts')
-    <script></script>
-@endpush
+@section('page-specific-scripts')
+    <script>
+        $('.offerd_course').select2({
+        });
+
+        setTimeout(() => {
+            $('#alert_message').hide();
+        }, 6000);
+    </script>
+@endsection

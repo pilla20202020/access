@@ -30,6 +30,7 @@ class CampaignRequest extends FormRequest
     }
 
     public function data(){
+
         $inputs=[
             'name' => $this->get('name'),
             'alias'   => $this->get('alias'),
@@ -45,8 +46,15 @@ class CampaignRequest extends FormRequest
             'description'   => $this->get('description'),
             'status' => ($this->get('status') ? $this->get('status') : '') == 'on' ? 'active' : 'in_active',
             'created_by'   => Auth()->user()->id,
-
         ];
+
+        if($this->get('offered_course')) {
+            $result = collect($this->get('offered_course'));
+        }
+
+        if(isset($result)) {
+            $inputs['offered_course'] = $result->implode(',');
+        }
 
         if ($this->has('status')) {
             $inputs['status'] = "active";

@@ -49,6 +49,11 @@ class CampaignController extends Controller
     public function store(CampaignRequest $request)
     {
         //
+
+        // foreach($request->offered_course as $course)
+        // {
+        //     $result = $course;
+        // }
         try {
             if ($campaign = $this->campaign->create($request->data())) {
                 if ($request->hasFile('banner')) {
@@ -87,7 +92,8 @@ class CampaignController extends Controller
     {
         //
         $campaign = $this->campaign->where('id',$id)->first();
-        return view('campaign.edit', compact('campaign'));
+        $campaign_course = explode(',', $campaign->offered_course);
+        return view('campaign.edit', compact('campaign','campaign_course'));
     }
 
     /**

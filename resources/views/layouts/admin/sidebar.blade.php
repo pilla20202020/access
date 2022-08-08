@@ -23,6 +23,8 @@
                         <li><a href="{{ route('user.index')}}" aria-expanded="false"><i class="fas fa-user"></i></i> Users</a></li>
                         <li><a href="{{ route('role.index')}}" aria-expanded="false"><i class="fa fa-tasks"></i> Roles</a></li>
                         <li><a href="{{ route('permission.index')}}" aria-expanded="false"><i class="fa fa-lock"></i> Permissions</a></li>
+                        <li><a href="{{ route('qualification.index')}}" aria-expanded="false"><i class="fas fa-graduation-cap"></i> Qualification</a></li>
+                        <li><a href="{{ route('preparation.index')}}" aria-expanded="false"><i class="fas fa-graduation-cap"></i> Preparation</a></li>
                     </ul>
                 </li>
 

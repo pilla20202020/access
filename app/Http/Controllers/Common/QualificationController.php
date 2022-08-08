@@ -43,7 +43,7 @@ class QualificationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'qualification' => 'required|max:255|unique:qualifications',
+            'name' => 'required|max:255|unique:qualifications,name',
             'description' => 'max:1024'
         ]);
         if (Qualification::create($request->all())) {
@@ -66,14 +66,14 @@ class QualificationController extends Controller
     public function update(Request $request, $qualification_id)
     {
         $request->validate([
-            'qualification' => 'required|max:255',
+            'name' => 'required|max:255',
             'description' => 'max:1024'
         ]);
 
         try{
             $qualification = Qualification::findOrFail($qualification_id);
             $qualification->update($request->all());
-            return redirect()->route('qualification.index')->with('message', 'The Job Type Updated Successfully!');
+            return redirect()->route('qualification.index')->with('message', 'Qualification Updated Successfully!');
         }catch(ModelNotFoundException $ex){
             return redirect()->route('qualification.index')->with('error', $ex->getMessage());
         }

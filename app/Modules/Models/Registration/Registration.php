@@ -2,6 +2,7 @@
 
 namespace App\Modules\Models\Registration;
 
+use App\Modules\Models\FollowUp\FollowUp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -45,11 +46,16 @@ class Registration extends Model
         'test_name',
         'test_score',
         'interested_for_country',
-        'interested_course',
+        'intrested_course',
         'display_order',
         'remarks',
         'status',
         'created_by',
         'created_on',
     ];
+
+    public static function getFollowUp($id)
+    {
+        return FollowUp::select('id','next_schedule','follow_up_name','follow_up_by','remarks')->where('follow_up_type','registration')->where('refrence_id',$id)->latest()->first();
+    }
 }
