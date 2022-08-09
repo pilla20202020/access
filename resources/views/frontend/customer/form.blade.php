@@ -116,7 +116,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!--div class="row">
                             <div class="form-group col-6">
                                 <select name="intrested_course[]" data-placeholder="Please Select Intrested Course" class="form-control offerd_course" multiple>
                                     @foreach ($campaign_course as $course)
@@ -124,7 +124,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div-->
 
                         <div class="row">
                         <div class="col-lg-12 justify-content-center align-center">
