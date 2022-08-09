@@ -25,6 +25,8 @@ class Registration extends Model
         'preffered_location',
         'see_year',
         'see_grade',
+        'headers',
+        'user_agent',
         'see_stream',
         'see_school',
         'plus2_year',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Campaign\CampaignRequest;
 use App\Modules\Models\Campaign\Campaign;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CampaignController extends Controller
 {
@@ -56,6 +57,10 @@ class CampaignController extends Controller
         // }
         try {
             if ($campaign = $this->campaign->create($request->data())) {
+                $campaign->fill([
+                    'url' => Str::slug($request->name),
+                    'alias' => Str::slug($request->name),
+                ])->save();
                 if ($request->hasFile('banner')) {
                     $this->uploadFile($request, $campaign,'banner');
                 }
@@ -93,7 +98,9 @@ class CampaignController extends Controller
         //
         $campaign = $this->campaign->where('id',$id)->first();
         $campaign_course = explode(',', $campaign->offered_course);
-        return view('campaign.edit', compact('campaign','campaign_course'));
+        $ogtags = explode(',', $campaign->ogtags);
+        $keywords = explode(',', $campaign->keywords);
+        return view('campaign.edit', compact('campaign','campaign_course','keywords','ogtags'));
     }
 
     /**
@@ -107,6 +114,10 @@ class CampaignController extends Controller
     {
         //
         if ($campaign->update($request->data())) {
+            $campaign->fill([
+                'url' => Str::slug($request->name),
+                'alias' => Str::slug($request->name),
+            ])->save();
             if ($request->hasFile('banner')) {
                 $this->uploadFile($request, $campaign,'banner');
             }
@@ -180,4 +191,6 @@ class CampaignController extends Controller
             return false;
         }
     }
+
+
 }

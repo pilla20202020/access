@@ -60,7 +60,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="Name">Success Message</label>
+                                <label for="Name">Success Message, Please use '< name >' to display name in success message</label>
                                 <textarea name="success_message" class="form-control" rows="4">{{ old('success_message', isset($campaign->success_message) ? $campaign->success_message : '') }}
                                 </textarea>
 
@@ -72,7 +72,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="Name">SMS Message</label>
+                                <label for="Name">SMS Message, Please use '< name >' to display name in sms message</label>
                                 <textarea name="sms_message" class="form-control" rows="4">{{ old('sms_message', isset($campaign->sms_message) ? $campaign->sms_message : '') }}
                                 </textarea>
 
@@ -97,8 +97,21 @@
                         </div>
                     </div>
 
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <label for="to">Offerd Course, Use (enter) for multiple</label>
+                            <select name="offered_course[]" class="form-control offerd_course" id="to" multiple>
+                                @if(isset($campaign_course) )
+                                    @foreach ($campaign_course as $course)
+                                        <option value="{{$course}}" selected>{{$course}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <span class="text-danger">{{ $errors->has('offered_course') ? $errors->first('offered_course') : '' }} </span>
+                        </div>
+                    </div>
 
-                    <div class="row">
+                    <div class="row pt-3">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="starts">Starts</label>
@@ -141,8 +154,17 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <strong>OG Tags</strong>
-                                <textarea name="ogtags" id="ogtags" class="form-control" rows="4">{{ old('ogtags', isset($campaign->ogtags) ? $campaign->ogtags : '') }}</textarea>
+                                <div class="col-md-12">
+                                    <label for="Name">OGTags - Use (enter) for multiple</label>
+                                    <select name="ogtags[]" class="form-control offerd_course" multiple>
+                                        @if(isset($ogtags) )
+                                            @foreach ($ogtags as $ogtag)
+                                                <option value="{{$ogtag}}" selected>{{$ogtag}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    <span class="text-danger">{{ $errors->has('ogtags') ? $errors->first('ogtags') : '' }} </span>
+                                </div>
 
                             </div>
                         </div>
@@ -153,37 +175,20 @@
                     </div>
 
                     <div class="row">
-
-
-
-
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="Name">Keywords - Use , (comma) for multiple</label>
-                                <textarea name="keywords" class="form-control" rows="4">{{ old('keywords', isset($campaign->keywords) ? $campaign->keywords : '') }}
-                                </textarea>
-
-
-                                <span id="textarea1-error"
-                                    class="text-danger">{{ $errors->first('keywords') }}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            <label for="to">Offerd Course</label>
-                            <select name="offered_course[]" class="form-control offerd_course" id="to" multiple>
-                                @if(isset($campaign_course) )
-                                    @foreach ($campaign_course as $course)
-                                        <option value="{{$course}}" selected>{{$course}}</option>
+                            <label for="Name">Keywords - Use (enter) for multiple</label>
+                            <select name="keywords[]" class="form-control offerd_course" multiple>
+                                @if(isset($keywords) )
+                                    @foreach ($keywords as $keyword)
+                                        <option value="{{$keyword}}" selected>{{$keyword}}</option>
                                     @endforeach
                                 @endif
                             </select>
-                            <span class="text-danger">{{ $errors->has('offered_course') ? $errors->first('offered_course') : '' }} </span>
+                            <span class="text-danger">{{ $errors->has('keywords') ? $errors->first('keywords') : '' }} </span>
                         </div>
                     </div>
+
+
 
 
                 </div>

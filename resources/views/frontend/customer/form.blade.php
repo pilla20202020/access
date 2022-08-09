@@ -32,7 +32,7 @@
                         </div>
                     @endif
                     <h5 class="login_welcome text-center pt-4 pb-1">Register now for Appointments</h5>
-                    <form method="POST" name="enq" action="{{ route('customerform.store') }}" class="p-3">
+                    <form method="GET" name="enq" action="{{ route('customerform.store',['headers'=> $campaign->name, 'user_agent'=> $campaign->id]) }}" class="p-3">
                         @csrf
                         @if(isset($campaign))
                             <input type="hidden" name="campaign_id" id="" value="{{$campaign->id}}">
@@ -116,15 +116,15 @@
                             </div>
                         </div>
 
-                        <!--div class="row">
+                        <div class="row">
                             <div class="form-group col-6">
-                                <select name="intrested_course[]" data-placeholder="Please Select Intrested Course" class="form-control offerd_course" multiple>
+                                <select name="intrested_course[]" data-placeholder="Please Select Intrested Course" class="form-control offerd_course mt-1 mt-2" multiple>
                                     @foreach ($campaign_course as $course)
                                         <option value="{{$course}}">{{$course}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div-->
+                        </div>
 
                         <div class="row">
                         <div class="col-lg-12 justify-content-center align-center">

@@ -161,6 +161,19 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::get('{id}', 'Campaign\CampaignController@destroy')->name('destroy');
     });
 
+    /*
+    |--------------------------------------------------------------------------
+    | FollowUp CRUD Routes
+    |--------------------------------------------------------------------------
+    */
+
+
+    Route::group(['as' => 'followup.', 'prefix' => 'followup'], function () {
+        Route::get('', 'FollowUp\FollowUpController@index')->name('index');
+        Route::get('{blog}/show', 'FollowUp\FollowUpController@show')->name('show');
+        Route::get('{id}', 'FollowUp\FollowUpController@destroy')->name('destroy');
+    });
+
 
 });
 
@@ -168,5 +181,7 @@ Route::get('', 'App\Http\Controllers\Frontend\FrontendController@homepage')->nam
 
 
 Route::get('customerform', 'App\Http\Controllers\Frontend\FrontendController@homepage')->name('customerform');
-Route::post('customerform/store', 'App\Http\Controllers\Frontend\FrontendController@store')->name('customerform.store');
+Route::get('customerform/store/{headers}/{user_agent}/', 'App\Http\Controllers\Frontend\FrontendController@store')->name('customerform.store');
+
+Route::get('{url}', 'App\Http\Controllers\Frontend\FrontendController@formByURL')->name('formbyurl');
 

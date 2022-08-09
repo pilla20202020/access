@@ -49,11 +49,27 @@ class CampaignRequest extends FormRequest
         ];
 
         if($this->get('offered_course')) {
-            $result = collect($this->get('offered_course'));
+            $offered_course = collect($this->get('offered_course'));
         }
 
-        if(isset($result)) {
-            $inputs['offered_course'] = $result->implode(',');
+        if(isset($offered_course)) {
+            $inputs['offered_course'] = $offered_course->implode(',');
+        }
+
+        if($this->get('ogtags')) {
+            $ogtags = collect($this->get('ogtags'));
+        }
+
+        if(isset($ogtags)) {
+            $inputs['ogtags'] = $ogtags->implode(',');
+        }
+
+        if($this->get('keywords')) {
+            $keywords = collect($this->get('keywords'));
+        }
+
+        if(isset($keywords)) {
+            $inputs['keywords'] = $keywords->implode(',');
         }
 
         if ($this->has('status')) {

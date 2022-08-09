@@ -42,6 +42,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('followup.index') }}" class="waves-effect">
+                        <i class="fa fa-bookmark"></i>
+                        <span>Follow Up</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

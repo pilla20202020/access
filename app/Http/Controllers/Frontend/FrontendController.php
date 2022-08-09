@@ -40,11 +40,13 @@ class FrontendController extends Controller
         return view('frontend.customer.form',compact('campaign','qualifications','preparations','campaign_course'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $headers, $user_agent)
     {
         $data = $request->all();
         $result = collect($data['intrested_course']);
         $data['intrested_course'] = $result->implode(',');
+        $data['headers'] = $headers;
+        $data['user_agent'] = $user_agent;
         if($registration = $this->registration->create($data)) {
             $campaign = $this->campaign->where('id',$request->campaign_id)->first();
             $web_message = $campaign->success_message;
@@ -71,6 +73,29 @@ class FrontendController extends Controller
             Mail::to($request->email)->send(new StudentNotifyMail($request->all()));
 
             return redirect()->route('homepage')->withSuccess(trans($todeliver_msg));
+        }
+    }
+
+
+    public function formByURL($url = null)
+    {
+
+        if ($url) {
+
+            $campaign = $this->campaign->whereUrl($url)->first();
+
+            if ($campaign == null) {
+                return view('frontend.errors.404');
+            }
+
+            if ($campaign) {
+                $campaign_course = explode(',', $campaign->offered_course);
+            $qualifications = $this->qualification->all();
+            $preparations = $this->preparation->all();
+            return view('frontend.customer.form',compact('campaign','qualifications','preparations','campaign_course'));
+            } else {
+                return view('frontend.errors.404');
+            }
         }
     }
 }

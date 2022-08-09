@@ -72,7 +72,7 @@ class RegistrationController extends Controller
 
         try{
             $followup = $this->followup->where('refrence_id',$request->refrence_id)->where('follow_up_type', $request->follow_up_type);
-            if(isset($followup)) {
+            if($followup->count() == 1) {
                 $data['refrence_id'] = $request->refrence_id;
                 $data['follow_up_name'] = $request->follow_up_name;
                 $data['follow_up_type'] = $request->follow_up_type;
