@@ -9,11 +9,11 @@
                 <img src="{{ asset('images/access.png') }}" alt="" class="img-fluid">
             </div>
             <div class="col-md-9">
-                <h2 class="login-right-title pt-5">
+                <!--h2 class="login-right-title pt-5">
                     @if(isset($campaign))
                         {{$campaign->name}}
                     @endif
-                </h2>
+                </h2-->
             </div>
         </div>
         <div class="row gx-5">
