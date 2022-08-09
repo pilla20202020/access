@@ -52,7 +52,7 @@ class FrontendController extends Controller
             $todeliver_msg = Str::replace("<name>",$request->name, $web_message);
             $smsdeliver_msg = Str::replace("<name>",$request->name, $sms_message);
 
-            $url = 'https://aakashsms.com/admin/public/sms/v1/send';
+            $url = 'https://sms.aakashsms.com/sms/v3/send';
             $data = array(
                 'auth_token' => '28a22c64768a49ee5f539fa2924a8c278bb9ff16d7798496adbb87278d1c7e70',
                 'from' => '31001',

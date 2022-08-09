@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Contact Inquiry Mail</title>
+    <title>Thankyou for registrations</title>
     <style>
         /* -------------------------------------
             GLOBAL RESETS
@@ -344,9 +344,9 @@
                     <tr>
                         <td class="wrapper">
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                <h2>Dear {{ $data['name'] }}, Your Enquiry has been submitted successfully. We will contact you as soon as possible. </h2><br>
+                                <h2>Dear {{ $data['name'] }}, Your registration information has been submitted successfully. Our team may contact you for confirmation of appointments. </h2><br>
                                 <h2>Thank You</h2>
-                                <h2>Access Consultancy </h2><br>
+                                <h2>Access Education Network </h2><br>
                             </table>
                         </td>
                     </tr>
