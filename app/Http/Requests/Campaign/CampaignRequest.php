@@ -43,6 +43,8 @@ class CampaignRequest extends FormRequest
             'coupon_codes'   => $this->get('coupon_codes'),
             'url'   => $this->get('url'),
             'keywords'   => $this->get('keywords'),
+            'ogtags'   => $this->get('ogtags'),
+            'headers'   => $this->get('headers'),
             'description'   => $this->get('description'),
             'status' => ($this->get('status') ? $this->get('status') : '') == 'on' ? 'active' : 'in_active',
             'created_by'   => Auth()->user()->id,
@@ -54,14 +56,6 @@ class CampaignRequest extends FormRequest
 
         if(isset($offered_course)) {
             $inputs['offered_course'] = $offered_course->implode(',');
-        }
-
-        if($this->get('ogtags')) {
-            $ogtags = collect($this->get('ogtags'));
-        }
-
-        if(isset($ogtags)) {
-            $inputs['ogtags'] = $ogtags->implode(',');
         }
 
         if($this->get('keywords')) {

@@ -145,46 +145,46 @@ class PermissionSeeder extends Seeder
 
 
 
-            //permission for candidate
+            //permission for registration
             [
-                "name" => "candidate-index",
+                "name" => "registration-index",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
             [
-                "name" => "candidate-data",
+                "name" => "registration-data",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
             [
-                "name" => "candidate-create",
+                "name" => "registration-create",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
             [
-                "name" => "candidate-store",
+                "name" => "registration-store",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
             [
-                "name" => "candidate-show",
+                "name" => "registration-show",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
             [
-                "name" => "candidate-edit",
+                "name" => "registration-edit",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
             [
-                "name" => "candidate-update",
+                "name" => "registration-update",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
             [
-                "name" => "candidate-delete",
+                "name" => "registration-delete",
                 "guard_name" => "web",
-                "group_name" => "candidate",
+                "group_name" => "registration",
             ],
         ];
 

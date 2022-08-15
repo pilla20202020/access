@@ -87,10 +87,10 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="Name">Email Success Message</label>
+                            <label for="Name">Email Success Message.Please use '< name >' to display name in email.</label>
                             <span id="textarea1-error" class="text-danger">{{ $errors->first('email_success') }}</span>
                             <div class="form-group">
-                                <textarea name="email_success" class="ckeditor form-control" rows="4">{{ old('email_success', isset($campaign->email_success) ? $campaign->sms_message : '') }}
+                                <textarea name="email_success" class="form-control" rows="4">{{ old('email_success', isset($campaign->email_success) ? $campaign->email_success : '') }}
                                 </textarea>
 
                             </div>
@@ -154,17 +154,8 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <div class="col-md-12">
-                                    <label for="Name">OGTags - Use (enter) for multiple</label>
-                                    <select name="ogtags[]" class="form-control offerd_course" multiple>
-                                        @if(isset($ogtags) )
-                                            @foreach ($ogtags as $ogtag)
-                                                <option value="{{$ogtag}}" selected>{{$ogtag}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <span class="text-danger">{{ $errors->has('ogtags') ? $errors->first('ogtags') : '' }} </span>
-                                </div>
+                                <strong>OG Tags</strong>
+                                <textarea name="ogtags" id="ogtags" class="form-control" rows="4">{{ old('ogtags', isset($campaign->ogtags) ? $campaign->ogtags : '') }}</textarea>
 
                             </div>
                         </div>
@@ -175,7 +166,15 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <strong>Headers</strong>
+                                <textarea name="headers" class="form-control" rows="4">{{ old('headers', isset($campaign->headers) ? $campaign->headers : '') }}</textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
                             <label for="Name">Keywords - Use (enter) for multiple</label>
                             <select name="keywords[]" class="form-control offerd_course" multiple>
                                 @if(isset($keywords) )
@@ -186,6 +185,8 @@
                             </select>
                             <span class="text-danger">{{ $errors->has('keywords') ? $errors->first('keywords') : '' }} </span>
                         </div>
+
+
                     </div>
 
 

@@ -13,20 +13,22 @@ class CreateFollowUpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('follow_ups', function (Blueprint $table) {
+        Schema::create('tbl_follow_ups', function (Blueprint $table) {
             $table->id();
             $table->string('follow_up_type');
             $table->bigInteger('refrence_id')->unsigned()->index()->nullable();
             $table->date('next_schedule');
             $table->string('follow_up_name');
             $table->string('follow_up_by');
-            $table->string('remarks');
+            $table->bigInteger('leadcategory_id')->unsigned()->index()->nullable();
+            $table->text('remarks');
             $table->string('display_order')->nullable();
             $table->enum('status',['active','in_active'])->nullable();
             $table->bigInteger('created_by')->unsigned()->index()->nullable();
             $table->bigInteger('last_updated_by')->unsigned()->index()->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('last_updated_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('leadcategory_id')->references('id')->on('tbl_lead_categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -38,6 +40,6 @@ class CreateFollowUpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follow_ups');
+        Schema::dropIfExists('tbl_follow_ups');
     }
 }

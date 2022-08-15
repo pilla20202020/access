@@ -51,8 +51,10 @@ class FrontendController extends Controller
             $campaign = $this->campaign->where('id',$request->campaign_id)->first();
             $web_message = $campaign->success_message;
             $sms_message = $campaign->sms_message;
+            $email_message = $campaign->email_success;
             $todeliver_msg = Str::replace("<name>",$request->name, $web_message);
             $smsdeliver_msg = Str::replace("<name>",$request->name, $sms_message);
+            $emaildeliver = Str::replace("<name>",$request->name, $email_message);
 
             $url = 'https://sms.aakashsms.com/sms/v3/send';
             $data = array(
@@ -69,7 +71,7 @@ class FrontendController extends Controller
             // } else {
             //     return false;
             // }
-            Mail::to('prajwalbro@hotmail.com')->send(new StudentEnquiryMail($request->all(), $campaign, $registration));
+            Mail::to('prajwalbro@hotmail.com')->send(new StudentEnquiryMail($request->all(), $emaildeliver, $registration));
             Mail::to($request->email)->send(new StudentNotifyMail($request->all()));
 
             return redirect()->route('homepage')->withSuccess(trans($todeliver_msg));

@@ -396,7 +396,7 @@
                         <tr>
                             <td class="wrapper">
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                    <h2>{!! $campaign['email_success'] !!}</h2>
+                                    <h2>{{ $emaildeliver }}</h2>
                                     <tbody>
                                         <tr>
                                             <td>Name</td>

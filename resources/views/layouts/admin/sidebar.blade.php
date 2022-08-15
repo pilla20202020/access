@@ -14,6 +14,8 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @role('SuperAdmin')
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow" aria-expanded="false">
                         <i class="mdi mdi-share-variant"></i>
@@ -24,17 +26,23 @@
                         <li><a href="{{ route('role.index')}}" aria-expanded="false"><i class="fa fa-tasks"></i> Roles</a></li>
                         <li><a href="{{ route('permission.index')}}" aria-expanded="false"><i class="fa fa-lock"></i> Permissions</a></li>
                         <li><a href="{{ route('qualification.index')}}" aria-expanded="false"><i class="fas fa-graduation-cap"></i> Qualification</a></li>
-                        <li><a href="{{ route('preparation.index')}}" aria-expanded="false"><i class="fas fa-graduation-cap"></i> Preparation</a></li>
+                        <li><a href="{{ route('preparation.index')}}" aria-expanded="false"><i class="fas fa-tasks"></i> Preparation</a></li>
+                        <li><a href="{{ route('leadcategory.index')}}" aria-expanded="false"><i class="fas fa-list-alt"></i> Lead Category</a></li>
+                        <li><a href="{{ route('location.index')}}" aria-expanded="false"><i class="fa fa-map-marker"></i> Location</a></li>
                     </ul>
                 </li>
+                @endrole
 
-                <li>
-                    <a href="{{ route('registration.index') }}" class="waves-effect">
-                        <i class="mdi mdi-folder"></i>
-                        <span>Registration Enquiry</span>
-                    </a>
-                </li>
+                @role('SuperAdmin|Consultancy')
+                    <li>
+                        <a href="{{ route('registration.index') }}" class="waves-effect">
+                            <i class="mdi mdi-folder"></i>
+                            <span>Registration Enquiry</span>
+                        </a>
+                    </li>
+                @endrole
 
+                @role('SuperAdmin')
                 <li>
                     <a href="{{ route('campaign.index') }}" class="waves-effect">
                         <i class="mdi mdi-trophy"></i>
@@ -48,6 +56,8 @@
                         <span>Follow Up</span>
                     </a>
                 </li>
+                @endrole
+
 
             </ul>
         </div>

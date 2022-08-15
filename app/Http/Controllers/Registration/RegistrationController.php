@@ -4,19 +4,21 @@ namespace App\Http\Controllers\Registration;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Models\FollowUp\FollowUp;
+use App\Modules\Models\LeadCategory\LeadCategory;
 use Illuminate\Http\Request;
 use App\Modules\Models\Registration\Registration;
 use App\Modules\Models\User;
 
 class RegistrationController extends Controller
 {
-    protected $customer, $registration, $followup;
+    protected $customer, $registration, $followup, $leadCategory;
 
-    function __construct(User $user, Registration $registration, FollowUp $followup)
+    function __construct(User $user, Registration $registration, FollowUp $followup, LeadCategory $leadCategory)
     {
         $this->user = $user;
         $this->registration = $registration;
         $this->followup = $followup;
+        $this->leadCategory = $leadCategory;
 
     }
     public function customerForm()
@@ -28,7 +30,8 @@ class RegistrationController extends Controller
     {
         //
         $registrations = $this->registration->orderBy('created_at', 'desc')->get();
-        return view('registration.index', compact('registrations'));
+        $leadCategories = $this->leadCategory->get();
+        return view('registration.index', compact('registrations','leadCategories'));
     }
 
 
@@ -68,8 +71,19 @@ class RegistrationController extends Controller
         return redirect()->route('registration.index');
     }
 
-    public function addFollowUp(Request $request) {
+    // Get FollowUp
+    public function viewFollowUp(Request $request) {
+        if($followup = $this->followup->where('refrence_id', $request->registration_id)->where('follow_up_type','registration')->with('leadcategory')->latest()->get())
+        {
+            return response()->json([
+                'data' => $followup,
+                'status' => true,
+                'message' => "Commission Generated Successfully."
+            ]);
+        }
+    }
 
+    public function addFollowUp(Request $request) {
         try{
             $followup = $this->followup->where('refrence_id',$request->refrence_id)->where('follow_up_type', $request->follow_up_type);
             if($followup->count() == 1) {
@@ -79,11 +93,12 @@ class RegistrationController extends Controller
                 $data['remarks'] = $request->remarks;
                 $data['next_schedule'] = $request->next_schedule;
                 $data['follow_up_by'] = $request->follow_up_by;
+                $data['leadcategory_id'] = $request->leadcategory_id;
                 $followup->update($data);
                 Toastr()->success('Followup Created Successfully','Success');
                 return redirect()->back();
             } else {
-                if($followup = $this->followup->create($request->all())) {
+                if($data = $this->followup->create($request->all())) {
                     Toastr()->success('Followup Created Successfully','Success');
                     return redirect()->back();
 
@@ -92,7 +107,6 @@ class RegistrationController extends Controller
                     return redirect()->back();
                 }
             }
-
         } catch (Exception $e) {
             return false;
         }

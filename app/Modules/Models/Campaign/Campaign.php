@@ -28,6 +28,7 @@ class Campaign extends Model
         'offered_course',
         'url',
         'keywords',
+        'headers',
         'description',
         'display_order',
         'remarks',

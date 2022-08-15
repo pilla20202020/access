@@ -133,6 +133,44 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
 
     /*
     |--------------------------------------------------------------------------
+    | LeadCategory CRUD
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::group(['as' => 'leadcategory.', 'prefix' => 'leadcategory',], function () {
+        Route::get('', 'LeadCategory\LeadCategoryController@index')->name('index');
+        Route::get('leadcategory-data', 'LeadCategory\LeadCategoryController@getAllData')->name('data');
+        Route::get('create', 'LeadCategory\LeadCategoryController@create')->name('create');
+        Route::post('', 'LeadCategory\LeadCategoryController@store')->name('store');
+        Route::get('{leadcategory}/edit', 'LeadCategory\LeadCategoryController@edit')->name('edit');
+        Route::put('{leadcategory}', 'LeadCategory\LeadCategoryController@update')->name('update');
+        Route::get('leadcategory/{id}/destroy', 'LeadCategory\LeadCategoryController@destroy')->name('destroy')->middleware('permission:permission-delete');
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Location CRUD
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::group(['as' => 'location.', 'prefix' => 'location',], function () {
+        Route::get('', 'Location\LocationController@index')->name('index');
+        Route::get('location-data', 'Location\LocationController@getAllData')->name('data');
+        Route::get('create', 'Location\LocationController@create')->name('create');
+        Route::post('', 'Location\LocationController@store')->name('store');
+        Route::get('{location}/edit', 'Location\LocationController@edit')->name('edit');
+        Route::put('{location}', 'Location\LocationController@update')->name('update');
+        Route::get('location/{id}/destroy', 'Location\LocationController@destroy')->name('destroy')->middleware('permission:permission-delete');
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Registration CRUD Routes
     |--------------------------------------------------------------------------
     */
@@ -141,8 +179,9 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
     Route::group(['as' => 'registration.', 'prefix' => 'registration'], function () {
         Route::get('', 'Registration\RegistrationController@index')->name('index');
         Route::get('{blog}/show', 'Registration\RegistrationController@show')->name('show');
-        Route::get('{id}', 'Registration\RegistrationController@destroy')->name('destroy');
+        Route::get('registration/{id}/destroy', 'Registration\RegistrationController@destroy')->name('destroy');
         Route::post('addfollowup', 'Registration\RegistrationController@addFollowUp')->name('addfollowup');
+        Route::get('/viewfollowup', 'Registration\RegistrationController@viewFollowUp')->name('viewfollowup');
     });
 
     /*

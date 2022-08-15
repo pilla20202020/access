@@ -114,7 +114,7 @@
             font-weight: 400;
             line-height: 1.4;
             margin: 0;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         h1 {

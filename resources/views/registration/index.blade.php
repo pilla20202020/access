@@ -39,7 +39,8 @@
     </div>
 
     {{-- Add Follow Up Modal --}}
-    <div class="modal fade add_followup" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade add_followup" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -49,24 +50,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('registration.addfollowup')}}" method="POST" class="form form-validate floating-label">
+                    <form action="{{ route('registration.addfollowup') }}" method="POST"
+                        class="form form-validate floating-label">
                         @csrf
-                        <input type="hidden" class="change_claim_commission" value="" name="refrence_id" id="">
+                        <input type="hidden" class="registration_id" value="" name="refrence_id"
+                            id="">
+                        <input type="hidden" class="follow_up_type" value="registration" name="follow_up_type"
+                            id="">
                         <div class="row justify-content-center">
                             <div class="col-md-12 mt-2">
                                 <label class="control-label">Follow Up To</label>
                                 <input type="text" name="follow_up_name" class="form-control" required>
-                            </div>
-
-
-                            <div class="col-md-12 mt-2">
-                                <label class="control-label">Follow Up Type</label>
-                                    <select data-placeholder="Select Status"
-                                        class="select2 tail-select form-control " id=""
-                                        name="follow_up_type" required>
-                                        <option value="" selected disabled >Select Follow Up Type</option>
-                                        <option value="registration">Registration</option>
-                                    </select>
                             </div>
 
                             <div class="col-md-12 mt-2">
@@ -83,17 +77,47 @@
                                 <label class="control-label">Follow Up By</label>
                                 <input type="text" name="follow_up_by" class="form-control" required>
                             </div>
+
+                            @if (isset($leadCategories))
+                                <div class="col-md-12 mt-2">
+                                    <label for="Name">Follow Up Option</label>
+                                    <select name="leadcategory_id" class="form-control">
+                                        @foreach ($leadCategories as $category)
+                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span
+                                        class="text-danger">{{ $errors->has('leadcategory_id') ? $errors->first('leadcategory_id') : '' }}
+                                    </span>
+                                </div>
+                            @endif
                         </div>
 
                         <hr>
                         <div class="row mt-2 justify-content-center">
                             <div class="form-group">
                                 <div>
-                                    <input type="submit" name="pageSubmit" class="btn btn-danger waves-effect waves-light" value="Submit">
+                                    <input type="submit" name="pageSubmit" class="btn btn-danger waves-effect waves-light"
+                                        value="Submit">
                                 </div>
                             </div>
                         </div>
                     </form>
+
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>S.No.</th>
+                                <th>Follow Up By</th>
+                                <th>Next Schedule</th>
+                                <th>Remarks</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="followuplist">
+
+                        </tbody>
+                    </table>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -109,11 +133,40 @@
             $('#datatable').DataTable();
         });
 
-        $(document).on('click','.addfollowup',function (e) {
-            let commission_id = $(this).data('commission_id');
-            $(".change_claim_commission").val(commission_id);
-            $('.add_followup').modal('show');
+        $(document).on('click', '.addfollowup', function(e) {
+            let registration_id = $(this).data('registration_id');
+            $(".registration_id").val(registration_id);
+            $.ajax({
+                type: 'get',
+                url: '{{ route('registration.viewfollowup') }}',
+                data: {
+                    registration_id: registration_id,
+                },
+                success: function(response) {
+                    if (typeof(response) != 'object') {
+                        response = JSON.parse(response)
+                    }
+                    var tbody_html = "";
+                    if (response.status) {
+                        $.each(response.data, function(key, followup) {
+                            key = key + 1;
+                            tbody_html += "<tr>";
+                            tbody_html += "<td>" + key + "</td>";
+                            tbody_html += "<td>" + followup.follow_up_by + "</td>";
+                            tbody_html += "<td>" + followup.next_schedule + "</td>";
+                            tbody_html += "<td>" + followup.remarks + "</td>";
+                            tbody_html += "<td>" + followup.leadcategory.name + "</td>";
+                            tbody_html += "</tr>";
+                        });
+                        $('#followuplist').html(tbody_html);
+                        $('.add_followup').modal('show');
+                    }
+                }
+
+            })
 
         });
+
+        $('.leadcategory').select2();
     </script>
 @endsection

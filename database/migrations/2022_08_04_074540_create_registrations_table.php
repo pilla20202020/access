@@ -24,7 +24,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zone')->nullable();
-            $table->string('nearest_landmark')->nullable();
+            $table->text('nearest_landmark')->nullable();
             $table->string('see_year')->nullable();
             $table->string('see_grade')->nullable();
             $table->string('see_stream')->nullable();
@@ -45,13 +45,13 @@ class CreateRegistrationsTable extends Migration
             $table->string('preparation_score')->nullable();
             $table->string('preparation_bandscore')->nullable();
             $table->string('preparation_date')->nullable();
-            $table->string('test_name')->nullable();
+            $table->text('test_name')->nullable();
             $table->string('test_score')->nullable();
             $table->string('preffered_location')->nullable();
             $table->string('interested_for_country')->nullable();
             $table->string('intrested_course')->nullable();
             $table->string('display_order')->nullable();
-            $table->string('remarks')->nullable();
+            $table->text('remarks')->nullable();
             $table->enum('status',['active','in_active'])->nullable();
             $table->bigInteger('created_by')->unsigned()->index()->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
