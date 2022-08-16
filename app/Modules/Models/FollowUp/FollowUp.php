@@ -29,13 +29,12 @@ class FollowUp extends Model
     public static function registration($id)
     {
         $query = DB::select("SELECT f.id,r.name,r.email,r.phone,f.next_schedule,f.follow_up_by,f.remarks FROM tbl_registrations r INNER JOIN tbl_follow_ups f ON f.refrence_id = r.id AND f.follow_up_type = 'registration' AND f.id = $id");
-        return $query[0];
+        if(!empty($query)) {
+            return $query[0];
+        }
     }
 
-    public function leadcategory()
-    {
-        return $this->belongsTo(LeadCategory::class);
-    }
+
 
 
 }

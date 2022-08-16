@@ -1,4 +1,6 @@
 
+@if(!empty($followup->registration($followup->id)))
+
 <tr>
     <td>{{++$key}}</td>
     <td>{{ $followup->registration($followup->id)->name}}</td>
@@ -21,5 +23,6 @@
 
     </td>
 </tr>
+@endif
 
 

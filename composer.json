@@ -19,6 +19,7 @@
         "laravel/ui": "^3.2",
         "laravelcollective/html": "^6.2",
         "spatie/laravel-permission": "^4.0",
+        "unisharp/laravel-filemanager": "^2.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

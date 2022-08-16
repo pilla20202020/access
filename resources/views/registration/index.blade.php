@@ -105,19 +105,64 @@
                     </form>
 
                     <table class="table table-bordered">
+                        <h6>Previous List of Follow Ups</h6>
                         <thead class="thead-light">
                             <tr>
                                 <th>S.No.</th>
                                 <th>Follow Up By</th>
                                 <th>Next Schedule</th>
                                 <th>Remarks</th>
-                                <th>Status</th>
+                                {{-- <th>Status</th> --}}
                             </tr>
                         </thead>
                         <tbody id="followuplist">
 
                         </tbody>
                     </table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    {{-- Add SMS --}}
+    <div class="modal fade send_sms" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title align-self-center mt-0 text-center" id="exampleModalLabel">Change Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('registration.send_sms') }}" method="POST"
+                        class="form form-validate floating-label">
+                        @csrf
+                        <input type="hidden" class="registration_id" value="" name="registration_id"
+                            id="">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-2">
+                                <label class="control-label">From</label>
+                                <input type="text" name="from" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-12 mt-2">
+                                <label class="control-label">Message</label>
+                                <textarea name="message" class="form-control" required></textarea>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row mt-2 justify-content-center">
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" name="pageSubmit" class="btn btn-danger waves-effect waves-light"
+                                        value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -155,7 +200,6 @@
                             tbody_html += "<td>" + followup.follow_up_by + "</td>";
                             tbody_html += "<td>" + followup.next_schedule + "</td>";
                             tbody_html += "<td>" + followup.remarks + "</td>";
-                            tbody_html += "<td>" + followup.leadcategory.name + "</td>";
                             tbody_html += "</tr>";
                         });
                         $('#followuplist').html(tbody_html);
@@ -165,6 +209,12 @@
 
             })
 
+        });
+
+        $(document).on('click', '.sendsms', function(e) {
+            let registration_id = $(this).data('registration_id');
+            $(".registration_id").val(registration_id);
+            $('.send_sms').modal('show');
         });
 
         $('.leadcategory').select2();

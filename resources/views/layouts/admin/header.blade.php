@@ -140,6 +140,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- item-->
                     <a class="dropdown-item" href="{{route('user.profileUpdate')}}"><i class="dripicons-user d-inlne-block text-muted mr-1"></i> Profile</a>
+                    <a class="dropdown-item" href="{{route('setting.index')}}"><i class="mdi mdi-spin mdi-settings mr-1"></i> Setting</a>
                     <a class="dropdown-item" href="{{ route('logout')}}" onclick="event.preventDefault();document.getElementById('logoutform').submit()"><i class="fa fa-power-off mr-1"></i>Logout</a>
                     <form action="{{ route('logout') }}" method="post" id="logoutform">
                     {{ csrf_field() }}

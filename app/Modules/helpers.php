@@ -3,6 +3,7 @@
 use App\Modules\Models\Country\Country;
 use App\Modules\Models\District\District;
 use App\Modules\Models\Province\Province;
+use App\Modules\Models\Setting\Setting;
 use App\Modules\Models\User;
 use Illuminate\Support\Facades\Storage;
 
@@ -228,3 +229,13 @@ function smsPost($url, $data)
     curl_close($curl);
     return $response;
 }
+
+
+function setting($query)
+{
+    $setting = Setting::fetch($query)->first();
+
+    return $setting ? $setting->value : null;
+}
+
+

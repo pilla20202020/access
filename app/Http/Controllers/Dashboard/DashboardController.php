@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Models\FollowUp\FollowUp;
+use App\Modules\Models\Registration\Registration;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,11 +14,19 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $user, $role, $permission,$checkin;
+    protected $followups, $registration;
+
+    function __construct(FollowUp $followup, Registration $registration)  {
+        $this->followup = $followup;
+        $this->registration = $registration;
+
+    }
 
     public function index()
     {
-        return view('dashboard.index',);
+        $followups = $this->followup->where('next_schedule', '>', date('Y-m-d'))->orderBy('next_schedule', 'ASC')->get();
+        $registrations = $this->registration->orderBy('created_at', 'desc')->get();
+        return view('dashboard.index',compact('followups','registrations'));
 
     }
 

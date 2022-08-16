@@ -32,8 +32,15 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
     Route::get('/dashboard','Dashboard\DashboardController@index')->name('dashboard');
 
 
+    Route::get('setting', 'Setting\SettingController@index')->name('setting.index');
+    Route::put('setting/update', 'Setting\SettingController@update')->name('setting.update');
 
 
+    Route::get('filemanager', 'FileManager\FileManagerController@index');
+
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function (){
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     /*
     |--------------------------------------------------------------------------
     | User CRUD
@@ -182,6 +189,7 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::get('registration/{id}/destroy', 'Registration\RegistrationController@destroy')->name('destroy');
         Route::post('addfollowup', 'Registration\RegistrationController@addFollowUp')->name('addfollowup');
         Route::get('/viewfollowup', 'Registration\RegistrationController@viewFollowUp')->name('viewfollowup');
+        Route::post('/sendsms', 'Registration\RegistrationController@sendSMS')->name('send_sms');
     });
 
     /*

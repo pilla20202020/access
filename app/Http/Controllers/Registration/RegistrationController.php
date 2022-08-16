@@ -73,7 +73,7 @@ class RegistrationController extends Controller
 
     // Get FollowUp
     public function viewFollowUp(Request $request) {
-        if($followup = $this->followup->where('refrence_id', $request->registration_id)->where('follow_up_type','registration')->with('leadcategory')->latest()->get())
+        if($followup = $this->followup->where('refrence_id', $request->registration_id)->where('follow_up_type','registration')->latest()->get())
         {
             return response()->json([
                 'data' => $followup,
@@ -85,28 +85,48 @@ class RegistrationController extends Controller
 
     public function addFollowUp(Request $request) {
         try{
-            $followup = $this->followup->where('refrence_id',$request->refrence_id)->where('follow_up_type', $request->follow_up_type);
-            if($followup->count() == 1) {
-                $data['refrence_id'] = $request->refrence_id;
-                $data['follow_up_name'] = $request->follow_up_name;
-                $data['follow_up_type'] = $request->follow_up_type;
-                $data['remarks'] = $request->remarks;
-                $data['next_schedule'] = $request->next_schedule;
-                $data['follow_up_by'] = $request->follow_up_by;
-                $data['leadcategory_id'] = $request->leadcategory_id;
-                $followup->update($data);
+            $registration = $this->registration->where('id',$request->refrence_id);
+            if($registration->count() == 1) {
+                $registration_data['leadcategory_id'] = $request->leadcategory_id;
+                $registration->update($registration_data);
+            }
+            $followup_data['refrence_id'] = $request->refrence_id;
+            $followup_data['follow_up_name'] = $request->follow_up_name ?? null;
+            $followup_data['follow_up_type'] = $request->follow_up_type ?? null;
+            $followup_data['follow_up_by'] = $request->follow_up_by ?? null;
+            $followup_data['remarks'] = $request->remarks;
+            $followup_data['next_schedule'] = $request->next_schedule;
+            if($data = $this->followup->create($followup_data)) {
                 Toastr()->success('Followup Created Successfully','Success');
                 return redirect()->back();
-            } else {
-                if($data = $this->followup->create($request->all())) {
-                    Toastr()->success('Followup Created Successfully','Success');
-                    return redirect()->back();
 
-                } else {
-                    Toastr()->error('There was error while creating','Error');
-                    return redirect()->back();
-                }
+            } else {
+                Toastr()->error('There was error while creating','Error');
+                return redirect()->back();
             }
+
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function sendSMS(Request $request) {
+        try{
+            $registration = $this->registration->where('id',$request->registration_id)->first();
+            $campaign = $registration->campaign;
+            $sms_message = $request->message;
+            $url = setting('sms_api') ?? 'https://sms.aakashsms.com/sms/v3/send';
+            $data = array(
+                'auth_token' => setting('sms_token') ?? '28a22c64768a49ee5f539fa2924a8c278bb9ff16d7798496adbb87278d1c7e70',
+                'from' => setting('sms_from') ?? '31001',
+                'to' => $registration->phone,
+                'text' => $sms_message
+            );
+            $response = smsPost($url, $data);
+
+            Toastr()->success('SMS Send Successfully','Success');
+            return redirect()->back();
+
         } catch (Exception $e) {
             return false;
         }

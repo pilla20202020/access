@@ -56,10 +56,10 @@ class FrontendController extends Controller
             $smsdeliver_msg = Str::replace("<name>",$request->name, $sms_message);
             $emaildeliver = Str::replace("<name>",$request->name, $email_message);
 
-            $url = 'https://sms.aakashsms.com/sms/v3/send';
+            $url = setting('sms_api') ?? 'https://sms.aakashsms.com/sms/v3/send';
             $data = array(
-                'auth_token' => '28a22c64768a49ee5f539fa2924a8c278bb9ff16d7798496adbb87278d1c7e70',
-                'from' => '31001',
+                'auth_token' => setting('sms_token') ?? '28a22c64768a49ee5f539fa2924a8c278bb9ff16d7798496adbb87278d1c7e70',
+                'from' => setting('sms_from') ?? '31001',
                 'to' => $request->phone,
                 'text' => $smsdeliver_msg
             );

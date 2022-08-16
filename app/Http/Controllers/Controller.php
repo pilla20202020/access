@@ -17,7 +17,6 @@ class Controller extends BaseController
 
     public function uploadRequestImage($request, $instance)
     {
-//        dd($request->hasFile('image'));
         if ($request->hasFile('image'))
         {
             $imageDetails = [

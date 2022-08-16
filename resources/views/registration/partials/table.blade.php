@@ -1,4 +1,4 @@
-<tr style="background: @if(!empty($registration->getFollowUp($registration->id))) {{$registration->getFollowUp($registration->id)->leadcategory->color_code}} @endif">
+<tr style="background: @if(!empty($registration->leadcategory)) {{$registration->leadcategory->color_code}} @endif">
     <td>{{++$key}}</td>
     <td>{{ Str::limit($registration->name, 47) }}</td>
     <td>{{ Str::limit($registration->email, 47) }}</td>
@@ -15,9 +15,12 @@
             </button>
         </a>
 
-
         <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-secondary btn-sm addfollowup" title="Add Follow Up">
             Add Follow Up @if(!empty($registration->getFollowUpCount($registration->id))) ({{$registration->getFollowUpCount($registration->id)->count()}}) @endif
+        </a>
+
+        <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-info btn-sm sendsms" title="Add Follow Up">
+            Send SMS
         </a>
 
     </td>
