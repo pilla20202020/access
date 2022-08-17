@@ -27,8 +27,49 @@
                 </div>
                 <!-- end page title -->
 
+                {{-- Campaign Lists --}}
+                <div class="col-xl-12 p-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Campaign Lists</h5>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table id="example" class="table table-hover display example">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.N.</th>
+                                                    <th>Name</th>
+                                                    <th>Detail</th>
+                                                    <th>Starts</th>
+                                                    <th>Ends</th>
+                                                    <th>Total Enquiry</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($campaigns as $key => $campaign)
+                                                <tr>
+                                                    <td>{{++$key}}</td>
+                                                    <td>{{ Str::limit($campaign->name, 47) }}</td>
+                                                    <td>{{ Str::limit($campaign->details, 47) }}</td>
+                                                    <td>{{ Str::limit($campaign->starts, 47) }}</td>
+                                                    <td>{{ Str::limit($campaign->ends, 47) }}</td>
+                                                    <td>{{ $campaign->registrations->count() }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--end table-responsive-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{-- Recent Enquiry Lists --}}
-                <div class="col-xl-9 p-0">
+
+                {{-- Recent Enquiry Lists --}}
+                <div class="col-xl-12 p-0">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title mb-4">Recent Enquiry Lists</h5>
@@ -62,10 +103,13 @@
                         </div>
                     </div>
                 </div>
-                {{-- Upcoming Follow Up Lists --}}
+                {{-- Recent Enquiry Lists --}}
+
+
+
 
                 {{-- Upcoming Follow Up Lists --}}
-                <div class="col-xl-9 p-0">
+                <div class="col-xl-12 p-0">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title mb-4">Upcoming Follow Up Lists</h5>

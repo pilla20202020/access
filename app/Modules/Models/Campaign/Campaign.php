@@ -2,6 +2,7 @@
 
 namespace App\Modules\Models\Campaign;
 
+use App\Modules\Models\Registration\Registration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -60,4 +61,11 @@ class Campaign extends Model
     {
         return $this->path . '/thumb/' . $this->ogImage;
     }
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
+
 }

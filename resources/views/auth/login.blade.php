@@ -80,7 +80,7 @@
                 <h3 class="text-center m-0">
                     <a href="index.html" class="logo logo-admin">
                         <img src="{{asset('images/logo.png')}}" height="80px" alt="logo" class="my-3">
-                        <p>New Project</p>
+                        <p>{{setting('project_name')}}</p>
                     </a>
                 </h3>
 

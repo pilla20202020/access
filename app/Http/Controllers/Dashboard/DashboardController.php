@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Models\Campaign\Campaign;
 use App\Modules\Models\FollowUp\FollowUp;
 use App\Modules\Models\Registration\Registration;
 use Illuminate\Http\Request;
@@ -14,11 +15,12 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $followups, $registration;
+    protected $followups, $registration, $campaign;
 
-    function __construct(FollowUp $followup, Registration $registration)  {
+    function __construct(FollowUp $followup, Registration $registration, Campaign $campaign)  {
         $this->followup = $followup;
         $this->registration = $registration;
+        $this->campaign = $campaign;
 
     }
 
@@ -26,7 +28,8 @@ class DashboardController extends Controller
     {
         $followups = $this->followup->where('next_schedule', '>', date('Y-m-d'))->orderBy('next_schedule', 'ASC')->get();
         $registrations = $this->registration->orderBy('created_at', 'desc')->get();
-        return view('dashboard.index',compact('followups','registrations'));
+        $campaigns = $this->campaign->orderBy('created_at', 'desc')->get();
+        return view('dashboard.index',compact('followups','registrations','campaigns'));
 
     }
 

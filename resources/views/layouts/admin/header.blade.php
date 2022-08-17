@@ -18,7 +18,7 @@
             </button>
         </div>
 
-        <h2 style="color: white">New Project</h2>
+        <h2 style="color: white">{{setting('project_name')}}</h2>
 
         <div class="d-flex">
 
