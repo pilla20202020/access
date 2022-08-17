@@ -56,6 +56,11 @@
                                 </div>
                             @endif
 
+                            <div class="form-group">
+                                <label class="control-label">Desciption</label>
+                                <textarea name="description" class="form-control" required>{{ old('description', isset($location->description) ? $location->description : '') }}</textarea>
+                            </div>
+
                         </div>
                     </div>
                 </div>

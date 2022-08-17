@@ -49,7 +49,7 @@ class Registration extends Model
         'preparation_date',
         'test_name',
         'test_score',
-        'interested_for_country',
+        'intrested_for_country',
         'intrested_course',
         'display_order',
         'remarks',

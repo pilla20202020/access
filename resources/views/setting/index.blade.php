@@ -47,10 +47,13 @@
                                             {{ Form::textarea('setting[google_map]', old('setting.google_map') ?: setting('google_map'), ['class'=>'form-control','rows'=>2]) }}
                                         </div>
 
-                                        <input value="{{$setting['image'] ?? ''}}" autofocus="true" required="true" name="image" type="text" label="Slide Image" disabled="readonly">
-                                        <button id="lfm" data-input="image" data-preview="image_holder" class="btn btn-icon icon-left btn-primary">
+
+                                        <button id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-icon icon-left btn-primary">
                                             <i class="fa fa-upload"></i> &nbsp;Choose
                                         </button>
+                                        <input id="thumbnail" class="form-control" type="text" name="image" readonly>
+                                        <img id="holder" style="margin-top:15px;max-height:100px;">
+
 
 
 
@@ -223,6 +226,7 @@
         });
 
         $('#lfm').filemanager('image');
+
     </script>
 @endsection
 

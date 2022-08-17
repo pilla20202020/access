@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class LocationController extends Controller
 {
@@ -72,6 +74,7 @@ class LocationController extends Controller
         ]);
         $data['name'] = $request->name;
         $data['email'] = $request->email;
+
         $data['password'] = Hash::make($request->password);
         $data['status'] = "Active";
         $user = $this->user::create($data);
@@ -79,7 +82,11 @@ class LocationController extends Controller
         $location['name'] = $request->name;
         $location['email'] = $request->email;
         $location['user_id'] = $user->id;
-        if ($this->location::create($location)) {
+        $location['description'] = $request->description;
+        if ($location = $this->location::create($location)) {
+            $location->fill([
+                'slug' => Str::slug($request->name),
+            ])->save();
             return redirect()->route('location.index')->with('message', 'The Location Created Successfully!');
         }else{
             return redirect()->route('location.index')->with('error', 'Some Error Occured!');
@@ -132,6 +139,10 @@ class LocationController extends Controller
         try{
             $location = $this->location->findOrFail($id);
             $location->update($request->all());
+            $location->fill([
+                'slug' => Str::slug($request->name),
+                'user_id' => $location->user_id,
+            ])->save();
             return redirect()->route('location.index')->with('message', 'Location Updated Successfully!');
         }catch(ModelNotFoundException $ex){
             return redirect()->route('location.index')->with('error', $ex->getMessage());

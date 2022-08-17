@@ -12,8 +12,10 @@ class Location extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'email',
         'password',
+        'description',
         'status',
     ];
 }

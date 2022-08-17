@@ -17,10 +17,10 @@ class CreateFollowUpsTable extends Migration
             $table->id();
             $table->string('follow_up_type');
             $table->bigInteger('refrence_id')->unsigned()->index()->nullable();
-            $table->date('next_schedule');
-            $table->string('follow_up_name');
-            $table->string('follow_up_by');
-            $table->text('remarks');
+            $table->date('next_schedule')->nullable();
+            $table->string('follow_up_name')->nullable();
+            $table->string('follow_up_by')->nullable();
+            $table->text('remarks')->nullable();
             $table->string('display_order')->nullable();
             $table->enum('status',['active','in_active'])->nullable();
             $table->bigInteger('created_by')->unsigned()->index()->nullable();

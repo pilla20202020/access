@@ -2,6 +2,7 @@
 
 namespace App\Modules\Models;
 
+use App\Modules\Models\Location\Location;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,4 +49,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'id','user_id')->first();
+    }
 }

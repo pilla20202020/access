@@ -36,8 +36,6 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
     Route::put('setting/update', 'Setting\SettingController@update')->name('setting.update');
 
 
-    Route::get('filemanager', 'FileManager\FileManagerController@index');
-
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function (){
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
@@ -186,10 +184,14 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
     Route::group(['as' => 'registration.', 'prefix' => 'registration'], function () {
         Route::get('', 'Registration\RegistrationController@index')->name('index');
         Route::get('{blog}/show', 'Registration\RegistrationController@show')->name('show');
+        Route::get('/update', 'Registration\RegistrationController@update')->name('update');
         Route::get('registration/{id}/destroy', 'Registration\RegistrationController@destroy')->name('destroy');
         Route::post('addfollowup', 'Registration\RegistrationController@addFollowUp')->name('addfollowup');
         Route::get('/viewfollowup', 'Registration\RegistrationController@viewFollowUp')->name('viewfollowup');
         Route::post('/sendsms', 'Registration\RegistrationController@sendSMS')->name('send_sms');
+        Route::post('/updateleadcategory', 'Registration\RegistrationController@updateLeadCategory')->name('update_lead_category');
+        Route::get('/getregistration', 'Registration\RegistrationController@getRegistration')->name('getregistration');
+
     });
 
     /*

@@ -8,6 +8,7 @@ use App\Modules\Models\LeadCategory\LeadCategory;
 use Illuminate\Http\Request;
 use App\Modules\Models\Registration\Registration;
 use App\Modules\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
@@ -29,7 +30,11 @@ class RegistrationController extends Controller
     public function index()
     {
         //
-        $registrations = $this->registration->orderBy('created_at', 'desc')->get();
+        if(Auth::user()->hasRole('Consultancy')) {
+            $registrations = $this->registration->orderBy('created_at', 'desc')->where('preffered_location', Auth()->user()->location()->slug)->get();
+        } else {
+            $registrations = $this->registration->orderBy('created_at', 'desc')->get();
+        }
         $leadCategories = $this->leadCategory->get();
         return view('registration.index', compact('registrations','leadCategories'));
     }
@@ -63,6 +68,19 @@ class RegistrationController extends Controller
         }
     }
 
+    public function update(Request $request) {
+        try{
+            $registration = $this->registration->findOrFail($request->registration_id);
+            $registration->update($request->all());
+            Toastr()->success('Registration Updated Successfully','Success');
+            return redirect()->route('registration.index');
+        }catch(ModelNotFoundException $ex){
+            return redirect()->route('registration.index')->with('error', $ex->getMessage());
+        }
+    }
+
+
+
     public function destroy($id)
     {
         $registration = Registration::where('id', $id)->first();
@@ -93,7 +111,7 @@ class RegistrationController extends Controller
             $followup_data['refrence_id'] = $request->refrence_id;
             $followup_data['follow_up_name'] = $request->follow_up_name ?? null;
             $followup_data['follow_up_type'] = $request->follow_up_type ?? null;
-            $followup_data['follow_up_by'] = $request->follow_up_by ?? null;
+            $followup_data['follow_up_by'] = Auth()->user()->name ?? null;
             $followup_data['remarks'] = $request->remarks;
             $followup_data['next_schedule'] = $request->next_schedule;
             if($data = $this->followup->create($followup_data)) {
@@ -130,6 +148,35 @@ class RegistrationController extends Controller
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    public function updateLeadCategory(Request $request) {
+        try{
+            $registration = $this->registration->where('id',$request->registration_id);
+            if($registration->count() == 1) {
+                $registration_data['leadcategory_id'] = $request->leadcategory_id;
+                $registration->update($registration_data);
+            }
+
+            Toastr()->success('Lead Category Updated Successfully','Success');
+            return redirect()->back();
+
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+
+    public function getRegistration(Request $request) {
+        if($registration = $this->registration->where('id', $request->registration_id)->first())
+        {
+            return response()->json([
+                'data' => $registration,
+                'status' => true,
+                'message' => "Commission Generated Successfully."
+            ]);
+        }
+
     }
 
 

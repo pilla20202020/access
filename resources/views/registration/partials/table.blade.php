@@ -6,7 +6,9 @@
     <td>{{ Str::limit($registration->address, 47) }}</td>
 
     <td >
-        <a href="{{route('registration.show', $registration->id)}}" class="btn btn-flat btn-primary btn-sm" title="edit">
+        <a href="javascript: void(0);"  data-registration_id="{{$registration->id}}"  class="btn btn-flat mdi mdi-pencil btn-edit" title="Edit Registration">
+        </a>
+        <a href="{{route('registration.show', $registration->id)}}" class="btn btn-flat btn-primary btn-sm" title="view">
             <i class="fa fa-eye"></i>
         </a>
         <a href="#">
@@ -21,6 +23,10 @@
 
         <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-info btn-sm sendsms" title="Add Follow Up">
             Send SMS
+        </a>
+
+        <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-warning btn-sm btn-leadcategory" title="Add Lead Category">
+            Lead Category
         </a>
 
     </td>
