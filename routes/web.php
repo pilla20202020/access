@@ -191,6 +191,7 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::post('/sendsms', 'Registration\RegistrationController@sendSMS')->name('send_sms');
         Route::post('/updateleadcategory', 'Registration\RegistrationController@updateLeadCategory')->name('update_lead_category');
         Route::get('/getregistration', 'Registration\RegistrationController@getRegistration')->name('getregistration');
+        Route::post('/bulkupdate', 'Registration\RegistrationController@bulkUpdate')->name('bulkupdate');
 
     });
 

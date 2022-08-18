@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendNewsLetterJob;
 use App\Mail\StudentEnquiryMail;
 use App\Mail\StudentNotifyMail;
 use App\Modules\Models\Blog\Blog;

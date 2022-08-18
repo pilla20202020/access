@@ -16,16 +16,41 @@
                 <header class="text-capitalize pt-1">Registration Lists</header>
             </div>
             <div class="card mt-2 p-4">
-                <div class="table-responsive">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="country" class="form-label">Bulk Option</label>
+                                <select name="bulk_option" id="bulk_option" class="form-control bulk_option" required >
+                                    <option value="" selected disabled >Select Bulk Option</option>
+                                    <option value="sms" >Bulk SMS</option>
+                                    <option value="lead" >Bulk Lead Status Change</option>
+                                    <option value="location" >Bulk Location Transfer</option>
+                                    <option value="newsletter" >Bulk Newsletter</option>
+                                </select>
+                                <div class="error d-none pt-1 pl-2">Please Select At Least One Option</div>
+                                <div class="clearix"></div>
+                            </div>
+                        </div>
 
+                        <div class="col-sm-2 mt-5">
+                            <input id="selectAll" type="checkbox">
+                            <label for="selectAll">Select All</label>
+                        </div>
+
+                        <div class="col-sm-2 mt-4">
+                            <button type="submit" class="btn btn-primary ink-reaction bulk_submit mt-1">Submit</button>
+                        </div>
+                    </div>
+                <div class="table-responsive">
                     <table id="datatable" class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>SN</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Address</th>
+                                <th>Preferred Location </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -38,7 +63,7 @@
         </div>
     </div>
 
-    {{-- Add Follow Up Modal --}}
+    {{-- Update Registration --}}
     <div class="modal fade update_registration" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -300,7 +325,6 @@
         </div><!-- /.modal-dialog -->
     </div>
 
-
     {{-- Add Follow Up Modal --}}
     <div class="modal fade add_followup" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
         aria-hidden="true">
@@ -470,17 +494,178 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
+
+    {{-- Bulk SMS MOdal --}}
+    <div class="modal fade bulk_sms" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title align-self-center mt-0 text-center" id="exampleModalLabel">Send SMS</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-2">
+                                <label class="control-label">From</label>
+                                <input type="text" name="option_from" class="form-control option_from" >
+                            </div>
+
+                            <div class="col-md-12 mt-2">
+                                <label class="control-label">Message</label>
+                                <textarea name="option_message" class="form-control option_message" ></textarea>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row mt-2 justify-content-center">
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" name="pageSubmit" class="btn btn-danger waves-effect waves-light btn-ok"
+                                        value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    {{-- Bulk Lead Modal --}}
+    <div class="modal fade bulk_lead" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title align-self-center mt-0 text-center" id="exampleModalLabel">Update Lead Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="row justify-content-center">
+                            @if (isset($leadCategories))
+                                <div class="col-md-12 mt-2">
+                                    <label for="Name">Follow Up Option</label>
+                                    <select name="option_leadstatus" class="form-control option_leadstatus">
+                                        @foreach ($leadCategories as $category)
+                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span
+                                        class="text-danger">{{ $errors->has('option_leadstatus') ? $errors->first('option_leadstatus    ') : '' }}
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <hr>
+                        <div class="row mt-2 justify-content-center">
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" name="pageSubmit" class="btn btn-danger waves-effect waves-light btn-ok"
+                                        value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    {{-- Bulk Location Update Modal --}}
+    <div class="modal fade bulk_location" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title align-self-center mt-0 text-center" id="exampleModalLabel">Update Lead Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="row justify-content-center">
+                            @if (isset($leadCategories))
+                                <div class="col-md-12 mt-2">
+                                    <label for="Name">Follow Up Option</label>
+                                    <select name="option_location" class="form-control option_location">
+                                        @foreach ($locations as $location)
+                                            <option value="{{ $location->slug }}" selected>{{ $location->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span
+                                        class="text-danger">{{ $errors->has('option_location') ? $errors->first('option_location') : '' }}
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <hr>
+                        <div class="row mt-2 justify-content-center">
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" name="pageSubmit" class="btn btn-danger waves-effect waves-light btn-ok"
+                                        value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    {{-- Bulk NewsLetter Modal --}}
+    <div class="modal fade bulk_newsletter" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title align-self-center mt-0 text-center" id="exampleModalLabel">Update Lead Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mt-2">
+                                <label for="Name">NewsLetter</label>
+                                <textarea name="newsletter" id="option_newsletter" class="ckeditor option_newsletter"></textarea>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row mt-2 justify-content-center">
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" name="pageSubmit" class="btn btn-danger waves-effect waves-light btn-ok"
+                                        value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
 @stop
 
 
 @section('page-specific-scripts')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/lightbox.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#datatable').DataTable();
         });
 
+        // Add Followup
         $(document).on('click', '.addfollowup', function(e) {
             let registration_id = $(this).data('registration_id');
             $(".registration_id").val(registration_id);
@@ -513,19 +698,25 @@
             })
 
         });
+        // Add Followup
 
+        // Send SMS
         $(document).on('click', '.sendsms', function(e) {
             let registration_id = $(this).data('registration_id');
             $(".registration_id").val(registration_id);
             $('.send_sms').modal('show');
         });
+        // Send SMS
 
+        // Update Lead Category
         $(document).on('click', '.btn-leadcategory', function(e) {
             let registration_id = $(this).data('registration_id');
             $(".registration_id").val(registration_id);
             $('.show_leadcategory').modal('show');
         });
+        // Update Lead Category
 
+        // Update Registration Modal
         $(document).on('click', '.btn-edit', function(e) {
             let registration_id = $(this).data('registration_id');
             $(".registration_id").val(registration_id);
@@ -581,7 +772,87 @@
 
             })
         });
+        // Update Registration Modal
+        var bulkoption;
+        var registration = [];
+
+        // Bulk Option Modal Pop Up
+
+        $(document).ready(function() {
+
+            $('.bulk_submit').on('click',function() {
+                if($('.registrationcheckbox:checkbox:checked').length == 0 ) {
+                    alert('Please at least one checkbox');
+                    return false
+                }
+                if($("#bulk_option")[0].selectedIndex === 0) {
+                    $('.error').removeClass('d-none');
+                    return false
+                }
+                bulkoption = $('.bulk_option').val();
+                if(bulkoption == "sms") {
+                    $('.bulk_sms').modal('show');
+                }
+                if(bulkoption == "lead") {
+                    $('.bulk_lead').modal('show');
+                }
+                if(bulkoption == "location") {
+                    $('.bulk_location').modal('show');
+                }
+                if(bulkoption == "newsletter") {
+                    $('.bulk_newsletter').modal('show');
+                }
+
+                var incr=0;
+                $('input[name="registrationcheckbox"]:checked').each(function() {
+                    if (this.checked) {
+                        registration[incr]=(this.value);
+                        incr++;
+                    }
+                });
+            })
+
+            $("#selectAll").click(function(){
+                $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+            });
+        });
+        // Bulk Option Modal Pop Up
+
+
+        // Bulk Option Submit
+        $(document).ready(function() {
+            $('.btn-ok').on('click',function() {
+                var option_from = $('.option_from').val();
+                var option_message = $('.option_message').val();
+                var option_leadstatus = $('.option_leadstatus').val();
+                var option_location = $('.option_location').val();
+                var option_newsletter = CKEDITOR.instances["option_newsletter"].getData();
+                $.ajax({
+                    url: "{{route('registration.bulkupdate')}}",
+                    method: 'post',
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        registration_id: registration,
+                        bulkoption: bulkoption,
+                        option_from: option_from,
+                        option_message: option_message,
+                        option_leadstatus: option_leadstatus,
+                        option_location: option_location,
+                        option_newsletter: option_newsletter,
+                    },
+                    success:function(data){
+                        window.location.reload();
+                    }
+
+                })
+            })
+        });
+        // Bulk Option Submit
 
         $('.leadcategory').select2();
+        $(function () {
+            $('.ckeditor').each(function (e) {
+            });
+        });
     </script>
 @endsection

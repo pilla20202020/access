@@ -48,11 +48,13 @@
                                         </div>
 
 
-                                        <button id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-icon icon-left btn-primary">
+                                        @if(setting('image'))
+                                            <img id="holder" style="margin-top:15px;max-height:300px;" class="img img-fluid" src="{{setting('image')}}">
+                                        @endif
+                                        <input id="thumbnail" class="form-control" type="text" name="setting[image]" readonly>
+                                        <button id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-icon icon-left btn-primary mt-2">
                                             <i class="fa fa-upload"></i> &nbsp;Choose
                                         </button>
-                                        <input id="thumbnail" class="form-control" type="text" name="image" readonly>
-                                        <img id="holder" style="margin-top:15px;max-height:100px;">
 
 
 

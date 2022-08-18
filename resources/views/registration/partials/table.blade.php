@@ -1,9 +1,15 @@
 <tr style="background: @if(!empty($registration->leadcategory)) {{$registration->leadcategory->color_code}} @endif">
+    <td class="text-center pt-3">
+        <div class="custom-checkbox custom-control">
+            <input type="checkbox" name="registrationcheckbox" data-checkboxes="mygroup" class="custom-control-input registrationcheckbox" id="{{$registration->id}}" value="{{$registration->id}}">
+            <label for="{{$registration->id}}" class="custom-control-label">&nbsp;</label>
+        </div>
+    </td>
     <td>{{++$key}}</td>
     <td>{{ Str::limit($registration->name, 47) }}</td>
     <td>{{ Str::limit($registration->email, 47) }}</td>
     <td>{{ Str::limit($registration->phone, 47) }}</td>
-    <td>{{ Str::limit($registration->address, 47) }}</td>
+    <td>{{ ucfirst($registration->preffered_location) }}</td>
 
     <td >
         <a href="javascript: void(0);"  data-registration_id="{{$registration->id}}"  class="btn btn-flat mdi mdi-pencil btn-edit" title="Edit Registration">

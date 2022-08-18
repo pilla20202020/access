@@ -43,6 +43,7 @@
                             <th>S.No.</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Description</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -98,6 +99,10 @@
 
                     {
                         "data": "email"
+                    },
+
+                    {
+                        "data": "description"
                     },
 
                     {

@@ -3,23 +3,28 @@
 namespace App\Http\Controllers\Registration;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendNewsLetterJob;
+use App\Jobs\SendSMSJob;
 use App\Modules\Models\FollowUp\FollowUp;
 use App\Modules\Models\LeadCategory\LeadCategory;
+use App\Modules\Models\Location\Location;
 use Illuminate\Http\Request;
 use App\Modules\Models\Registration\Registration;
 use App\Modules\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RegistrationController extends Controller
 {
-    protected $customer, $registration, $followup, $leadCategory;
+    protected $customer, $registration, $followup, $leadCategory, $location;
 
-    function __construct(User $user, Registration $registration, FollowUp $followup, LeadCategory $leadCategory)
+    function __construct(User $user, Registration $registration, FollowUp $followup, LeadCategory $leadCategory, Location $location)
     {
         $this->user = $user;
         $this->registration = $registration;
         $this->followup = $followup;
         $this->leadCategory = $leadCategory;
+        $this->location = $location;
 
     }
     public function customerForm()
@@ -36,7 +41,8 @@ class RegistrationController extends Controller
             $registrations = $this->registration->orderBy('created_at', 'desc')->get();
         }
         $leadCategories = $this->leadCategory->get();
-        return view('registration.index', compact('registrations','leadCategories'));
+        $locations = $this->location->get();
+        return view('registration.index', compact('registrations','leadCategories','locations'));
     }
 
 
@@ -175,6 +181,61 @@ class RegistrationController extends Controller
                 'status' => true,
                 'message' => "Commission Generated Successfully."
             ]);
+        }
+
+    }
+
+    public function bulkUpdate(Request $request) {
+        $request->validate([
+            'registration_id' => 'required|max:255|',
+        ]);
+        try{
+            if($request->bulkoption == "lead") {
+                foreach($request->registration_id as $registration){
+                    $registration = $this->registration->where('id',$registration);
+                    if($registration->count() == 1) {
+                        $registration_data['leadcategory_id'] = $request->option_leadstatus;
+                        $registration->update($registration_data);
+                    }
+                }
+                Toastr()->success('Lead Categpry Updated Successfully','Success');
+                return redirect()->back();
+            }
+            if($request->bulkoption == "sms") {
+                foreach($request->registration_id as $data){
+                    $registration = $this->registration->where('id',$data)->first();
+                    $campaign = $registration->campaign;
+                    $sms_message = $request->option_message;
+                    SendSMSJob::dispatch($registration, $campaign, $sms_message)
+                    ->delay(now()->addSeconds(10));
+
+                }
+                Toastr()->success('SMS Send Successfully','Success');
+                return redirect()->back();
+            }
+            if($request->bulkoption == "location") {
+                foreach($request->registration_id as $registration){
+                    $registration = $this->registration->where('id',$registration);
+                    if($registration->count() == 1) {
+                        $registration_data['preffered_location'] = $request->option_location;
+                        $registration->update($registration_data);
+                    }
+                }
+                Toastr()->success('Location Trasferred Successfully','Success');
+                return redirect()->back();
+            }
+
+            if($request->bulkoption == "newsletter") {
+                foreach($request->registration_id as $registration){
+                    $registration = $this->registration->where('id',$registration)->first();
+                    SendNewsLetterJob::dispatch($registration, $request->option_newsletter)
+                    ->delay(now()->addSeconds(10));
+                }
+                Toastr()->success('NewsLetter Send Successfully','Success');
+                return redirect()->back();
+            }
+        } catch(ModelNotFoundException $ex){
+            return redirect()->route('location.index')->with('error', $ex->getMessage());
         }
 
     }
