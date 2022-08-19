@@ -18,6 +18,7 @@ class Location extends Model
         'password',
         'description',
         'status',
+        'user_id',
     ];
 
     public function registrations()
