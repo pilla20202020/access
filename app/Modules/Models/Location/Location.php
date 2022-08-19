@@ -2,6 +2,7 @@
 
 namespace App\Modules\Models\Location;
 
+use App\Modules\Models\Registration\Registration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,4 +19,11 @@ class Location extends Model
         'description',
         'status',
     ];
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class,'preffered_location','slug');
+    }
+
+
 }

@@ -240,5 +240,26 @@ class RegistrationController extends Controller
 
     }
 
+    public function getRegistrationByCampaignAndFilter($campaign_id, $leadcategory_id) {
+        if(Auth::user()->hasRole('Consultancy')) {
+            $registrations = $this->registration->orderBy('created_at', 'desc')->where('preffered_location', Auth()->user()->location()->slug)->where('campaign_id',$campaign_id)->where('leadcategory_id', $leadcategory_id)->get();
+        } else {
+            $registrations = $this->registration->orderBy('created_at', 'desc')->where('campaign_id',$campaign_id)->where('leadcategory_id', $leadcategory_id)->get();
+        }
+        $leadCategories = $this->leadCategory->get();
+        $locations = $this->location->get();
+        return view('registration.index', compact('registrations','leadCategories','locations'));
+    }
+
+    public function getRegistrationByLocationAndLeadCategory($location_slug, $leadcategory_id) {
+        if(Auth::user()->hasRole('Consultancy')) {
+            $registrations = $this->registration->orderBy('created_at','desc')->where('preffered_location', Auth()->user()->location()->slug)->where('leadcategory_id', $leadcategory_id)->get();
+        } else {
+            $registrations = $this->registration->orderBy('created_at','desc')->where('preffered_location',$location_slug)->where('leadcategory_id', $leadcategory_id)->get();
+        }
+        $leadCategories = $this->leadCategory->get();
+        $locations = $this->location->get();
+        return view('registration.index', compact('registrations','leadCategories','locations'));
+    }
 
 }

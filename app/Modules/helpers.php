@@ -1,7 +1,9 @@
 <?php
 
+use App\Modules\Models\Campaign\Campaign;
 use App\Modules\Models\Country\Country;
 use App\Modules\Models\District\District;
+use App\Modules\Models\Location\Location;
 use App\Modules\Models\Province\Province;
 use App\Modules\Models\Setting\Setting;
 use App\Modules\Models\User;
@@ -219,6 +221,7 @@ function getPrimaryNotifiableUsers()
     return $users;
 }
 
+// SMS CURL
 function smsPost($url, $data)
 {
     $curl = curl_init($url);
@@ -230,12 +233,24 @@ function smsPost($url, $data)
     return $response;
 }
 
-
+// Setting Fetch
 function setting($query)
 {
     $setting = Setting::fetch($query)->first();
 
     return $setting ? $setting->value : null;
+}
+
+// Campaign List
+function getCampaign()
+{
+    return Campaign::all();
+}
+
+// Location List
+function getLocation()
+{
+    return Location::all();
 }
 
 
