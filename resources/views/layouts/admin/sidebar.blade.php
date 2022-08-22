@@ -9,7 +9,7 @@
                 <li class="menu-title">Main</li>
 
                 <li>
-                    <a href="{{ route('dashboard') }}" class="waves-effect">
+                               <a href="{{ route('dashboard') }}" class="waves-effect">
                         <i class="mdi mdi-speedometer"></i>
                         <span>Dashboard</span>
                     </a>
@@ -57,7 +57,7 @@
                                                     aria-expanded="false"><i
                                                         class="fas fa-hand-point-right"></i>{{ $campaign->name }}</a>
                                                 @if ($campaign->registrations->isEmpty() == false)
-                                                    @foreach ($campaign->registrations as $registration)
+                                                    @foreach ($campaign->registrations->unique('leadcategory_id') as $registration)
                                                         <ul class="sub-menu mm-collapse" aria-expanded="true"
                                                             style="height: 0px;">
                                                             <li><a
@@ -82,7 +82,7 @@
                                                     aria-expanded="false"><i
                                                         class="fas fa-hand-point-right"></i>{{ $location->name }}</a>
                                                 @if ($location->registrations->isEmpty() == false)
-                                                    @foreach ($location->registrations as $registration)
+                                                    @foreach ($location->registrations->unique('leadcategory_id') as $registration)
                                                         <ul class="sub-menu mm-collapse" aria-expanded="true"
                                                             style="height: 0px;">
                                                             <li><a
@@ -125,6 +125,5 @@
                 @endrole
             </ul>
         </div>
-        <!-- Sidebar -->
     </div>
 </div>
