@@ -840,7 +840,7 @@
                         option_location: option_location,
                         option_newsletter: option_newsletter,
                     },
-                    success:function(data){
+                    success:function(status){
                         window.location.reload();
                     }
 

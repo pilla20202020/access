@@ -36,9 +36,9 @@ class RegistrationController extends Controller
     {
         //
         if(Auth::user()->hasRole('Consultancy')) {
-            $registrations = $this->registration->orderBy('created_at', 'desc')->where('preffered_location', Auth()->user()->location()->slug)->get();
+            $registrations = $this->registration->orderBy('id', 'DESC')->where('preffered_location', Auth()->user()->location()->slug)->get();
         } else {
-            $registrations = $this->registration->orderBy('created_at', 'desc')->get();
+            $registrations = $this->registration->orderBy('id','DESC')->get();
         }
         $leadCategories = $this->leadCategory->get();
         $locations = $this->location->get();
@@ -198,8 +198,10 @@ class RegistrationController extends Controller
                         $registration->update($registration_data);
                     }
                 }
-                Toastr()->success('Lead Categpry Updated Successfully','Success');
-                return redirect()->back();
+                return response()->json([
+                    'status' => true,
+                    'message' => "Lead Categpry Updated Successfully."
+                ]);
             }
             if($request->bulkoption == "sms") {
                 foreach($request->registration_id as $data){
@@ -210,8 +212,11 @@ class RegistrationController extends Controller
                     ->delay(now()->addSeconds(10));
 
                 }
-                Toastr()->success('SMS Send Successfully','Success');
-                return redirect()->back();
+                return response()->json([
+                    'status' => true,
+                    'message' => "SMS Send Successfully."
+                ]);
+
             }
             if($request->bulkoption == "location") {
                 foreach($request->registration_id as $registration){
@@ -221,8 +226,10 @@ class RegistrationController extends Controller
                         $registration->update($registration_data);
                     }
                 }
-                Toastr()->success('Location Trasferred Successfully','Success');
-                return redirect()->back();
+                return response()->json([
+                    'status' => true,
+                    'message' => "Location Trasferred Successfully."
+                ]);
             }
 
             if($request->bulkoption == "newsletter") {
@@ -231,9 +238,14 @@ class RegistrationController extends Controller
                     SendNewsLetterJob::dispatch($registration, $request->option_newsletter)
                     ->delay(now()->addSeconds(10));
                 }
-                Toastr()->success('NewsLetter Send Successfully','Success');
-                return redirect()->back();
+                return response()->json([
+                    'status' => true,
+                    'message' => "NewsLetter Send Successfully."
+                ]);
+
             }
+
+
         } catch(ModelNotFoundException $ex){
             return redirect()->route('location.index')->with('error', $ex->getMessage());
         }
