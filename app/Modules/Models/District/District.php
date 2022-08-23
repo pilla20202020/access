@@ -14,7 +14,7 @@ class District extends Model
         'province_id',
         'status',
     ];
-    
+
     public static function getDistricts()
     {
         return self::select('id', 'district_name')->where('status', 'Active')->get();
@@ -22,16 +22,16 @@ class District extends Model
 
     public static function getDistrictsByProvinceId($province_id)
     {
-        return self::select('id', 'district_name')->where('status', 'Active')->where('province_id',$province_id)->get();
+        return self::select('id', 'district_name')->where('status', 'Active')->where('state_id',$province_id)->get();
     }
 
     public static function getPermDistrictsByProvinceId($province_id)
     {
-        return self::select('id', 'district_name')->where('status', 'Active')->where('province_id',$province_id)->get();
+        return self::select('id', 'district_name')->where('status', 'Active')->where('state_id',$province_id)->get();
     }
 
     public static function getTempDistrictsByProvinceId($province_id)
     {
-        return self::select('id', 'district_name')->where('status', 'Active')->where('province_id',$province_id)->get();
+        return self::select('id', 'district_name')->where('status', 'Active')->where('state_id',$province_id)->get();
     }
 }

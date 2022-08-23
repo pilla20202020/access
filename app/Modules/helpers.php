@@ -1,11 +1,14 @@
 <?php
 
+use App\Modules\Models\Admission\Admission;
 use App\Modules\Models\Campaign\Campaign;
+use App\Modules\Models\College\College;
 use App\Modules\Models\Country\Country;
 use App\Modules\Models\District\District;
 use App\Modules\Models\Location\Location;
 use App\Modules\Models\Province\Province;
 use App\Modules\Models\Setting\Setting;
+use App\Modules\Models\State\State;
 use App\Modules\Models\User;
 use Illuminate\Support\Facades\Storage;
 
@@ -86,19 +89,33 @@ function getCountries()
 
 /**
  * ---------------------------------------------
- * |            Province                         |
+ * |            State                         |
  * ----------------------------------------------
  */
-function getProvinces()
+function getStates()
 {
-    return Province::getProvinces();
+    return State::getStates();
 }
 
-function getProvincesByCountryId($country_id)
+function getStatesByCountryId($country_id)
 {
-    return Province::getProvincesByCountryId($country_id);
+    return State::getStatesByCountryId($country_id);
 }
 
+/**
+ * ---------------------------------------------
+ * |            Colleges                        |
+ * ----------------------------------------------
+ */
+function getColleges()
+{
+    return College::getColleges();
+}
+
+function getCollegesByStateId($state_id)
+{
+    return College::getCollegesByStateId($state_id);
+}
 /**
  * ---------------------------------------------
  * |            District                        |
@@ -109,9 +126,22 @@ function getDistricts()
     return District::getDistricts();
 }
 
-function getDistrictsByProvinceId($province_id)
+function getDistrictsByProvinceId($state_id)
 {
-    return District::getDistrictsByProvinceId($province_id);
+    return District::getDistrictsByProvinceId($state_id);
+}
+/**
+ * ---------------------------------------------
+ * |            Commenced                        |
+ * ----------------------------------------------
+ */
+function getCommencedByStudent($student_id)
+{
+    $admission = Admission::where('student_id', $student_id)->whereNotNull('commenced_date')->where('commenced_status','applied')->get();
+    if(!$admission->isEmpty()) {
+        return false;
+    }
+    return true;
 }
 
 function uploadCommonFile($file, $path,$existingPath=null)

@@ -7,15 +7,23 @@ use Illuminate\Http\Request;
 
 class CommonController extends Controller
 {
-    public function getProvincesByCountryId(Request $request)
+    public function getStatesByCountryId(Request $request)
     {
-        $provinces= getProvincesByCountryId($request->country_id);
-        return response()->json(['provinces' =>$provinces],200);
+        $states= getStatesByCountryId($request->country_id);
+        return response()->json(['states' =>$states],200);
+    }
+
+    public function getCollegesByStateId(Request $request)
+    {
+
+        $colleges= getCollegesByStateId($request->state_id);
+        return response()->json(['colleges' =>$colleges],200);
     }
 
     public function getDistrictsByProvinceId(Request $request)
     {
-        $districts= getDistrictsByProvinceId($request->province_id);
+        $districts= getDistrictsByProvinceId($request->state_id);
         return response()->json(['districts' =>$districts],200);
     }
 }
+

@@ -422,8 +422,8 @@
                             id="">
                         <div class="row justify-content-center">
                             <div class="col-md-12 mt-2">
-                                <label class="control-label">From</label>
-                                <input type="text" name="from" class="form-control" >
+                                <label class="control-label">To</label>
+                                <input type="text" name="from" class="form-control sms_to" >
                             </div>
 
                             <div class="col-md-12 mt-2">
@@ -508,10 +508,10 @@
                 </div>
                 <div class="modal-body">
                         <div class="row justify-content-center">
-                            <div class="col-md-12 mt-2">
-                                <label class="control-label">From</label>
+                            {{-- <div class="col-md-12 mt-2">
+                                <label class="control-label">To</label>
                                 <input type="text" name="option_from" class="form-control option_from" >
-                            </div>
+                            </div> --}}
 
                             <div class="col-md-12 mt-2">
                                 <label class="control-label">Message</label>
@@ -703,7 +703,9 @@
         // Send SMS
         $(document).on('click', '.sendsms', function(e) {
             let registration_id = $(this).data('registration_id');
+            let phone = $(this).parent().prev().prev().text();
             $(".registration_id").val(registration_id);
+            $(".sms_to").val(phone);
             $('.send_sms').modal('show');
         });
         // Send SMS
@@ -853,6 +855,13 @@
         $(function () {
             $('.ckeditor').each(function (e) {
             });
+        });
+
+        $(".table tbody tr").click(function(e) {
+            if($(e.target).is(':checkbox')) return; //ignore when click on the checkbox
+
+            var $cb = $(this).find(':checkbox');
+            $cb.prop('checked', !$cb.is(':checked'));
         });
     </script>
 @endsection

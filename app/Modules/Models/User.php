@@ -22,7 +22,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'branch_id',
         'role',
         'status',
         'is_deleted',
