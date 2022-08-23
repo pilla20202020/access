@@ -32,7 +32,7 @@
                         </div>
                     @endif
                     <h5 class="login_welcome text-center pt-4 pb-1">Register now for Appointments</h5>
-                    <form method="GET" name="enq" action="{{ route('customerform.store',['headers'=> $campaign->name, 'user_agent'=> $campaign->id]) }}" class="p-3">
+                    <form method="GET" id="enquiry_form" name="enq" action="{{ route('customerform.store',['headers'=> $campaign->name, 'user_agent'=> $campaign->id]) }}" class="p-3">
                         @csrf
                         @if(isset($campaign))
                             <input type="hidden" name="campaign_id" id="" value="{{$campaign->id}}">
@@ -163,5 +163,9 @@
         setTimeout(() => {
             $('#alert_message').hide();
         }, 6000);
+
+        $('#enquiry_form').submit(function(){
+            $(this).find(':input[type=submit]').prop('disabled', true);
+        });
     </script>
 @endsection

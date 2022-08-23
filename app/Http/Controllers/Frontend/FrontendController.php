@@ -44,8 +44,11 @@ class FrontendController extends Controller
     public function store(Request $request, $headers, $user_agent)
     {
         $data = $request->all();
-        $result = collect($data['intrested_course']);
-        $data['intrested_course'] = $result->implode(',');
+        if(isset($request->intrested_course)) {
+            $result = collect($data['intrested_course']);
+            $data['intrested_course'] = $result->implode(',');
+        }
+
         $data['headers'] = $headers;
         $data['user_agent'] = $user_agent;
         if($registration = $this->registration->create($data)) {
