@@ -9,6 +9,7 @@
     <td>{{ Str::limit($registration->name, 47) }}</td>
     <td>{{ Str::limit($registration->email, 47) }}</td>
     <td>{{ Str::limit($registration->phone, 47) }}</td>
+    <td>{{ Str::limit($registration->source, 47) }}</td>
     <td>{{ ucfirst($registration->preffered_location) }}</td>
 
     <td >

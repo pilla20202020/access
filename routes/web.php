@@ -392,5 +392,9 @@ Route::get('', 'App\Http\Controllers\Frontend\FrontendController@homepage')->nam
 Route::get('customerform', 'App\Http\Controllers\Frontend\FrontendController@homepage')->name('customerform');
 Route::get('customerform/store/{headers}/{user_agent}/', 'App\Http\Controllers\Frontend\FrontendController@store')->name('customerform.store');
 
+
+Route::get('visit', 'App\Http\Controllers\Frontend\FrontendController@visit')->name('visit');
+Route::post('visit/store/', 'App\Http\Controllers\Frontend\FrontendController@visitStore')->name('visitform.store');
+
 Route::get('{url}', 'App\Http\Controllers\Frontend\FrontendController@formByURL')->name('formbyurl');
 

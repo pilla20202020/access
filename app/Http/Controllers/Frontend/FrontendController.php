@@ -104,4 +104,46 @@ class FrontendController extends Controller
             }
         }
     }
+
+    public function visit()
+    {
+        $campaigns = $this->campaign->get();
+        $qualifications = $this->qualification->all();
+        $preparations = $this->preparation->all();
+        return view('frontend.visit.form',compact('campaigns','qualifications','preparations'));
+    }
+
+    public function visitStore(Request $request) {
+        $data = $request->all();
+
+        if($registration = $this->registration->create($data)) {
+            $campaign = $this->campaign->where('id',$request->campaign_id)->first();
+            $web_message = $campaign->success_message;
+            $sms_message = $campaign->sms_message;
+            $email_message = $campaign->email_success;
+            $todeliver_msg = Str::replace("<name>",$request->name, $web_message);
+            $smsdeliver_msg = Str::replace("<name>",$request->name, $sms_message);
+            $emaildeliver = Str::replace("<name>",$request->name, $email_message);
+
+            $url = setting('sms_api') ?? 'https://sms.aakashsms.com/sms/v3/send';
+            $data = array(
+                'auth_token' => setting('sms_token') ?? '28a22c64768a49ee5f539fa2924a8c278bb9ff16d7798496adbb87278d1c7e70',
+                'from' => setting('sms_from') ?? '31001',
+                'to' => $request->phone,
+                'text' => $smsdeliver_msg
+            );
+            $response = smsPost($url, $data);
+            // $response = json_decode(smsPost($url, $data));
+            // dd($response);
+            // if ($response->response_code == 201) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
+            Mail::to('prajwalbro@hotmail.com')->send(new StudentEnquiryMail($request->all(), $emaildeliver, $registration));
+            Mail::to($request->email)->send(new StudentNotifyMail($request->all()));
+
+            return redirect()->route('visit')->withSuccess(trans($todeliver_msg));
+        }
+    }
 }

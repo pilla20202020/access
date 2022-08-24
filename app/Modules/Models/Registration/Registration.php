@@ -51,6 +51,7 @@ class Registration extends Model
         'test_score',
         'intrested_for_country',
         'intrested_course',
+        'source',
         'display_order',
         'remarks',
         'status',

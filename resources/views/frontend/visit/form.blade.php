@@ -9,20 +9,15 @@
                 <img src="{{ asset('images/access.png') }}" alt="" class="img-fluid">
             </div>
             <div class="col-md-9">
-                <!--h2 class="login-right-title pt-5">
-                    @if(isset($campaign))
-                        {{$campaign->name}}
-                    @endif
-                </h2-->
+                <h2 class="login-right-title pt-5">
+                    Visit Form
+                </h2>
             </div>
         </div>
         <div class="row gx-5">
-            <div class="col-lg-7 col-md-8">
+            <div class="col-lg-6 col-md-6">
                 <div class="login-form bg-light mt-4 pb-4">
 
-                    @if(isset($campaign) && $campaign->banner)
-                        <img class="img-fluid" src="{{ asset($campaign->banner_path)}}"/>
-                    @endif
                     @if(Illuminate\Support\Facades\Session::has('success'))
                         <div class="alert alert-success mt-3 mb-3" id="alert_message">
                             {{Illuminate\Support\Facades\Session::get('success')}}
@@ -32,12 +27,10 @@
                         </div>
                     @endif
                     <h5 class="login_welcome text-center pt-4 pb-1">Register now for Appointments</h5>
-                    <form method="GET" id="enquiry_form" name="enq" action="{{ route('customerform.store',['headers'=> $campaign->name, 'user_agent'=> $campaign->id]) }}" class="p-3">
+                    <form method="POST" id="enquiry_form" name="enq" action="{{ route('visitform.store') }}" class="p-3">
                         @csrf
-                        @if(isset($campaign))
-                            <input type="hidden" name="campaign_id" id="" value="{{$campaign->id}}">
-                        @endif
-                        <input type="hidden" name="source" id="" value="registration">
+
+                        <input type="hidden" name="source" id="" value="visit">
                         <div class="row">
                             <div class="form-group col-12">
                                 <input required="required" placeholder="Enter Name" id="first-name" class="form-control"
@@ -94,6 +87,8 @@
                             </div>
 
 
+
+
                             <div class="form-group col-6">
                                 <input required="required" placeholder="Enter Test Score " class="form-control"
                                     name="test_score" type="text">
@@ -118,14 +113,18 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-6">
-                                <select name="intrested_course[]" data-placeholder="Please Select Intrested Course" class="form-control offerd_course mt-1 mt-2" multiple>
-                                    @foreach ($campaign_course as $course)
-                                        <option value="{{$course}}">{{$course}}</option>
+
+                            <div class="form-group col-12">
+                                <select name="campaign_id" class="form-control">
+                                    <option value="" disabled selected>Select Campaign</option>
+                                    @foreach ($campaigns as $campaign)
+                                        <option value="{{$campaign->id}}">{{$campaign->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
+
 
                         <div class="row">
                         <div class="col-lg-12 justify-content-center align-center">
@@ -137,21 +136,7 @@
 
             </div>
         </div>
-        <div class="col-lg-5 col-md-4 d-flex align-items-center pl-5">
-            <div class="login-right">
 
-
-                <div class="login-right-list pt-4 ">
-                    @if(isset($campaign))
-
-                        {!! $campaign->description !!}
-                    @endif
-
-                </div>
-
-
-            </div>
-        </div>
     </div>
     </div>
 @endsection
