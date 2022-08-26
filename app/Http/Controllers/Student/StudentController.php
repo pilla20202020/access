@@ -234,7 +234,7 @@ class StudentController extends Controller
                     'intake_month' => $data['intake_month'],
                     'intake_year' => $data['intake_year'],
                     'source_ref' => $data['source_ref'] ?? null,
-                    'ref_id' => $data['source_ref'] == 'agent' || 'location' ? $data['ref_id']:null,
+                    'ref_id' => $data['ref_id'] ?? null,
                     'created_by' => Auth::user()->id,
                 ];
                 $student->update($studentData);

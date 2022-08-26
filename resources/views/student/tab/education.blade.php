@@ -31,7 +31,7 @@
 
                     <div class="col-sm-2">
                         <label class="control-label">Percentage</label>
-                        <input type="number" name="percentage[]" class="form-control" min="0" max="100" value="{{$education->percentage}}">
+                        <input type="text" name="percentage[]" class="form-control" min="0" max="100" value="{{$education->percentage}}">
                     </div>
 
                     <div class="col-sm-3">

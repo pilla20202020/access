@@ -127,35 +127,90 @@
                                     <hr>
                                     <h5>Address: </h5>
                                     <div class="row">
-                                        <div class="col-md-3 mt-2">
-                                            <label class="control-label">Zone</label>
-                                            <input type="text" name="zone" class="form-control reg_zone" value="" >
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="specialization" class="col-form-label pt-0">Select Country</label>
+                                                <div class="">
+                                                    <select data-placeholder="Select Country"
+                                                        class="form-control country_id reg_country" id="country_id"
+                                                        name="country_id">
+                                                        <option value="" disabled selected>Select Country</option>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->id }}" @if (isset($student) && $student->country_id == $country->id) selected @endif>
+                                                                {{ ucfirst($country->country_name) }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div class="col-md-3 mt-2">
-                                            <label class="control-label">State</label>
-                                            <input type="text" name="state" class="form-control reg_state" value="" >
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="province" class="col-form-label pt-0">Select Province/State</label>
+                                                <div class="">
+                                                    <select data-placeholder="Select Province"
+                                                        class="tail-select form-control state_class reg_state" id="province_id"
+                                                        name="state_id">
+                                                        <option value="" selected disabled >Select Province</option>
+                                                        @if(isset($states))
+                                                            @foreach ($states as $state)
+                                                                <option value="{{ $state->id }}" @if (isset($student) && $student->state_id == $state->id) selected @endif>
+                                                                {{ $state->state_name }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div class="col-md-3 mt-2">
-                                            <label class="control-label">City</label>
-                                            <input type="text" name="city" class="form-control reg_city" value="" >
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="districts" class="col-form-label pt-0">Select District</label>
+                                                <div class="">
+                                                    <select data-placeholder="Select District"
+                                                        class="tail-select form-control district_class reg_district" id="district_id"
+                                                        name="district_id">
+                                                        <option value="" selected disabled>Select District</option>
+                                                        @if(isset($districts))
+                                                            @foreach ($districts as $district)
+                                                                <option value="{{ $district->id }}" @if (isset($student) && $student->district_id == $district->id) selected @endif>
+                                                                    {{ $district->district_name }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="municipality"
+                                                    class="col-form-label pt-0">Metro/Sub-Metro/Municipality/VDC</label>
+                                                <input type="text" class="form-control reg_municipality" name="municipality_name"
+                                                    placeholder="Municipality" value="{{ old('municipality_name', isset($student->municipality_name) ? $student->municipality_name : '') }}">
 
-                                        <div class="col-md-3 mt-2">
-                                            <label class="control-label">Address</label>
-                                            <input type="text" name="address" class="form-control reg_address" value="" >
+                                            </div>
                                         </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="municipality" class="col-form-label pt-0">Ward No.</label>
+                                                <input type="number" class="form-control reg_ward" name="ward_no" placeholder="Ward" value="{{ old('ward_no', isset($student->ward_no) ? $student->ward_no : '') }}">
 
-                                        <div class="col-md-3 mt-2">
-                                            <label class="control-label">Nearest landmark</label>
-                                            <input type="text" name="nearest_landmark" class="form-control reg_nearest_landmark" value="" >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="municipality" class="col-form-label pt-0">Village/Town/City</label>
+                                                <input type="text" class="form-control reg_village" name="village_name" value="{{ old('village_name', isset($student->village_name) ? $student->village_name : '') }}">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="tab-pane p-3" id="academic" role="tabpanel">
-                                    <h5>SEE Detail: </h5>
+                                    {{-- <h5>SEE Detail: </h5>
                                     <div class="row">
                                         <div class="col-md-3 mt-2">
                                             <label class="control-label">SEE Year</label>
@@ -223,7 +278,7 @@
                                             <input type="text" name="bachelors_college" class="form-control reg_bachelors_college" value="" >
                                         </div>
                                     </div>
-                                    <hr>
+                                    <hr> --}}
                                     <h5>Highest Qualification Detail: </h5>
                                     <div class="row">
                                         <div class="col-md-3 mt-2">
@@ -711,6 +766,14 @@
         });
         // Send SMS
 
+        // Procceed To Enroll
+        $(document).on('click', '.btn-enrolled', function(e) {
+            let registration_id = $(this).data('registration_id');
+            $(".registration_id").val(registration_id);
+            $('.show_enrolled').modal('show');
+        });
+        // Procceed To Enroll
+
         // Update Lead Category
         $(document).on('click', '.btn-leadcategory', function(e) {
             let registration_id = $(this).data('registration_id');
@@ -739,11 +802,6 @@
                         $(".reg_name").val(response.data.name);
                         $(".reg_email").val(response.data.email);
                         $(".reg_phone").val(response.data.phone);
-                        $(".reg_zone").val(response.data.zone);
-                        $(".reg_state").val(response.data.state);
-                        $(".reg_city").val(response.data.city);
-                        $(".reg_address").val(response.data.address);
-                        $(".reg_nearest_landmark").val(response.data.nearest_landmark);
                         $(".reg_see_year").val(response.data.see_year);
                         $(".reg_see_grade").val(response.data.see_grade);
                         $(".reg_see_stream").val(response.data.see_stream);
@@ -769,6 +827,12 @@
                         $(".reg_intrested_for_country").val(response.data.intrested_for_country);
                         $(".reg_intrested_course").val(response.data.intrested_course);
                         $(".reg_preffered_location").val(response.data.preffered_location);
+                        $(".reg_country").val(response.data.country_id).attr("selected","selected");
+                        $(".reg_state").val(response.data.state_id).attr("selected","selected");
+                        $(".reg_district").val(response.data.district_id).attr("selected","selected");
+                        $(".reg_municipality").val(response.data.municipality_name);
+                        $(".reg_ward").val(response.data.ward_no);
+                        $(".reg_village").val(response.data.village_name);
                         $('.update_registration').modal('show');
                     }
                 }
@@ -864,5 +928,10 @@
             var $cb = $(this).find(':checkbox');
             $cb.prop('checked', !$cb.is(':checked'));
         });
+
+        var provincesByCountryId = "{{ route('common.state.countryId') }}";
+        var districtByProvinceId = "{{ route('common.district.provinceId') }}";
+
     </script>
+    <script src="{{ asset('js/student/student.js') }}"></script>
 @endsection

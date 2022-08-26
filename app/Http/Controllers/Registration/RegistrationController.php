@@ -5,26 +5,37 @@ namespace App\Http\Controllers\Registration;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendNewsLetterJob;
 use App\Jobs\SendSMSJob;
+use App\Modules\Models\Country\Country;
+use App\Modules\Models\District\District;
 use App\Modules\Models\FollowUp\FollowUp;
 use App\Modules\Models\LeadCategory\LeadCategory;
 use App\Modules\Models\Location\Location;
 use Illuminate\Http\Request;
 use App\Modules\Models\Registration\Registration;
+use App\Modules\Models\State\State;
+use App\Modules\Models\Student\Student;
+use App\Modules\Models\Student\StudentEducation;
+use App\Modules\Models\Student\StudentLanguage;
 use App\Modules\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class RegistrationController extends Controller
 {
-    protected $customer, $registration, $followup, $leadCategory, $location;
+    protected $customer, $registration, $followup, $leadCategory, $location, $student, $country, $state, $district;
 
-    function __construct(User $user, Registration $registration, FollowUp $followup, LeadCategory $leadCategory, Location $location)
+    function __construct(User $user, Registration $registration, FollowUp $followup, LeadCategory $leadCategory, Location $location,Student $student,Country $country, State $state, District $district)
     {
         $this->user = $user;
         $this->registration = $registration;
         $this->followup = $followup;
         $this->leadCategory = $leadCategory;
         $this->location = $location;
+        $this->student = $student;
+        $this->country = $country;
+        $this->state = $state;
+        $this->district = $district;
 
     }
     public function customerForm()
@@ -40,9 +51,13 @@ class RegistrationController extends Controller
         } else {
             $registrations = $this->registration->orderBy('id','DESC')->get();
         }
+        $countries = $this->country->where('status','Active')->get();
         $leadCategories = $this->leadCategory->get();
         $locations = $this->location->get();
-        return view('registration.index', compact('registrations','leadCategories','locations'));
+        $states = $this->state->get();
+
+        $districts = $this->district->get();
+        return view('registration.index', compact('registrations','leadCategories','locations','countries','states','districts'));
     }
 
 
@@ -272,6 +287,69 @@ class RegistrationController extends Controller
         $leadCategories = $this->leadCategory->get();
         $locations = $this->location->get();
         return view('registration.index', compact('registrations','leadCategories','locations'));
+    }
+
+    public function proceedForAdmission(Request $request, $id) {
+        try {
+            $registration = $this->registration->where('id',$id);
+            if($registration->count() == 1) {
+                $registration_data['leadcategory_id'] = 5;
+                $registration->update($registration_data);
+                $registration = $registration->first();
+            }
+            if(isset($registration)) {
+                $student = DB::transaction(function () use ($registration) {
+                    $studentData = [
+                        'applicant' => $registration->name,
+                        'first_name' => $registration->name,
+                        'mobile_no' => $registration->phone,
+                        'preffered_location' => $registration->preffered_location,
+                        'intrested_for_country' => $registration->intrested_for_country,
+                        'intrested_course' => $registration->intrested_course,
+                        'email' => $registration->email,
+                        'country_id' => $registration['country_id'] ?? "157",
+                        'full_address' => $registration->address,
+                        'state_id' => $registration->state ?? null,
+                        'district_id' => $registration['district_id'] ?? null,
+                        'source_ref' => "registration",
+                        'ref_id' => $registration->id,
+                        'created_by' => Auth::user()->id,
+
+                    ];
+                    $student = $this->student->create($studentData);
+
+                    if (!empty($registration->highest_qualification)) {
+                            $quali = [
+                                'student_id' => $student->id,
+                                'level' => $registration->highest_qualification,
+                                'university' => $registration->college,
+                                'stream' => $registration->highest_stream,
+                                'percentage' => $registration->highest_grade,
+                            ];
+                            // dd($quali);
+                            StudentEducation::create($quali);
+                    }
+
+
+                    if (!empty($registration->test_name)) {
+                            $lang = [
+                                'student_id' => $student->id,
+                                'language' => $registration->test_name,
+                                'score' => $registration->test_score,
+                            ];
+                            // dd($quali);
+                            StudentLanguage::create($lang);
+                    }
+                });
+                Toastr()->success('Student Enrolled Successfully','Success');
+                return redirect()->route('registration.index');
+            }
+        } catch (Exception $e) {
+            return null;
+        }
+
+
+
     }
 
 }

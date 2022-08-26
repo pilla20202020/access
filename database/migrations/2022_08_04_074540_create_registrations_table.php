@@ -48,7 +48,7 @@ class CreateRegistrationsTable extends Migration
             $table->text('test_name')->nullable();
             $table->string('test_score')->nullable();
             $table->string('preffered_location')->nullable();
-            $table->string('interested_for_country')->nullable();
+            $table->string('intrested_for_country')->nullable();
             $table->string('intrested_course')->nullable();
             $table->string('display_order')->nullable();
             $table->text('remarks')->nullable();

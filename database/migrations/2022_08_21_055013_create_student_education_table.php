@@ -18,7 +18,8 @@ class CreateStudentEducationTable extends Migration
             $table->bigInteger('student_id')->unsigned()->index()->nullable();
             $table->string('level')->nullable();
             $table->string('university')->nullable();
-            $table->decimal('percentage',5,2)->nullable();
+            $table->text('percentage')->nullable();
+            $table->text('stream')->nullable();
             $table->string('documents',500)->nullable();
             $table->string('display_order')->nullable();
             $table->string('remarks')->nullable();

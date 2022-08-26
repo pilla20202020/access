@@ -28,13 +28,22 @@
             Add Follow Up @if(!empty($registration->getFollowUpCount($registration->id))) ({{$registration->getFollowUpCount($registration->id)->count()}}) @endif
         </a>
 
-        <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-info btn-sm sendsms" title="Add Follow Up">
+        <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-info btn-sm sendsms mt-1" title="Add Follow Up">
             Send SMS
         </a>
 
-        <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-warning btn-sm btn-leadcategory" title="Add Lead Category">
+        <a href="javascript: void(0);" data-registration_id="{{$registration->id}}"  class="btn btn-warning btn-sm btn-leadcategory mt-1" title="Add Lead Category">
             Lead Category
         </a>
+
+        @if($registration->enroll($registration->id) == null)
+            <a href="#">
+                <button type="button" class="btn btn-purple btn-sm btn-icon-toggle mt-1" onclick="proceedThis(this); return false;" link="{{ route('registration.proceed_for_admission', $registration->id) }}">
+                    Proceed To Enroll
+                </button>
+            </a>
+        @endif
+
 
     </td>
 </tr>

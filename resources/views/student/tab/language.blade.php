@@ -12,6 +12,7 @@
                             <option value="#" disabled selected>Select Language</option>
                             <option value="ielts" @if($language->language == "ielts") selected @endif>Ielts</option>
                             <option value="sat" @if($language->language == "sat") selected @endif>SAT</option>
+                            <option value="tofel" @if($language->language == "tofel") selected @endif>TOFEL</option>
                             <option value="pte" @if($language->language == "pte") selected @endif>PTE</option>
                             <option value="gre" @if($language->language == "gre") selected @endif>GRE</option>
                             <option value="other" @if($language->language == "other") selected @endif>Other</option>
@@ -21,7 +22,7 @@
 
                     <div class="col-sm-2">
                         <label class="control-label">Score</label>
-                        <input type="number" name="score[]"
+                        <input type="text" name="score[]"
                             class="form-control" min="0" max="100" value="{{$language->score}}">
                     </div>
 

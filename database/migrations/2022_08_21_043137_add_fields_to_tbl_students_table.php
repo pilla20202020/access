@@ -15,9 +15,11 @@ class AddFieldsToTblStudentsTable extends Migration
     {
         Schema::table('tbl_students', function (Blueprint $table) {
             //
-
             $table->string('intake_year')->nullable();
             $table->string('intake_month')->nullable()->after('intake_year');
+            $table->string('preffered_location')->nullable();
+            $table->string('intrested_for_country')->nullable();
+            $table->string('intrested_course')->nullable();
 
         });
 
@@ -39,7 +41,7 @@ class AddFieldsToTblStudentsTable extends Migration
     {
         Schema::table('tbl_students', function (Blueprint $table) {
             //
-            $table->dropColumn(['intake_year','intake_month']);
+            $table->dropColumn(['intake_year','intake_month','preffered_location','intrested_for_country','intrested_course']);
         });
 
         Schema::table('tbl_admissions', function (Blueprint $table) {

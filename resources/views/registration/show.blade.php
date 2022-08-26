@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="col-md-4 mt-1">
-                                <label>Intrested Country: <span>{{ $registration->interested_for_country }}</span></label>
+                                <label>Intrested Country: <span>{{ $registration->intrested_for_country }}</span></label>
                             </div>
 
                             <div class="col-md-4">

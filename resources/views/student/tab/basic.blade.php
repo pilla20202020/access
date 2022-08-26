@@ -26,7 +26,7 @@
             <div class="form-group ">
                 <label for="name" class="col-form-label pt-0">Middle Name</label>
                 <div class="">
-                    <input class="form-control" type="text" required name="middle_name"
+                    <input class="form-control" type="text" name="middle_name"
                         placeholder="Middle Name" value="{{ old('middle_name', isset($student->middle_name) ? $student->middle_name : '') }}">
                 </div>
             </div>
@@ -292,6 +292,10 @@
     </div>
 
     <div class="row">
+        @if(isset($student->ref_id) && isset($student->source_ref))
+            <input type="hidden" name="ref_id" value="{{$student->ref_id}}">
+        @endif
+        <input type="hidden" name="">
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="marital_status" class="col-form-label pt-0">Source Refrence</label>
@@ -302,6 +306,7 @@
                         <option value="direct"  @if (isset($student) && $student->source_ref == 'direct') selected @endif>Direct</option>
                         <option value="agent"  @if (isset($student) && $student->source_ref == 'agent') selected @endif>Agent</option>
                         <option value="location"  @if (isset($student) && $student->source_ref == 'location') selected @endif>Location</option>
+                        <option value="registration"  @if (isset($student) && $student->source_ref == 'registration') selected @endif>Registration</option>
                     </select>
                 </div>
             </div>

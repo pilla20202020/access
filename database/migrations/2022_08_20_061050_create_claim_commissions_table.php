@@ -39,6 +39,6 @@ class CreateClaimCommissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('claim_commissions');
+        Schema::dropIfExists('tbl_claim_commissions');
     }
 }

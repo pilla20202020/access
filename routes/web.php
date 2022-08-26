@@ -283,6 +283,7 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::post('/bulkupdate', 'Registration\RegistrationController@bulkUpdate')->name('bulkupdate');
         Route::get('/getregistrationbycampaignandleadcategory/{campaign_id}/{leadcategory_id}', 'Registration\RegistrationController@getRegistrationByCampaignAndFilter')->name('getregistration_by_campaign_and_leadcategory');
         Route::get('/getregistrationbylocationandleadcategory/{location_slug}/{leadcategory_id}', 'Registration\RegistrationController@getRegistrationByLocationAndLeadCategory')->name('getregistration_by_location_and_leadcategory');
+        Route::get('/proceedforadmission/{id}', 'Registration\RegistrationController@proceedForAdmission')->name('proceed_for_admission');
 
     });
 

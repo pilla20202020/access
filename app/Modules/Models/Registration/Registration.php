@@ -5,6 +5,7 @@ namespace App\Modules\Models\Registration;
 use App\Modules\Models\Campaign\Campaign;
 use App\Modules\Models\FollowUp\FollowUp;
 use App\Modules\Models\LeadCategory\LeadCategory;
+use App\Modules\Models\Student\Student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +29,13 @@ class Registration extends Model
         'see_year',
         'see_grade',
         'headers',
+        'country_id',
+        'state_id',
+        'district_id',
+        'municipality_name',
+        'ward_no',
+        'village_name',
+        'full_address',
         'user_agent',
         'see_stream',
         'see_school',
@@ -77,5 +85,9 @@ class Registration extends Model
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);
+    }
+
+    public function enroll($id) {
+        return Student::select('id')->where('source_ref','registration')->where('ref_id',$id)->latest()->first();
     }
 }
