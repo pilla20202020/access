@@ -385,6 +385,25 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
     });
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | DocumentCheck List CRUD
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::group(['as' => 'document_checklist.', 'prefix' => 'document_checklist',], function () {
+        Route::get('', 'DocumentChecklist\DocumentChecklistController@index')->name('index');
+        Route::get('create', 'DocumentChecklist\DocumentChecklistController@create')->name('create');
+        Route::post('', 'DocumentChecklist\DocumentChecklistController@store')->name('store');
+        Route::get('{document_checklist}/edit', 'DocumentChecklist\DocumentChecklistController@edit')->name('edit');
+        Route::put('{document_checklist}', 'DocumentChecklist\DocumentChecklistController@update')->name('update');
+        Route::get('document_checklist/{id}/destroy', 'DocumentChecklist\DocumentChecklistController@destroy')->name('destroy')->middleware('permission:permission-delete');
+        Route::get('/{id}/delete-checklistitem','DocumentChecklist\DocumentChecklistController@deleteCheckList')->name('delete_checklist');
+
+    });
+
+
 });
 
 Route::get('', 'App\Http\Controllers\Frontend\FrontendController@homepage')->name('homepage');

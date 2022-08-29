@@ -151,6 +151,16 @@
                         <li><a href="{{ route('commission-claim.claimed')}}" aria-expanded="false"><i class="fas fa-dollar-sign"></i> Commission Claimed</a></li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow" aria-expanded="false">
+                        <i class="mdi mdi-warehouse"></i>
+                        <span>Document CheckList</span>
+                    </a>
+                    <ul class="sub-menu mm-collapse" aria-expanded="true">
+                        <li><a href="{{ route('document_checklist.index')}}" aria-expanded="false"><i class="fas fa-users"></i> Document CheckList</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
