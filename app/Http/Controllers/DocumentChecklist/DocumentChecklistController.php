@@ -57,7 +57,6 @@ class DocumentChecklistController extends Controller
         //
         try {
             $document = $request->all();
-
             $document_checklist = DB::transaction(function () use ($document) {
                 $documentData = [
                     'checklist_for' => $document['checklist_for'],
@@ -66,22 +65,25 @@ class DocumentChecklistController extends Controller
                 $documentschecklist = $this->document_checklist->create($documentData);
 
                 // documentSamplePath Language
-                $documentsPath = [];
-                if (!empty($document['document_sample'])) {
-                    foreach ($document['document_sample'] as $value) {
-                        $documentsPath[] = uploadCommonFile($value, 'checklist_documents/');
-                    }
-                }
+                // $documentsPath = [];
+                // if (!empty($document['document_sample'])) {
+                //     foreach ($document['document_sample'] as $value) {
+                //         $documentsPath[] = uploadCommonFile($value, 'checklist_documents/');
+                //     }
+                // }
 
                 if (!empty($document['document_name'])) {
                     foreach ($document['document_name'] as  $key => $value) {
-                        $files = [
-                            'documentation_id' => $documentschecklist->id,
-                            'document_name' => $document['document_name'][$key],
-                            'document_sample' => $documentsPath[$key] ?? null
-                        ];
-                        // dd($quali);
-                        CheckedListItem::create($files);
+                        if(isset($value)) {
+                            $files = [
+                                'documentation_id' => $documentschecklist->id,
+                                'document_name' => $document['document_name'][$key] ?? null,
+                                'document_sample' => $document['document_sample'][$key] ?? null,
+                            ];
+                            // dd($quali);
+                            CheckedListItem::create($files);
+                        }
+
                     }
                 }
 
@@ -155,10 +157,12 @@ class DocumentChecklistController extends Controller
                                 $documentsPath[] = $existingQuli->document_sample;
                             }
                         }
-                        $documentsPath[] = uploadCommonFile($value, 'checklist_documents/');
+                        $documentsPath[$key] = $data['document_sample'][$key];
+
 
                     }
                 }
+
                 if (!empty($data['document_name'])) {
                     foreach ($data['document_name'] as  $key => $value) {
                         if($value != null) {
@@ -166,7 +170,7 @@ class DocumentChecklistController extends Controller
                                 'documentation_id' => $documentschecklist->id,
                                 'document_name' => $data['document_name'][$key],
                             ];
-                            // dd($quali);
+
                             if(isset($documentsPath[$key])){
                                 $files['document_sample'] = $documentsPath[$key];
                             }
@@ -227,7 +231,7 @@ class DocumentChecklistController extends Controller
                 Toastr()->success('CheckList Item has been deleted successfully','Success');
                 return redirect()->back();
             } else {
-                Toastr()->success('CheckList Item cannot be deleted at the moment','Error');
+                Toastr()->error('CheckList Item cannot be deleted at the moment','Error');
                 return redirect()->back();
             }
 
@@ -236,4 +240,21 @@ class DocumentChecklistController extends Controller
         }
 
     }
+
+    public function replicate($id) {
+        $document_checklist = $this->document_checklist->where('id',$id)->first();
+        $newDocument = $document_checklist->replicate();
+        $newDocument->save();
+        if (isset($document_checklist->checklists) && $document_checklist->checklists->isEmpty() == false) {
+            foreach($document_checklist->checklists as $list) {
+                $newlistitem = $list->replicate();
+                $newlistitem->documentation_id= $newDocument->id;
+                $newlistitem->save();
+            }
+        }
+
+        Toastr()->success('Replicate checklist created Successfully','Success');
+        return redirect()->back();
+    }
+
 }

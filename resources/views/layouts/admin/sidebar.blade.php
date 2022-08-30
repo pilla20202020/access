@@ -117,6 +117,7 @@
                         <li><a href="{{ route('colleges.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Colleges</a></li>
                         <li><a href="{{ route('agent.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Agent</a></li>
                         <li><a href="{{ route('location.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Branch/Location</a></li>
+                        <li><a href="{{ route('program.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Program</a></li>
                     </ul>
                 </li>
 

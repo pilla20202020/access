@@ -338,6 +338,24 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
 
     /*
     |--------------------------------------------------------------------------
+    | Program CRUD
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::group(['as' => 'program.', 'prefix' => 'program',], function () {
+        Route::get('', 'Program\ProgramController@index')->name('index');
+        Route::get('create', 'Program\ProgramController@create')->name('create');
+        Route::post('', 'Program\ProgramController@store')->name('store');
+        Route::get('{program}/edit', 'Program\ProgramController@edit')->name('edit');
+        Route::put('{program}', 'Program\ProgramController@update')->name('update');
+        Route::get('program/{id}/destroy', 'Program\ProgramController@destroy')->name('destroy');
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Admission CRUD
     |--------------------------------------------------------------------------
     |
@@ -400,6 +418,8 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::put('{document_checklist}', 'DocumentChecklist\DocumentChecklistController@update')->name('update');
         Route::get('document_checklist/{id}/destroy', 'DocumentChecklist\DocumentChecklistController@destroy')->name('destroy')->middleware('permission:permission-delete');
         Route::get('/{id}/delete-checklistitem','DocumentChecklist\DocumentChecklistController@deleteCheckList')->name('delete_checklist');
+        Route::get('{document_checklist}/replicate', 'DocumentChecklist\DocumentChecklistController@replicate')->name('replicate');
+
 
     });
 

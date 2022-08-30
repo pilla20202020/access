@@ -9,6 +9,10 @@
         <button type="button" class="btn btn-icon-toggle" onclick="deleteThis(this); return false;" link="{{ route('document_checklist.destroy', $document_checklist->id) }}">
             <i class="far fa-trash-alt"></i>
         </button>
+
+        <a href="{{route('document_checklist.replicate', $document_checklist->id)}}"  class="btn btn-icon-toggle btn-sm" title="Replicate">
+            <i class="fas fa-copy"></i>
+        </a>
     </td>
 </tr>
 

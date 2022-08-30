@@ -57,7 +57,8 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <a href="{{ asset('storage/'.$checklist->document_sample) }}" target="__blank">
+                                        <input type="hidden" name="document_sample[]" class="form-control" value="{{$checklist->document_sample}}" readonly>
+                                        <a href="{{$checklist->document_sample}}" target="__blank">
                                             View Uploaded File
                                         </a>
                                     </div>
@@ -69,14 +70,19 @@
                             @endforeach
                         @endif
                         <div class="form-group row d-flex align-items-end">.
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mb-2">
                                 <label class="control-label">Document Name</label>
                                 <input type="text" name="document_name[]" class="form-control" >
                             </div>
 
-                            <div class="col-sm-4">
-                                <label class="control-label">Document Sample</label>
-                                <input type="file" name="document_sample[]" class="form-control">
+                            <div class="col-sm-6">
+                                <label class="control-label">Document Name</label>
+                                <div class="d-flex">
+                                    <input id="thumbnail" class="form-control" type="text" name="document_sample[]" readonly>
+                                    <button id="lfm" data-input="thumbnail" data-preview="holder" class="lfm btn btn-icon icon-left btn-primary ml-2 d-flex">
+                                        <i class="fa fa-upload"></i> &nbsp;Choose
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="col-md-1" style="margin-top: 45px;">
@@ -113,12 +119,15 @@
     <script src="{{ asset('resources/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
     <script src="{{ asset('resources/js/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('resources/js/libs/jquery-validation/dist/additional-methods.min.js') }}"></script>
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.dropify').dropify();
         });
 
 
+        var append = 1;
         $(document).on('click', '#additemrowedu', function() {
             var b = parseFloat($("#tempedu").val());
             b = b + 1;
@@ -126,14 +135,19 @@
             var temp = $("#tempedu").val();
             var tst = `<div class="form-group row d-flex align-items-end appended-row-edu">
 
-                <div class="col-sm-4">
+                <div class="col-sm-4 mb-2">
                     <label class="control-label">Document Name</label>
                     <input type="text" name="document_name[]" class="form-control">
                 </div>
 
-                <div class="col-sm-4">
-                    <label class="control-label">Document Sample</label>
-                    <input type="file" name="document_sample[]" class="form-control">
+                <div class="col-sm-6">
+                    <label class="control-label">Document Name</label>
+                    <div class="d-flex">
+                        <input id="thumbnail`+append+`" class="form-control" type="text" name="document_sample[]" readonly>
+                        <button id="lfm`+append+`" data-input="thumbnail`+append+`" data-preview="holder`+append+`" class="lfm`+append+` btn btn-icon icon-left btn-primary ml-2 d-flex">
+                            <i class="fa fa-upload"></i> &nbsp;Choose
+                        </button>
+                    </div>
                 </div>
 
 
@@ -143,6 +157,8 @@
 
             </div>`
             $('#additernary_edu').append(tst);
+            $('.lfm'+append).filemanager('file');
+            append++;
             selectRefresh();
         });
 
@@ -159,5 +175,11 @@
             var p = o.parentNode.parentNode;
             p.parentNode.removeChild(p);
         }
+
+        $(document).ready(function() {
+            $('.dropify').dropify();
+        });
+
+        $('.lfm').filemanager('file');
     </script>
 @endsection
