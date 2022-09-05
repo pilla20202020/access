@@ -1,6 +1,6 @@
 <tr>
     <td>{{++$key}}</td>
-    <td>{{ Str::limit($program->name, 47) }}</td>
+    <td>{{ Str::limit($program->title, 47) }}</td>
 
     <td>{{ Str::limit($program->contact_person, 47) }}</td>
     <td>{{ Str::limit($program->contact_email, 47) }}</td>

@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="col-md-1" style="margin-top: 45px;">
-                        <a href="{{route('admission.delete_commission',$language->id)}}" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
+                        <a href="{{route('student.delete_test',$language->id)}}" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
                     </div>
                 </div>
             @endforeach

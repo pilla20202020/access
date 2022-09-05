@@ -332,6 +332,9 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::get('{student}/edit', 'Student\StudentController@edit')->name('edit');
         Route::put('{student}', 'Student\StudentController@update')->name('update');
         Route::get('student/{id}/destroy', 'Student\StudentController@destroy')->name('destroy');
+        Route::get('/{id}/delete-academic','Student\StudentController@deleteAcademic')->name('delete_academic');
+        Route::get('/{id}/delete-test','Student\StudentController@deleteTest')->name('delete_test');
+
 
     });
 
@@ -350,6 +353,10 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
         Route::get('{program}/edit', 'Program\ProgramController@edit')->name('edit');
         Route::put('{program}', 'Program\ProgramController@update')->name('update');
         Route::get('program/{id}/destroy', 'Program\ProgramController@destroy')->name('destroy');
+        Route::get('/{id}/delete-intake','Program\ProgramController@deleteIntake')->name('delete_intake');
+        Route::get('/{id}/delete-fee','Program\ProgramController@deleteFee')->name('delete_fee');
+        Route::get('/{id}/delete-eligibility','Program\ProgramController@deleteEligibility')->name('delete_eligibility');
+        Route::get('/{id}/delete-criteria','Program\ProgramController@deleteCriteria')->name('delete_criteria');
 
     });
 

@@ -3,6 +3,7 @@
     <div id="eligibility">
         @if (isset($program->eligibilities) && $program->eligibilities->isEmpty() == false)
             @foreach ($program->eligibilities as $key => $education)
+            <input type="hidden" class="form-control" name="eligibility_id[{{ $key }}]" value={{ $education->id }}>
                 <div class="form-group d-flex align-items-end">
                     <div class="col-sm-2">
                         <label class="control-label">Stream</label>
@@ -21,7 +22,7 @@
 
 
                     <div class="col-md-1" style="margin-top: 45px;">
-                        <a href="#" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
+                        <a href="{{route('program.delete_eligibility', $education->id)}}" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
                     </div>
                 </div>
             @endforeach

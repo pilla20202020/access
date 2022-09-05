@@ -4,6 +4,7 @@
     <div id="criteria">
         @if (isset($program->criterias) && $program->criterias->isEmpty() == false)
             @foreach ($program->criterias as $key => $education)
+            <input type="hidden" class="form-control" name="criteria_id[{{ $key }}]" value={{ $education->id }}>
                 <div class="form-group d-flex align-items-end">
                     <div class="col-sm-2">
                         <label class="control-label">Title</label>
@@ -25,9 +26,8 @@
                         <input type="date" name="criteria_date[]" class="form-control" value="{{$education->date}}">
                     </div>
 
-
                     <div class="col-md-1" style="margin-top: 45px;">
-                        <a href="#" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
+                        <a href="{{route('program.delete_criteria', $education->id)}}" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
                     </div>
                 </div>
             @endforeach

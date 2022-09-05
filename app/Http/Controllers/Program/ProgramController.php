@@ -179,6 +179,132 @@ class ProgramController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            $data = $request->all();
+
+            $programdetail = DB::transaction(function () use ($data, $id) {
+                $programs = $this->program->where('id',$id);
+                $programData = [
+                    'title' => $data['title'],
+                    'checklist_documents' => $data['checklist_documents'],
+                    'image' => $data['image'],
+                    'description' => $data['description'],
+                    'contact_person' => $data['contact_person'],
+                    'contact_email' => $data['contact_email'],
+                    'contact_number' => $data['contact_number'],
+                    'special_instruction' => $data['special_instruction'],
+                    'created_by' => Auth::user()->id,
+
+                ];
+                $programs->update($programData);
+                $program = $programs->first();
+
+
+                // Intake
+                if (!empty($data['intake_title'])) {
+                    foreach ($data['intake_title'] as $key => $value) {
+                        if($value != null) {
+                            $intake = [
+                                'program_id' => $program->id,
+                                'title' => $data['intake_title'][$key] ?? null,
+                                'intake_date' => $data['intake_date'][$key] ?? null,
+                                'class_commencement' => $data['class_commencement'][$key] ?? null,
+                                'deadline_date' => $data['deadline_date'][$key] ?? null
+                            ];
+                            if(!empty($data['intake_id'][$key])){
+                                $existingIntake = Intake::find($data['intake_id'][$key]);
+                                if($existingIntake){
+                                    $existingIntake->update($intake);
+                                }
+                            }else{
+                                Intake::create($intake);
+                            }
+                        }
+                    }
+                }
+                // Intake
+
+                // Fee
+                if (!empty($data['fee_title'])) {
+                    foreach ($data['fee_title'] as  $key => $value) {
+                        if($value != null) {
+                            $fee_detail = [
+                                'program_id' => $program->id,
+                                'title' => $data['fee_title'][$key] ?? null,
+                                'type' => $data['fee_type'][$key] ?? null,
+                                'amount' => $data['fee_amount'][$key] ?? null
+                            ];
+
+                            if(!empty($data['fee_id'][$key])){
+                                $existingFee = Fee::find($data['fee_id'][$key]);
+                                if($existingFee){
+                                    $existingFee->update($fee_detail);
+                                }
+                            }else{
+                                Fee::create($fee_detail);
+                            }
+                        }
+                    }
+                }
+                // Fee
+
+                // Eligibility
+                if (!empty($data['eligibility_stream'])) {
+                    foreach ($data['eligibility_stream'] as  $key => $value) {
+                        if($value != null) {
+                            $field = [
+                                'program_id' => $program->id,
+                                'stream' => $data['eligibility_stream'][$key] ?? null,
+                                'level' => $data['eligibility_level'][$key] ?? null,
+                                'grade' => $data['eligibility_grade'][$key] ?? null,
+                            ];
+
+                            if(!empty($data['eligibility_id'][$key])){
+                                $existingEligibility = Eligibility::find($data['eligibility_id'][$key]);
+                                if($existingEligibility){
+                                    $existingEligibility->update($field);
+                                }
+                            }else{
+                                Eligibility::create($field);
+                            }
+                        }
+                    }
+                }
+                // Eligibility
+
+
+                // Criteria
+                if (!empty($data['criteria_title'])) {
+                    foreach ($data['criteria_title'] as  $key => $value) {
+                        if($value != null) {
+                            $criteria_data = [
+                                'program_id' => $program->id,
+                                'title' => $data['criteria_title'][$key] ?? null,
+                                'min' => $data['criteria_min'][$key] ?? null,
+                                'max' => $data['criteria_max'][$key] ?? null,
+                                'date' => $data['criteria_date'][$key] ?? null,
+                            ];
+                            if(!empty($data['criteria_id'][$key])){
+                                $existingCriteria = Criteria::find($data['criteria_id'][$key]);
+                                if($existingCriteria){
+                                    $existingCriteria->update($criteria_data);
+                                }
+                            }else{
+                                Criteria::create($criteria_data);
+                            }
+                        }
+                    }
+                }
+                // Eligibility
+
+
+            });
+            Toastr()->success('Programs Updated Successfully','Success');
+            return redirect()->route('program.index');
+
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
     /**
@@ -190,5 +316,37 @@ class ProgramController extends Controller
     public function destroy($id)
     {
         //
+        $program = $this->program->where('id',$id);
+        $program->delete();
+        Toastr()->success('Program Deleted Successfully','Success');
+        return redirect()->back();
+    }
+
+    public function deleteIntake($id) {
+        $intake = Intake::find($id);
+        $intake->delete();
+        Toastr()->success('Intake Deleted Successfully','Success');
+        return redirect()->back();
+    }
+
+    public function deleteFee($id) {
+        $fee = Fee::find($id);
+        $fee->delete();
+        Toastr()->success('Fee Deleted Successfully','Success');
+        return redirect()->back();
+    }
+
+    public function deleteEligibility($id) {
+        $eligibility = Eligibility::find($id);
+        $eligibility->delete();
+        Toastr()->success('Eligibility Deleted Successfully','Success');
+        return redirect()->back();
+    }
+
+    public function deleteCriteria($id) {
+        $criteria = Criteria::find($id);
+        $criteria->delete();
+        Toastr()->success('Criteria Deleted Successfully','Success');
+        return redirect()->back();
     }
 }

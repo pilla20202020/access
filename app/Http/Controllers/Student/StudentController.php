@@ -361,4 +361,18 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('student.index')->withSuccess(trans('Student has been deleted'));
     }
+
+    public function deleteAcademic($id) {
+        $academic = StudentEducation::find($id);
+        $academic->delete();
+        Toastr()->success('Education Deleted Successfully','Success');
+        return redirect()->back();
+    }
+
+    public function deleteTest($id) {
+        $language = StudentLanguage::find($id);
+        $language->delete();
+        Toastr()->success('Language Deleted Successfully','Success');
+        return redirect()->back();
+    }
 }

@@ -3,6 +3,7 @@
     <div id="additernary">
         @if (isset($program->intakes) && $program->intakes->isEmpty() == false)
             @foreach ($program->intakes as $key => $education)
+            <input type="hidden" class="form-control" name="intake_id[{{ $key }}]" value={{ $education->id }}>
                 <div class="form-group d-flex align-items-end">
                     <div class="col-sm-2">
                         <label class="control-label">Title</label>
@@ -26,7 +27,7 @@
 
 
                     <div class="col-md-1" style="margin-top: 45px;">
-                        <a href="#" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
+                        <a href="{{route('program.delete_intake', $education->id)}}" class="btn btn-sm btn-danger mr-1 p-2" type="submit" value=""><i class="far fa-trash-alt"></i></a>
                     </div>
                 </div>
             @endforeach
