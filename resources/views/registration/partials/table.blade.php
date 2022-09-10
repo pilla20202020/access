@@ -11,12 +11,16 @@
     <td>{{ Str::limit($registration->phone, 47) }}</td>
     <td>{{ Str::limit($registration->source, 47) }}</td>
     <td>{{ ucfirst($registration->preffered_location) }}</td>
+    <td>{{ $registration->coupen_code }}</td>
 
     <td >
         <a href="javascript: void(0);"  data-registration_id="{{$registration->id}}"  class="btn btn-flat mdi mdi-pencil btn-edit" title="Edit Registration">
         </a>
         <a href="{{route('registration.show', $registration->id)}}" class="btn btn-flat btn-primary btn-sm" title="view">
             <i class="fa fa-eye"></i>
+        </a>
+        <a href="{{route('registration.print', $registration->id)}}" class="btn btn-flat btn-sm" title="print">
+            <i class="fa fa-print"></i>
         </a>
         <a href="#">
             <button type="button" class="btn btn-icon-toggle" onclick="deleteThis(this); return false;" link="{{ route('registration.destroy', $registration->id) }}">

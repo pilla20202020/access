@@ -412,33 +412,46 @@
                                         </tr>
 
                                         <tr>
+                                            @if(isset($data['highest_qualification']))
                                             <td>Highest Qualification</td>
                                             <td>{{ $data['highest_qualification'] }}</td>
+                                            @endif
                                         </tr>
 
                                         <tr>
+                                            @if(isset($data['highest_grade']))
+
                                             <td>Highest Grade</td>
                                             <td>{{ $data['highest_grade'] }}</td>
+                                            @endif
                                         </tr>
 
                                         <tr>
+                                            @if(isset($data['highest_stream']))
                                             <td>Highest Stream</td>
                                             <td>{{ $data['highest_stream'] }}</td>
+                                            @endif
                                         </tr>
 
                                         <tr>
+                                            @if(isset($data['test_name']))
                                             <td>Test Name</td>
                                             <td>{{ ucfirst($data['test_name']) }}</td>
+                                            @endif
                                         </tr>
 
                                         <tr>
+                                            @if(isset($data['test_score']))
                                             <td>Test Score</td>
                                             <td>{{ ucfirst($data['test_score']) }}</td>
+                                            @endif
                                         </tr>
 
                                         <tr>
-                                            <td>Preferred Location</td>
-                                            <td>{{ ucfirst($data['preffered_location']) }}</td>
+                                            @if(isset($data['preffered_location']))
+                                                <td>Preferred Location</td>
+                                                <td>{{ ucfirst($data['preffered_location']) }}</td>
+                                            @endif
                                         </tr>
                                     </tbody>
                                 </table>

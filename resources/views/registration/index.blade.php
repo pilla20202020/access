@@ -52,6 +52,7 @@
                                 <th>Phone</th>
                                 <th>Source</th>
                                 <th>Preferred Location </th>
+                                <th>Coupen Code </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -718,7 +719,23 @@
     <script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#datatable').DataTable();
+            $('#datatable').DataTable({
+                dom: 'Bfrtip',
+                
+                buttons: [{
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [ 2, 3, 4, 5, 6, 7 ]
+                    },
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: [ 2, 3, 4, 5, 6, 7 ]
+                    }
+                },
+            ]
+            });
         });
 
         // Add Followup

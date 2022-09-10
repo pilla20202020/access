@@ -352,4 +352,11 @@ class RegistrationController extends Controller
 
     }
 
+    public function print($id) {
+        $registration = $this->registration->where('id',$id)->first();
+        return view('registration.print', compact('registration'));
+        
+
+    }
+
 }
