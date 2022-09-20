@@ -117,7 +117,6 @@
                         <li><a href="{{ route('colleges.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Colleges</a></li>
                         <li><a href="{{ route('agent.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Agent</a></li>
                         <li><a href="{{ route('location.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Branch/Location</a></li>
-                        <li><a href="{{ route('program.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Program</a></li>
                     </ul>
                 </li>
 
@@ -136,8 +135,16 @@
                             <span>Follow Up</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('program.index')}}" aria-expanded="false"><i class="fa fa-tasks"></i> Programs</a>
+                    </li>
                 @endrole
 
+
+                <li>
+                    <a href="{{ route('document_checklist.index')}}" aria-expanded="false"><i class="fas fa-file-archive"></i> Document CheckList</a>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow" aria-expanded="false">
@@ -153,15 +160,7 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow" aria-expanded="false">
-                        <i class="mdi mdi-file-table-box-multiple"></i>
-                        <span>Document CheckList</span>
-                    </a>
-                    <ul class="sub-menu mm-collapse" aria-expanded="true">
-                        <li><a href="{{ route('document_checklist.index')}}" aria-expanded="false"><i class="fas fa-file-archive"></i> Document CheckList</a></li>
-                    </ul>
-                </li>
+
             </ul>
         </div>
     </div>

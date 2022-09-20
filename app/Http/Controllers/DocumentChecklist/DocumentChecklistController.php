@@ -135,6 +135,7 @@ class DocumentChecklistController extends Controller
     public function update(Request $request, $id)
     {
         //
+        dd($request->all());
         try {
             $data = $request->all();
             $document_checklist = DB::transaction(function () use ($data, $id) {
