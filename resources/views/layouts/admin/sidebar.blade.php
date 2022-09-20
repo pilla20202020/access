@@ -139,6 +139,10 @@
                     <li>
                         <a href="{{ route('program.index')}}" aria-expanded="false"><i class="fa fa-tasks"></i> Programs</a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('classes.index')}}" aria-expanded="false"><i class="fa fa-tasks"></i> Class</a>
+                    </li>
                 @endrole
 
 

@@ -190,6 +190,24 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
 
     /*
     |--------------------------------------------------------------------------
+    | Class CRUD
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::group(['as' => 'classes.', 'prefix' => 'classes',], function () {
+        Route::get('', 'Classes\ClassesController@index')->name('index');
+        Route::get('create', 'Classes\ClassesController@create')->name('create');
+        Route::post('', 'Classes\ClassesController@store')->name('store');
+        Route::get('{classes}/edit', 'Classes\ClassesController@edit')->name('edit');
+        Route::put('{classes}', 'Classes\ClassesController@update')->name('update');
+        Route::get('classes/{id}/destroy', 'Classes\ClassesController@destroy')->name('destroy');
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
     | qualification CRUD
     |--------------------------------------------------------------------------
     |
