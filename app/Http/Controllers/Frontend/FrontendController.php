@@ -48,7 +48,7 @@ class FrontendController extends Controller
             $result = collect($data['intrested_course']);
             $data['intrested_course'] = $result->implode(',');
         }
-
+        $data['coupen_code'] = bin2hex(openssl_random_pseudo_bytes(3));
         $data['headers'] = $headers;
         $data['user_agent'] = $user_agent;
         if($registration = $this->registration->create($data)) {

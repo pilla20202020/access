@@ -69,13 +69,13 @@
                             </div>
 
                             <div class="form-group col-4">
-                                <input required="required" placeholder="Grade" class="form-control"
+                                <input placeholder="Grade" class="form-control"
                                     name="highest_grade" type="text">
 
                             </div>
 
                             <div class="form-group col-4">
-                                <input required="required" placeholder="Stream" class="form-control"
+                                <input placeholder="Stream" class="form-control"
                                     name="highest_stream" type="text">
 
                             </div>
@@ -95,27 +95,24 @@
 
 
                             <div class="form-group col-6">
-                                <input required="required" placeholder="Enter Test Score " class="form-control"
+                                <input placeholder="Enter Test Score " class="form-control"
                                     name="test_score" type="text">
                             </div>
                         </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="form-group col-md-12">
-
-                                    <select class="form-select form-control" name="preffered_location" aria-label="Default select example">
-                                        <option selected disabled>Registering For</option>
-                                        <option value="baneshwor">NZ Admission Day New Baneshor (24 August)</option>
-                                                <option value="biratnagar">NZ Admission Day Biratnagar (25 August)</option>
-                                                <option value="pokhara">NZ Admission Day Pokhara (26 August)</option>
-                                                <option value="chitwan">NZ Admission Day Chitwan (28 August)</option>
-                                                <option value="butwal">NZ Admission Day Butwal (29 August)</option>
-                                                <option value="putalisadak">NZ Admission Day Putalisadak (30 August)</option>
-
-                                      </select>
-
+                                <select class="form-select form-control" name="preffered_location" aria-label="Default select example">
+                                    <option selected disabled>Registering For</option>
+                                    <option value="baneshwor">NZ Admission Day New Baneshor (24 August)</option>
+                                    <option value="biratnagar">NZ Admission Day Biratnagar (25 August)</option>
+                                    <option value="pokhara">NZ Admission Day Pokhara (26 August)</option>
+                                    <option value="chitwan">NZ Admission Day Chitwan (28 August)</option>
+                                    <option value="butwal">NZ Admission Day Butwal (29 August)</option>
+                                    <option value="putalisadak">NZ Admission Day Putalisadak (30 August)</option>
+                                </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <div class="form-group col-6">

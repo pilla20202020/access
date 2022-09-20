@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^1.0",
         "brian2694/laravel-toastr": "^5.56",
+        "codedge/laravel-fpdf": "^1.9",
         "cviebrock/eloquent-sluggable": "^8.0",
         "doctrine/dbal": "^3.4",
         "fideloper/proxy": "^4.4",

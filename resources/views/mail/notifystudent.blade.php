@@ -346,7 +346,7 @@
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <h2>Dear {{ $data['name'] }}, Your registration information has been submitted successfully. Our team may contact you for confirmation of appointments. </h2><br>
                                 <h2>Thank You</h2>
-                                <h2>Access Education Network </h2><br>
+                                <h2>{{ucfirst(setting('project_name'))}} </h2><br>
                             </table>
                         </td>
                     </tr>

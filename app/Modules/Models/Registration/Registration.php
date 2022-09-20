@@ -56,6 +56,7 @@ class Registration extends Model
         'preparation_bandscore',
         'preparation_date',
         'test_name',
+        'coupen_code',
         'test_score',
         'intrested_for_country',
         'intrested_course',
