@@ -149,12 +149,25 @@ class FrontendController extends Controller
 
     public function verify() {
 
-        return view('frontend.visit.form');
+        return view('frontend.verify.form');
     }
 
     public function validateRegistration(Request $request) {
-        $registration = $this->registration->where('coupen_code', $request->coupen_code)->first();
-        dd($registration);
+
+        if($registration = $this->registration->where('coupen_code', $request->code)->first())
+        {
+            return response()->json([
+                'data' => $registration,
+                'status' => true,
+                'message' => "Registration user found."
+            ]);
+        } else {
+            return response()->json([
+                'data' => null,
+                'status' => false,
+                'message' => "Registration user not found."
+            ]);
+        }
 
     }
 

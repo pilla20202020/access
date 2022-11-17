@@ -465,7 +465,7 @@ Route::post('visit/store/', 'App\Http\Controllers\Frontend\FrontendController@vi
 
 // Verify Registration
 Route::get('verify', 'App\Http\Controllers\Frontend\FrontendController@verify')->name('verify');
-Route::post('verify/validate/', 'App\Http\Controllers\Frontend\FrontendController@validateRegistration')->name('verify.validate');
+Route::get('verify/validate/', 'App\Http\Controllers\Frontend\FrontendController@validateRegistration')->name('verify.validate');
 
 Route::get('{url}', 'App\Http\Controllers\Frontend\FrontendController@formByURL')->name('formbyurl');
 
