@@ -15,7 +15,7 @@ class ChangeFieldsToTblRegistrations extends Migration
     {
         Schema::table('tbl_registrations', function (Blueprint $table) {
             //
-            $table->bigInteger('leadcategory_id')->unsigned()->index()->nullable();
+            $table->bigInteger('leadcategory_id')->unsigned()->index()->nullable()->default(3);
         });
     }
 

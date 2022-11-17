@@ -17,6 +17,7 @@ Route::get('/', function () {
     return route('customerform');
 });
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -454,13 +455,17 @@ Route::group(['middleware' => 'auth','namespace' => 'App\Http\Controllers'], fun
 
 Route::get('', 'App\Http\Controllers\Frontend\FrontendController@homepage')->name('homepage');
 
-
+// Campaign Registration
 Route::get('customerform', 'App\Http\Controllers\Frontend\FrontendController@homepage')->name('customerform');
 Route::get('customerform/store/{headers}/{user_agent}/', 'App\Http\Controllers\Frontend\FrontendController@store')->name('customerform.store');
 
-
+// Visit Registration
 Route::get('visit', 'App\Http\Controllers\Frontend\FrontendController@visit')->name('visit');
 Route::post('visit/store/', 'App\Http\Controllers\Frontend\FrontendController@visitStore')->name('visitform.store');
+
+// Verify Registration
+Route::get('verify', 'App\Http\Controllers\Frontend\FrontendController@verify')->name('verify');
+Route::post('verify/validate/', 'App\Http\Controllers\Frontend\FrontendController@validateRegistration')->name('verify.validate');
 
 Route::get('{url}', 'App\Http\Controllers\Frontend\FrontendController@formByURL')->name('formbyurl');
 

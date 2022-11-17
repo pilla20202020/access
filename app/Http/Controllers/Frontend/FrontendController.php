@@ -146,4 +146,16 @@ class FrontendController extends Controller
             return redirect()->route('visit')->withSuccess(trans($todeliver_msg));
         }
     }
+
+    public function verify() {
+
+        return view('frontend.visit.form');
+    }
+
+    public function validateRegistration(Request $request) {
+        $registration = $this->registration->where('coupen_code', $request->coupen_code)->first();
+        dd($registration);
+
+    }
+
 }

@@ -275,7 +275,8 @@ class RegistrationController extends Controller
         }
         $leadCategories = $this->leadCategory->get();
         $locations = $this->location->get();
-        return view('registration.index', compact('registrations','leadCategories','locations'));
+        $countries = $this->country->get();
+        return view('registration.index', compact('registrations','leadCategories','locations','countries'));
     }
 
     public function getRegistrationByLocationAndLeadCategory($location_slug, $leadcategory_id) {
@@ -286,7 +287,8 @@ class RegistrationController extends Controller
         }
         $leadCategories = $this->leadCategory->get();
         $locations = $this->location->get();
-        return view('registration.index', compact('registrations','leadCategories','locations'));
+        $countries = $this->country->get();
+        return view('registration.index', compact('registrations','leadCategories','locations','countries'));
     }
 
     public function proceedForAdmission(Request $request, $id) {
@@ -355,7 +357,7 @@ class RegistrationController extends Controller
     public function print($id) {
         $registration = $this->registration->where('id',$id)->first();
         return view('registration.print', compact('registration'));
-        
+
 
     }
 
