@@ -20,7 +20,6 @@ class DistrictController extends Controller
     public function index()
     {
         //
-        dd('here');
         return view('config.district.index');
     }
 
