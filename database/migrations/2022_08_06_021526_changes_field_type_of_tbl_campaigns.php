@@ -17,8 +17,8 @@ class ChangesFieldTypeOfTblCampaigns extends Migration
         Schema::table('tbl_campaigns', function (Blueprint $table) {
             $table->text('ogtags')->change();
             $table->text('details')->change();
-            $table->string('email_success')->nullable();
-            $table->string('offered_course')->nullable();
+            $table->text('email_success')->nullable();
+            $table->text('offered_course')->nullable();
 
         });
     }

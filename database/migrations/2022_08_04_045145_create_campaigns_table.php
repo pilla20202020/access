@@ -27,7 +27,7 @@ class CreateCampaignsTable extends Migration
             $table->text('sms_message')->nullable();
             $table->text('coupon_codes')->nullable();
             $table->string('url')->nullable();
-            $table->string('keywords')->nullable();
+            $table->text('keywords')->nullable();
             $table->text('headers')->nullable();
             $table->string('description')->nullable();
             $table->string('display_order')->nullable();

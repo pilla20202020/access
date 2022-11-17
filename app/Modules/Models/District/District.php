@@ -2,6 +2,7 @@
 
 namespace App\Modules\Models\District;
 
+use App\Modules\Models\State\State;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,11 @@ class District extends Model
         'province_id',
         'status',
     ];
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 
     public static function getDistricts()
     {
