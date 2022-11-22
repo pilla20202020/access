@@ -112,9 +112,51 @@
                 <div class="col-xl-12 p-0">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Upcoming Follow Up Lists</h5>
+                            <h5 class="card-title mb-4">Follow Up Lists</h5>
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <h5 class="card-title mb-4">Todays Follow Up Lists</h5>
+                                    <div class="table-responsive">
+                                        <table id="example" class="table table-hover display example">
+                                            <thead>
+                                                <tr>
+                                                    <th>Student Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Follow Up By</th>
+                                                    <th>Follow Up Dates</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($todaysfollowups as $followup)
+                                                    @if(($followup->follow_up_type == "registration") && !empty($followup->registration($followup->id)))
+                                                        <tr>
+                                                            <td>
+                                                                {{ $followup->registration($followup->id)->name}}
+                                                            </td>
+                                                            <td>
+                                                                {{ $followup->registration($followup->id)->email}}
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $followup->registration($followup->id)->phone}}
+                                                            </td>
+                                                            <td>
+                                                                {{ $followup->follow_up_by}}
+                                                            </td>
+                                                            <td>{{$followup->next_schedule}}</td>
+                                                            <td>{{$followup->remarks}}</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--end table-responsive-->
+                                </div>
+                                <div class="col-sm-12 mt-2">
+                                    <h5 class="card-title mb-4">Upcoming Follow Up Lists</h5>
                                     <div class="table-responsive">
                                         <table id="example" class="table table-hover display example">
                                             <thead>
@@ -154,6 +196,7 @@
                                     </div>
                                     <!--end table-responsive-->
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -47,7 +47,7 @@ class RegistrationController extends Controller
     {
         //
         if(Auth::user()->hasRole('Consultancy')) {
-            $registrations = $this->registration->orderBy('id', 'DESC')->where('preffered_location', Auth()->user()->location()->slug)->get();
+            $registrations = $this->registration->orderBy('id', 'DESC')->get();
         } else {
             $registrations = $this->registration->orderBy('id','DESC')->get();
         }

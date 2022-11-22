@@ -75,7 +75,7 @@ class FrontendController extends Controller
             // } else {
             //     return false;
             // }
-            Mail::to('prajwalbro@hotmail.com')->send(new StudentEnquiryMail($request->all(), $emaildeliver, $registration));
+            Mail::to('info@trusteducation.com.np')->cc(['prajwalbro@hotmail.com'])->send(new StudentEnquiryMail($request->all(), $emaildeliver, $registration));
             Mail::to($request->email)->send(new StudentNotifyMail($request->all()));
 
             return redirect()->route('homepage')->withSuccess(trans($todeliver_msg));
@@ -140,7 +140,7 @@ class FrontendController extends Controller
             // } else {
             //     return false;
             // }
-            Mail::to('prajwalbro@hotmail.com')->send(new StudentEnquiryMail($request->all(), $emaildeliver, $registration));
+            Mail::to('info@trusteducation.com.np')->cc(['prajwalbro@hotmail.com'])->send(new StudentEnquiryMail($request->all(), $emaildeliver, $registration));
             Mail::to($request->email)->send(new StudentNotifyMail($request->all()));
 
             return redirect()->route('visit')->withSuccess(trans($todeliver_msg));

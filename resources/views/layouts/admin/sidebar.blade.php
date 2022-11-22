@@ -105,6 +105,7 @@
                     </ul>
                 </li>
 
+                @role('SuperAdmin')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow" aria-expanded="false">
                         <i class="mdi mdi-settings-outline"></i>
@@ -119,6 +120,7 @@
                         <li><a href="{{ route('location.index')}}" aria-expanded="false"><i class="fas fa-hand-point-right"></i>Branch/Location</a></li>
                     </ul>
                 </li>
+                @endrole
 
 
                 @role('SuperAdmin')
@@ -143,8 +145,6 @@
                     <li>
                         <a href="{{ route('classes.index')}}" aria-expanded="false"><i class="fa fa-tasks"></i> Class</a>
                     </li>
-                @endrole
-
 
                 <li>
                     <a href="{{ route('document_checklist.index')}}" aria-expanded="false"><i class="fas fa-file-archive"></i> Document CheckList</a>
@@ -163,6 +163,8 @@
                         <li><a href="{{ route('commission-claim.claimed')}}" aria-expanded="false"><i class="fas fa-dollar-sign"></i> Commission Claimed</a></li>
                     </ul>
                 </li>
+                @endrole
+
 
 
             </ul>

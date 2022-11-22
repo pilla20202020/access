@@ -27,9 +27,10 @@ class DashboardController extends Controller
     public function index()
     {
         $followups = $this->followup->where('next_schedule', '>', date('Y-m-d'))->orderBy('next_schedule', 'ASC')->get();
+        $todaysfollowups = $this->followup->where('next_schedule', '=', date('Y-m-d'))->orderBy('next_schedule', 'ASC')->get();
         $registrations = $this->registration->orderBy('created_at', 'desc')->get();
         $campaigns = $this->campaign->orderBy('created_at', 'desc')->get();
-        return view('dashboard.index',compact('followups','registrations','campaigns'));
+        return view('dashboard.index',compact('followups','registrations','campaigns','todaysfollowups'));
 
     }
 
