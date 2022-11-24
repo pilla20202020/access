@@ -414,6 +414,7 @@
                             </div>
 
 
+
                             @if (isset($leadCategories))
                                 <div class="col-md-12 mt-2">
                                     <label for="Name">Follow Up Option</label>

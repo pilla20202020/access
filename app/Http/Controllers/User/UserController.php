@@ -10,6 +10,7 @@ use App\Modules\Service\User\UserService;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -114,6 +115,7 @@ class UserController extends Controller
         $user = $this->user->find($id);
         $input = $request->except('roles');
         $user->syncRoles($request->input('roles'));
+        $input['password'] = Hash::make($request->password);
         $user = $this->user->update($id,$input);
         return redirect()->route('user.index');
     }
@@ -127,9 +129,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        if($this->user->delete($id)) {
-            return redirect()->route('user.index');
-        }
+        $user = $this->user->delete($id);
+        return response()->json(['status'=>true]);
     }
 
     public function profileUpdate() {
