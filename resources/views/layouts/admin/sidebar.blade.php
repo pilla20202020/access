@@ -59,8 +59,8 @@
                                                         <ul class="sub-menu mm-collapse" aria-expanded="true"
                                                             style="height: 0px;">
                                                             <li><a
-                                                                    href="{{ route('registration.getregistration_by_campaign_and_leadcategory', ['campaign_id' => $campaign->id, 'leadcategory_id' => $registration->leadcategory_id]) }}"><i
-                                                                        class="fas fa-hand-point-right"></i>{{ $registration->leadcategory->name }}</a>
+                                                                    href="@if(isset($registration->leadcategory_id)) {{ route('registration.getregistration_by_campaign_and_leadcategory', ['campaign_id' => $campaign->id, 'leadcategory_id' => $registration->leadcategory_id]) }} @endif"><i
+                                                                        class="fas fa-hand-point-right"></i>@if(isset($registration->leadcategory)) {{ $registration->leadcategory->name }} @endif</a>
                                                             </li>
                                                         </ul>
                                                     @endforeach

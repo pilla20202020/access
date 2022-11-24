@@ -417,7 +417,7 @@
                             @if (isset($leadCategories))
                                 <div class="col-md-12 mt-2">
                                     <label for="Name">Follow Up Option</label>
-                                    <select name="leadcategory_id" class="form-control">
+                                    <select name="leadcategory_id" class="form-control" required>
                                         <option value="" selected disabled >Select Follow Up Options</option>
                                         @foreach ($leadCategories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -526,7 +526,7 @@
                             @if (isset($leadCategories))
                                 <div class="col-md-12 mt-2">
                                     <label for="Name">Follow Up Option</label>
-                                    <select name="leadcategory_id" class="form-control">
+                                    <select name="leadcategory_id" class="form-control" required>
                                         <option value="" selected disabled >Select Follow Up Options</option>
                                         @foreach ($leadCategories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -574,7 +574,7 @@
 
                             <div class="col-md-12 mt-2">
                                 <label class="control-label">Message</label>
-                                <textarea name="option_message" class="form-control option_message" ></textarea>
+                                <textarea name="option_message" class="form-control option_message" required ></textarea>
                             </div>
                         </div>
 
@@ -609,7 +609,7 @@
                             @if (isset($leadCategories))
                                 <div class="col-md-12 mt-2">
                                     <label for="Name">Follow Up Option</label>
-                                    <select name="option_leadstatus" class="form-control option_leadstatus">
+                                    <select name="option_leadstatus" class="form-control option_leadstatus" required>
                                         @foreach ($leadCategories as $category)
                                             <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                                         @endforeach
@@ -652,7 +652,7 @@
                             @if (isset($leadCategories))
                                 <div class="col-md-12 mt-2">
                                     <label for="Name">Follow Up Option</label>
-                                    <select name="option_location" class="form-control option_location">
+                                    <select name="option_location" class="form-control option_location" required>
                                         @foreach ($locations as $location)
                                             <option value="{{ $location->slug }}" selected>{{ $location->name }}</option>
                                         @endforeach
