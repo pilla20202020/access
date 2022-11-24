@@ -418,8 +418,9 @@
                                 <div class="col-md-12 mt-2">
                                     <label for="Name">Follow Up Option</label>
                                     <select name="leadcategory_id" class="form-control">
+                                        <option value="" selected disabled >Select Follow Up Options</option>
                                         @foreach ($leadCategories as $category)
-                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <span
@@ -526,8 +527,9 @@
                                 <div class="col-md-12 mt-2">
                                     <label for="Name">Follow Up Option</label>
                                     <select name="leadcategory_id" class="form-control">
+                                        <option value="" selected disabled >Select Follow Up Options</option>
                                         @foreach ($leadCategories as $category)
-                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <span

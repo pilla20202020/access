@@ -35,6 +35,46 @@
                             </div>
 
 
+
+
+                        </div>
+                        <hr>
+                        <h4>Qualification Detail: </h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Qualification:
+                                    <span>{{ $followup->registration($followup->id)->highest_qualification }}</span></label>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Grade: <span>{{ $followup->registration($followup->id)->highest_grade }}</span></label>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Stream:
+                                    <span>{{ $followup->registration($followup->id)->highest_stream }}</span></label>
+                            </div>
+
+                        </div>
+                        <hr>
+
+                        <h4>Preparation Class Detail: </h4>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <label>Test Name: <span>{{ $followup->registration($followup->id)->test_name }}</span></label>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Score: <span>{{ $followup->registration($followup->id)->test_score }}</span></label>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4>Intrested Course: </h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Intrested Course: <span>{{ $followup->registration($followup->id)->intrested_course }}</span></label>
+                            </div>
                         </div>
                         <hr>
                         <h4>Follow Up Details: </h4>

@@ -28,7 +28,7 @@ class FollowUp extends Model
 
     public static function registration($id)
     {
-        $query = DB::select("SELECT f.id,r.name,r.email,r.phone,f.next_schedule,f.follow_up_by,f.remarks FROM tbl_registrations r INNER JOIN tbl_follow_ups f ON f.refrence_id = r.id AND f.follow_up_type = 'registration' AND f.id = $id");
+        $query = DB::select("SELECT f.id,r.name,r.email,r.phone,r.highest_qualification,r.highest_grade,r.highest_stream,r.test_name,r.test_score,r.intrested_course,f.next_schedule,f.follow_up_by,f.remarks FROM tbl_registrations r INNER JOIN tbl_follow_ups f ON f.refrence_id = r.id AND f.follow_up_type = 'registration' AND f.id = $id");
         if(!empty($query)) {
             return $query[0];
         }
